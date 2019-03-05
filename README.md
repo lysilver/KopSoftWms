@@ -8,9 +8,9 @@
 * Gitee: https://gitee.com/yulou/KopSoftWms
 
 # 效果如下：
-![login](http://demo.openauth.me:8887/upload_files/181228200620875.gif "181228200620875.gif")
-![home](http://demo.openauth.me:8887/upload_files/181228200620875.gif "181228200620875.gif")
-![log](http://demo.openauth.me:8887/upload_files/181228200620875.gif "181228200620875.gif")
+![home](https://github.com/lysilver/KopSoftWms/blob/master/docs/img/20190305145657.png)
+![login](https://github.com/lysilver/KopSoftWms/blob/master/docs/img/20190305145807.png)
+![log](https://github.com/lysilver/KopSoftWms/blob/master/docs/img/20190305145740.png)
 
 ## 功能模块
 [x] 用户管理
