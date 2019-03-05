@@ -1,0 +1,65 @@
+﻿@using YL.Core.Dto
+@model List<PermissionMenu>
+
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            @* active *@
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    <span>仪表盘</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @*class="active"*@
+                    <li><a href="/Home"><i class="fa fa-circle-o"></i> 仪表盘1</a></li>
+                    <li><a href="/Home"><i class="fa fa-circle-o"></i>仪表盘2</a></li>
+                </ul>
+            </li>
+            @{
+                if (@Model.Any())
+                {
+                    foreach (var item in @Model)
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span>@item.Name</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                @foreach (var item2 in item.Children)
+                                {
+                                    <li ref="@item2.Url?.Remove(0,1)"><a href="@item2.Url"><i class="fa fa-circle-o"></i> @item2.Name</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                }
+            }
+
+            @*<li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>基础资料</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/User"><i class="fa fa-circle-o"></i> 产品分类</a></li>
+                        <li><a href="/Dept"><i class="fa fa-circle-o"></i> 产品管理</a></li>
+                        <li><a href="/Home/Error"><i class="fa fa-circle-o"></i> 仓库管理</a></li>
+                        <li><a href="/Role"><i class="fa fa-circle-o"></i> 库区管理</a></li>
+                        <li><a href="/Role"><i class="fa fa-circle-o"></i> 货架管理</a></li>
+                    </ul>
+                </li>*@
+        </ul>
+    </section>
+</aside>

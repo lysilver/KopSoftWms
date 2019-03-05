@@ -1,0 +1,323 @@
+﻿@using YL.Utils.Json;
+@{
+    Layout = "_LayoutH";
+    @model YL.Core.Dto.Wms_invmovedetailDto
+}
+@section styles{
+    <link rel="stylesheet" href="~/css/bootstrap-select.min.css" />
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <table class="table table-bordered">
+                <tr>
+                    @*<td>
+                            <div class="form-group">
+                                <label class="form-label col-sm-2">源货架</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" readonly v-model="Storagerack" type="text">
+                                </div>
+                            </div>
+                        </td>*@
+                    <td colspan="2">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">物料</label>
+                            <div class="col-sm-10">
+                                <select size="1" id="MaterialId" v-model="MaterialId" class="show-menu-arrow show-tick selectpicker form-control" data-live-search="true"></select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="form-label col-sm-2">库存数量</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" readonly v-model="Qty" type="text">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">实际数量</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" v-model="ActQty" v-focus type="text">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-10">
+                                <textarea v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                                <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input v-on:click="addD" class="btn btn-primary radius" type="submit" v-model="addDe">
+                    </td>
+                    <td>
+                        <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="form-group">
+                            <table class="table table-bordered text-nowrap table-hover" id="bootstraptable">
+                                <thead>
+                                    <tr>
+                                        <th data-field="MaterialNo">物料编号</th>
+                                        <th data-field="MaterialName">物料名称</th>
+                                        <th data-field="Qty">库存数量</th>
+                                        <th data-field="ActQty">实际数量</th>
+                                        <th data-field="Remark">备注</th>
+                                        <th data-field="InventorymoveId" data-visible="false">InventorymoveId</th>
+                                        <th data-formatter="operateFormatter" data-events="operateEvents">删除</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        @*<div class="box-footer">
+                <div class="pull-right box-tools">
+                    <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+                </div>
+            </div>*@
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/js/bootstrap-select.min.js"></script>
+    <script src="~/js/defaults-zh_CN.min.js"></script>
+    <script>
+        $(function () {
+            $('#MaterialId').on('show.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+                var divdom = $("div[class='bs-searchbox']")[0].childNodes[0];
+                $(divdom).on("input propertychange", function () {
+                    var dom = $("li[class='no-results']");
+                    var text = divdom.value;
+                    if (dom.length > 0) {
+                        app.searchMaterial(text, 2);
+                    }
+                    if (app.MaterialList.length <= 0) {
+                        app.searchMaterial(text, 2);
+                    }
+                });
+            });
+            $("#bootstraptable").bootstrapTable({ data: app.list });
+            //$('#MaterialId').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            //});
+        });
+
+        function operateFormatter(value, row, index) {
+            //fa-heart
+            return [
+                '<a class="remove" href="javascript:void(0)" title="Remove">',
+                '<i class="fa fa-trash">删除</i>',
+                '</a>'
+            ].join('')
+        };
+        window.operateEvents = {
+            //删除选中行
+            'click .remove': function (e, value, row, index) {
+                $("#bootstraptable").bootstrapTable('remove', {
+                    field: 'MaterialNo',
+                    values: [row.MaterialNo]
+                })
+            }
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                addDe:'添加明细',
+                submit: "添加",
+                Storagerack: '',
+                SStoragerackId:'@Model.SourceStoragerackId',
+                AStoragerackId:'@Model.AimStoragerackId',
+                MaterialId:"@Model.MaterialId",
+                MaterialNo:"",
+                MaterialName:"",
+                InventorymoveId:"@Model.Pid",
+                MoveDetailId:"@Model.MoveDetailId",
+                Remark: "@Model.Remark",
+                ActQty: "@Model.ActQty",
+                MaterialList: [],
+                StorageRackList: [],
+                updateList:@Html.Raw(Model.Detail.JilToJson()),
+                Qty: "",
+                urlM: '',
+                list: [],
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            watch: {
+                MaterialId: function (val) {
+                    var _self = this;
+                    _self.Qty = "";
+                    _self.qtyL(val);
+                    //yui.$axiosget('/StockOut/SearchInventory?id='+val).then(function (res) {
+                    //    _self.StorageRackList = res.data.rows;
+                    //    _self.qtyL(_self.SStoragerackId);
+                    //}).catch(function (res) {
+                    //});
+                },
+                updateList: function () {
+                    var _self = this;
+                    var obj = _self.updateList;
+                    if (obj.length > 0) {
+                        for (var item in obj) {
+                            var a = obj[item];
+                            var data = {
+                                "MaterialId": a.MaterialId,
+                                "MaterialNo": a.MaterialNo,
+                                "MaterialName": a.MaterialName,
+                                "Qty": a.Qty,
+                                "ActQty": a.ActQty,
+                                "Remark": a.Remark,
+                                "Status": a.Status,
+                                "InventorymoveId": a.InventorymoveId,
+                            }
+                            _self.list.push(data);
+                        }
+                    }
+
+                }
+            },
+            mounted: function(){
+                var _self = this;
+                _self.$nextTick(function () {
+                    $("#MaterialId").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    _self.updateList=@Html.Raw(Model.Detail.JilToJson());
+                    _self.searchMaterial("", 1);
+                    $("#bootstraptable").bootstrapTable("prepend", _self.list);
+                });
+            },
+            methods: {
+                searchMaterial: function (val,type) {
+                    var _self = this;
+                    if (type === 1) {
+                        //_self.urlM = "/Material/Search";
+                        _self.urlM = "/StockOut/SearchInventory?storagerackId=" + _self.SStoragerackId;
+                    } else {
+                        _self.urlM = "/StockOut/SearchInventory?id" + val + "&storagerackId="+ _self.SStoragerackId;
+                    }
+                    yui.$axiosget(_self.urlM).then(function (res) {
+                        _self.StorageRackList=_self.MaterialList = res.data.rows;
+                        var html = "<option value=''>请选择</option>";
+                        for (var item in _self.MaterialList) {
+                            var a = _self.MaterialList[item];
+                            html += "<option value='" + a.MaterialId + "' " + "data-subtext='" + a.MaterialNo + "'>" + a.MaterialName + "</option>"
+                        }
+                        if (type !== 1) {
+                            $("#MaterialId").empty();
+                        }
+                        $("#MaterialId").append(html)
+                        $('#MaterialId').selectpicker('refresh');
+                        $('#MaterialId').selectpicker('val', _self.MaterialId);
+                    }).catch(function (res) {
+                    });
+                },
+                qtyL: function (val) {
+                    var _self = this;
+                    for (var item in _self.StorageRackList) {
+                        var a = _self.StorageRackList[item];
+                        if (a.MaterialId == val) {
+                            _self.Qty = a.Qty;
+                            _self.MaterialNo = a.MaterialNo;
+                            _self.MaterialName = a.MaterialName;
+                            return false;
+                        }
+                    }
+                },
+                addD: function () {
+                    var _self = this;
+                    if (_self.MaterialId.length<=0) {
+                        layer.msg("请选择物料", { icon: 2 });
+                        return false;
+                    }
+                    if (!yui.signlessInteger(_self.ActQty)) {
+                        layer.msg("实际数量为正整数", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.ActQty > _self.Qty) {
+                        layer.msg("实际数量不能大于库存数量", { icon: 2 });
+                        return false;
+                    }
+                    _self.list = $("#bootstraptable").bootstrapTable('getData');
+                    for (var item in _self.list) {
+                        var a = _self.list[item];
+                        if (a.MaterialNo == _self.MaterialNo) {
+                            layer.msg("不允许重复添加", { icon: 2 });
+                            return false;
+                        }
+                    }
+                    var data = {
+                        "MaterialId": _self.MaterialId,
+                        "MaterialNo": _self.MaterialNo,
+                        "MaterialName": _self.MaterialName,
+                        "Qty": _self.Qty,
+                        "ActQty": _self.ActQty,
+                        "Remark": _self.Remark,
+                        "Status": 1,
+                        "InventorymoveId": _self.InventorymoveId,
+                    }
+                    $("#bootstraptable").bootstrapTable("prepend",data);
+                    //$("#bootstraptable").bootstrapTable("refsrefresh");
+                },
+                addL: function () {
+                    var _self = this;
+                    _self.list = $("#bootstraptable").bootstrapTable('getData');
+                    if (_self.list.length <= 0) {
+                        layer.msg("请添加明细", { icon: 2 });
+                        return false;
+                    }
+
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    _self.list = $("#bootstraptable").bootstrapTable('getData');
+                    var data = {
+                        id: _self.InventorymoveId, //存在修改
+                        list: _self.list,
+                    };
+                    yui.$axiospostform('/InventoryMove/AddOrUpdateD', data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close3();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

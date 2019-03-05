@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>YL.Core.Entity</RootNamespace>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.1.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.1.3" />
+    <PackageReference Include="sqlSugarCore" Version="4.9.9.1" />
+  </ItemGroup>
+
+</Project>

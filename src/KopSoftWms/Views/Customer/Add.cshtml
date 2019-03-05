@@ -1,0 +1,135 @@
+﻿@{
+    Layout = "_LayoutH";
+    @model Wms_Customer
+}
+
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">客户编号</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="CustomerNo" v-focus type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">客户名称</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="CustomerName" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">地址</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="Address" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">电话</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="Tel" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系人</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="CustomerPerson" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">邮箱</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="Email" type="text">
+                </div>
+            </div>
+            @await Component.InvokeAsync("Level")
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                CustomerId:"@Model.CustomerId",
+                CustomerName: "@Model.CustomerName",
+                CustomerNo: "@Model.CustomerNo",
+                Address:"@Model.Address",
+                Tel:"@Model.Tel",
+                CustomerPerson: "@Model.CustomerPerson",
+                Level:"@Model.CustomerLevel",
+                Email:"@Model.Email",
+                Remark: "@Model.Remark"
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            methods: {
+                addL: function () {
+                    var _self = this;
+                    if (_self.CustomerNo.length <= 0) {
+                        layer.msg("客户编号不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.CustomerName.length <= 0) {
+                        layer.msg("客户名称不能为空", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var data = {
+                        id: _self.CustomerId,
+                        CustomerName: _self.CustomerName,
+                        CustomerNo: _self.CustomerNo,
+                        Address: _self.Address,
+                        Tel: _self.Tel,
+                        CustomerPerson: _self.CustomerPerson,
+                        CustomerLevel: _self.Level,
+                        Email: _self.Email,
+                        Remark: _self.Remark
+                    };
+                    yui.$axiospostform('/Customer/AddOrUpdate', data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close3();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

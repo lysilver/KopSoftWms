@@ -1,0 +1,128 @@
+﻿@{
+    Layout = "_LayoutH";
+}
+@section styles{
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body" id="print">
+            @*<table class="table">
+                    <thead>
+                        <tr>
+                            <th style="white-space:nowrap">入库单号</th>
+                            <th style="white-space:nowrap;margin-left:20px;">订单号</th>
+                            <th style="white-space:nowrap;margin-left:20px;">供应商编号</th>
+                            <th style="white-space:nowrap;margin-left:20px;">供应商名称</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in stockInList">
+                            <td style="white-space:nowrap">{{item.StockInNo}}</td>
+                            <td style="white-space:nowrap">{{item.OrderNo}}</td>
+                            <td style="white-space:nowrap">{{item.SupplierNo}}</td>
+                            <td style="white-space:nowrap">{{item.SupplierName}}</td>
+                        </tr>
+                    </tbody>
+                </table>*@
+            <br />
+            <table class="table" style="border: 1px solid #ddd;width:100%">
+                <caption style="text-align:center">明细</caption>
+                <thead>
+                    <tr>
+                        <th style="white-space:nowrap">物料编号</th>
+                        <th style="white-space:nowrap">物料名称</th>
+                        <th style="white-space:nowrap">计划数量</th>
+                        <th style="white-space:nowrap">实际数量</th>
+                        <th style="white-space:nowrap">货架编号</th>
+                        <th style="white-space:nowrap">货架名称</th>
+                        <th style="white-space:nowrap">状态</th>
+                        <th style="white-space:nowrap">审核人</th>
+                        <th style="white-space:nowrap">审核时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in stockInDList">
+                        <td style="white-space:nowrap">{{item.MaterialNo}}</td>
+                        <td style="white-space:nowrap">{{item.MaterialName}}</td>
+                        <td style="white-space:nowrap">{{item.PlanInQty}}</td>
+                        <td style="white-space:nowrap">{{item.ActInQty}}</td>
+                        <td style="white-space:nowrap">{{item.StorageRackNo}}</td>
+                        <td style="white-space:nowrap">{{item.StorageRackName}}</td>
+                        <td style="white-space:nowrap">{{item.Status}}</td>
+                        <td style="white-space:nowrap">{{item.AName}}</td>
+                        <td style="white-space:nowrap">{{formatL(item.AuditinTime)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="printL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/lib/lodop/LodopFuncs.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "打印",
+                stockInId: "@ViewBag.StockInId",
+                stockInList: [],
+                stockInDList: [],
+                stockInNo:''
+
+            },
+            computed: {
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    _self.loadL();
+                });
+            },
+            methods: {
+                loadL: function () {
+                    var _self = this;
+                    yui.$axiosget('/StockIn/PreviewJson?id=' + _self.stockInId)
+                        .then(function (response) {
+                            _self.stockInList = response.data.Item2;
+                            if (_self.stockInList.length>0) {
+                                _self.stockInNo = _self.stockInList[0].StockInNo;
+                            }
+                            _self.stockInDList = response.data.Item4;
+                        })
+                        .catch(function (error) {
+                            layer.msg(error.message, { icon: 5 });
+                        });
+                },
+                printL: function () {
+                    var _self = this;
+                    var html = document.getElementById("print").innerHTML;
+                    //console.info(html);
+                    var LODOP = getLodop();
+                    LODOP.PRINT_INIT("入库单")
+                    LODOP.ADD_PRINT_TEXT(45, 325, 146, 45, "入库单");
+                    LODOP.SET_PRINT_STYLEA(0, "FontSize", 17);
+                    LODOP.ADD_PRINT_BARCODE(40, 555, 257, 141, "QRCode", _self.stockInNo);
+                    LODOP.ADD_PRINT_HTM(203, 53, 620, 600, html);
+                    if (_self.stockInList.length > 0) {
+                       LODOP.ADD_PRINT_TEXT(92, 33, 205, 25, "入库单号:" + _self.stockInList[0].StockInNo);
+                       LODOP.ADD_PRINT_TEXT(191, 33,205, 25, "供应商名称:" + _self.stockInList[0].OrderNo);
+                       LODOP.ADD_PRINT_TEXT(158, 33,205, 25, "供应商编号:" + _self.stockInList[0].SupplierNo);
+                       LODOP.ADD_PRINT_TEXT(127, 33,205, 25, "订单号:" + _self.stockInList[0].SupplierName);
+                    }
+                    //LODOP.ADD_PRINT_TABLE("0", "0", "210", "290", html);
+                    LODOP.PRINT_DESIGN();
+                },
+                formatL: function (val) {
+                    return this.jsonDateFormat(val);
+                }
+
+            }
+        });
+    </script>
+}

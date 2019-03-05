@@ -1,0 +1,76 @@
+[
+  {
+    "outputFileName": "wwwroot/js/bootstrap-datetimepicker.min.js",
+    "inputFiles": [
+      "wwwroot/js/bootstrap-datetimepicker.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/yui.min.js",
+    "inputFiles": [
+      "wwwroot/js/yui.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/yui2.min.js",
+    "inputFiles": [
+      "wwwroot/js/yui2.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/vueqypa.min.js",
+    "inputFiles": [
+      "wwwroot/js/vue.js",
+      "wwwroot/js/qs_6.5.2_qs.min.js",
+      "wwwroot/js/polyfill.min.js",
+      "wwwroot/js/axios.min.js",
+      "wwwroot/js/yui.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/vqypa.min.js",
+    "inputFiles": [
+      "wwwroot/js/vue.min.js",
+      "wwwroot/js/qs_6.5.2_qs.min.js",
+      "wwwroot/js/polyfill.min.js",
+      "wwwroot/js/axios.min.js",
+      "wwwroot/js/yui.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bootstrap.table.min.js",
+    "inputFiles": [
+      "wwwroot/js/bootstrap.min.js",
+      "wwwroot/js/bootstrap-table.min.js",
+      "wwwroot/js/bootstrap-table-zh-CN.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bootstrap.table.min.css",
+    "inputFiles": [
+      "wwwroot/css/bootstrap.min.css",
+      "wwwroot/css/bootstrap-table.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/adminlte/css/AdminLTE.icon.font.min.css",
+    "inputFiles": [
+      "wwwroot/lib/adminlte/css/_all-skins.min.css",
+      "wwwroot/lib/adminlte/css/AdminLTE.min.css",
+      "wwwroot/css/ionicons.min.css",
+      "wwwroot/css/font-awesome.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/snow.min.js",
+    "inputFiles": [
+      "wwwroot/js/snow.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  }
+]

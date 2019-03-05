@@ -1,0 +1,55 @@
+﻿@model ErrorViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Error";
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="~/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="~/css/bootstrap.table.min.css" />
+    <link rel="stylesheet" href="~/lib/adminlte/css/AdminLTE.icon.font.min.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="~/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>404 Page not found</title>
+</head>
+<body>
+    <section class="content">
+        <div class="error-page">
+            <h2 class="headline text-yellow"> 404</h2>
+
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+
+                <p>
+                    We could not find the page you were looking for.
+                    Meanwhile, you may <a href="javascript:;" onclick="history.go(-1)">返回上页</a> or try using the search form.
+                </p>
+
+                <form class="search-form">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" name="submit" class="btn btn-warning btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.input-group -->
+                </form>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

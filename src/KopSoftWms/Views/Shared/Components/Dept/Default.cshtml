@@ -1,0 +1,18 @@
+﻿@model List<YL.Core.Entity.Sys_dept>
+<div class="form-group">
+    <label class="form-label col-sm-2">部门：</label>
+    <div class="col-sm-10">
+        <select class="form-control" v-model="DeptId" size="1">
+            <option value="">请选择</option>
+            @{
+                if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <option value="@item.DeptId">@item.DeptName</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+</div>

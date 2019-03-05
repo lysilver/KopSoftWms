@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "_LayoutH";
+    @model Wms_storagerack
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">货架编号</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="StorageRackNo" v-focus type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">货架名称</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="StorageRackName" type="text">
+                </div>
+            </div>
+            @await Component.InvokeAsync("Warehouse")
+            <div class="form-group">
+                <label class="form-label col-sm-2">所属库区</label>
+                <div class="col-sm-10">
+                    <select class="form-control" v-model="ReservoirAreaId" size="1">
+                        <option value="">请选择</option>
+                        <template v-for="item in list">
+                            <option :value="item.ReservoirAreaId">{{item.ReservoirAreaName}}</option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                Remark: "@Model.Remark",
+                StorageRackId:"@Model.StorageRackId",
+                WarehouseId: "@Model.WarehouseId",
+                ReservoirAreaId:"@Model.ReservoirAreaId",
+                StorageRackName: "@Model.StorageRackName",
+                StorageRackNo: "@Model.StorageRackNo",
+                list: [] //库区
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            watch: {
+                WarehouseId: function () {
+                    var _self = this;
+                    _self.loadL(_self.WarehouseId);
+                }
+            },
+            mounted: function () {
+                var _self = this;
+                if (_self.WarehouseId.length > 1) {
+                    _self.loadL(_self.WarehouseId);
+                }
+            },
+            methods: {
+                loadL: function (id) {
+                    var _self = this;
+                    yui.$axiosget('/StorageRack/GetReservoirarea?id=' + id).then(function (response) {
+                        _self.list = response.data;
+                    });
+                },
+                addL: function () {
+                    var _self = this;
+                    if (_self.StorageRackNo.length <= 0) {
+                        layer.msg("库区编号不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.StorageRackName.length <= 0) {
+                        layer.msg("库区名称不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.WarehouseId.length <= 0) {
+                        layer.msg("请选择仓库", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.ReservoirAreaId.length <= 0) {
+                        layer.msg("请选择库区", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var data = {
+                        id: _self.StorageRackId,
+                        StorageRackName: _self.StorageRackName,
+                        StorageRackNo: _self.StorageRackNo,
+                        Remark: _self.Remark,
+                        WarehouseId: _self.WarehouseId,
+                        ReservoirAreaId:_self.ReservoirAreaId
+                    };
+                    yui.$axiospostform('/StorageRack/AddOrUpdate', data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close3();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

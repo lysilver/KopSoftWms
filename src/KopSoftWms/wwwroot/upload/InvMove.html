@@ -1,0 +1,89 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <style>
+        .yui-center {
+            text-align: center
+        }
+
+        .yui-font {
+            font-family: "Microsoft YaHei";
+            color: #000000;
+        }
+
+        table,
+        table tr th,
+        table tr td {
+            border: 1px solid #0094ff;
+        }
+
+        table {
+            width: 600px;
+            min-height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+
+        div#div1 {
+            width: 150px;
+            height: 150px;
+            right: -20px;
+            top: 20px;
+            position: absolute;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="yui-font">
+        <b>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            移库单
+        </b>
+    </h2>
+    <!-- <div id="div1">
+        <img src="pms2.ico">
+    </div> -->
+    <div style="margin-top: 70px;">
+        <table>
+            <tr valign="top">
+                <th>移库单号</th>
+                <th>源货架编号</th>
+                <th>源货架编号</th>
+                <th>目标货架编号</th>
+                <th>目标货架名称</th>
+            </tr>
+            <tr>
+                <td>{InventorymoveNo}</td>
+                <td>{SourceStoragerackNo}</td>
+                <td>{SourceStoragerackName}</td>
+                <td>{AimStoragerackNo}</td>
+                <td>{AimStoragerackName}</td>
+            </tr>
+        </table>
+        <table>
+            <caption class="yui-center">明细</caption>
+            <tr valign="top">
+                <th style="white-space:nowrap">物料编号</th>
+                <th style="white-space:nowrap">物料名称</th>
+                <th style="white-space:nowrap">实际数量</th>
+                <th style="white-space:nowrap">状态</th>
+                <th style="white-space:nowrap">审核人</th>
+                <th style="white-space:nowrap">审核时间</th>
+            </tr>
+            {Content}
+        </table>
+    </div>
+</body>
+</html>

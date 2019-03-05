@@ -1,0 +1,298 @@
+﻿@{
+    Layout = "_LayoutH";
+    @model Wms_stockoutdetail
+}
+@section styles{
+    <link rel="stylesheet" href="~/css/bootstrap-select.min.css" />
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">物料</label>
+                <div class="col-sm-10">
+                    <select size="1" id="MaterialId" v-model="MaterialId" class="show-menu-arrow show-tick selectpicker form-control" data-live-search="true"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label col-sm-2">货架</label>
+                <div class="col-sm-10">
+                    <select size="1" id="StoragerackId" v-model="StoragerackId" class="show-menu-arrow show-tick selectpicker form-control" data-live-search="true"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label col-sm-2">货架库存数量</label>
+                <div class="col-sm-10">
+                    <input class="form-control" readonly v-model="Qty" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">计划数量</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="PlanOutQty" v-focus type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">实际数量</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="ActOutQty" v-focus type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/js/bootstrap-select.min.js"></script>
+    <script src="~/js/defaults-zh_CN.min.js"></script>
+    <script>
+        $(function () {
+            $('#MaterialId').on('show.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+                var divdom = $("div[class='bs-searchbox']")[0].childNodes[0];
+                $(divdom).on("input propertychange", function () {
+                    var dom = $("li[class='no-results']");
+                    var text = divdom.value;
+                    if (dom.length > 0) {
+                        app.searchMaterial(text, 2);
+                    }
+                    if (app.MaterialList.length <= 0) {
+                        app.searchMaterial(text, 2);
+                    }
+                    //if (dom.length > 0) {
+                    //    yui.$axiosget('/Material/Search?text=' + text).then(function (res) {
+                    //        var data = res.data.rows;
+                    //        var html = "<option value=''>请选择</option>";
+                    //        for (var item in data) {
+                    //            html += "<option value='" + data[item].MaterialId + "' " + "data-subtext='" + data[item].MaterialNo + "'>" + data[item].MaterialName + "</option>"
+                    //        }
+                    //        $("#MaterialId").empty();
+                    //        $("#MaterialId").append(html)
+                    //        $('#MaterialId').selectpicker('refresh');
+                    //    }).catch(function (res) {
+                    //    });
+                    //} else {
+                    //    yui.$axiosget('/Material/Search?text=' + text).then(function (res) {
+                    //        var data = res.data.rows;
+                    //        var html = "<option value=''>请选择</option>";
+                    //        for (var item in data) {
+                    //            html += "<option value='" + data[item].MaterialId + "' " + "data-subtext='" + data[item].MaterialNo + "'>" + data[item].MaterialName + "</option>"
+                    //        }
+                    //        $("#MaterialId").empty();
+                    //        $("#MaterialId").append(html)
+                    //        $('#MaterialId').selectpicker('refresh');
+                    //    }).catch(function (res) {
+                    //    });
+                    //}
+                });
+            });
+
+            //$('#StoragerackId').on('show.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            //    var divdom = $("div[class='bs-searchbox']")[0].childNodes[0];
+            //    $(divdom).on("input propertychange", function () {
+            //        var dom = $("li[class='no-results']");
+            //        var text = divdom.value;
+            //        if (dom.length > 0) {
+            //            yui.$axiosget('/Storagerack/Search?text=' + text).then(function (res) {
+            //                var data = res.data.rows;
+            //                var html = "<option value=''>请选择</option>";
+            //                for (var item in data) {
+            //                    html += "<option value='" + data[item].StorageRackId + "' " + "data-subtext='" + data[item].StorageRackNo + "'>" + data[item].StorageRackName + "</option>"
+            //                }
+            //                $("#StoragerackId").empty();
+            //                $("#StoragerackId").append(html)
+            //                $('#StoragerackId').selectpicker('refresh');
+            //            }).catch(function (res) {
+            //            });
+            //        } else {
+            //            yui.$axiosget('/Storagerack/Search?text=' + text).then(function (res) {
+            //                var data = res.data.rows;
+            //                var html = "<option value=''>请选择</option>";
+            //                for (var item in data) {
+            //                    html += "<option value='" + data[item].StorageRackId + "' " + "data-subtext='" + data[item].StorageRackNo + "'>" + data[item].StorageRackName + "</option>"
+            //                }
+            //                $("#StoragerackId").empty();
+            //                $("#StoragerackId").append(html)
+            //                $('#StoragerackId').selectpicker('refresh');
+            //            }).catch(function (res) {
+            //            });
+            //        }
+            //    });
+            //});
+        });
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                MaterialId:"@Model.MaterialId",
+                StockOutId:"@Model.StockOutId",
+                StockOutDetailId:"@Model.StockOutDetailId",
+                Remark: "@Model.Remark",
+                StoragerackId: "@Model.StoragerackId",
+                PlanOutQty:"@Model.PlanOutQty",
+                ActOutQty: "@Model.ActOutQty",
+                MaterialList: [],
+                StorageRackList: [],
+                Qty: "",
+                urlM:'',
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            watch: {
+                MaterialId: function (val) {
+                    var _self = this;
+                    _self.Qty = "";
+                    yui.$axiosget('/StockOut/SearchInventory?id='+val).then(function (res) {
+                        _self.StorageRackList = res.data.rows;
+                        var html = "<option value=''>请选择</option>";
+                        for (var item in _self.StorageRackList) {
+                            html += "<option value='" + _self.StorageRackList[item].StorageRackId + "' " + "data-subtext='" + _self.StorageRackList[item].StorageRackNo + "'>" + _self.StorageRackList[item].StorageRackName + "</option>"
+                        }
+                        $("#StoragerackId").empty();
+                        $("#StoragerackId").append(html)
+                        $('#StoragerackId').selectpicker('refresh');
+                    }).catch(function (res) {
+                    });
+                },
+                StoragerackId: function (val) {
+                    this.qtyL(val);
+                }
+            },
+            mounted: function(){
+                var _self = this;
+                _self.$nextTick(function () {
+                    $("#MaterialId").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#StoragerackId").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    _self.searchMaterial("",1);
+                    _self.searchInvntory();
+                });
+            },
+            methods: {
+                searchMaterial: function (val,type) {
+                    var _self = this;
+                    if (type === 1) {
+                        _self.urlM = "/Material/Search";
+                    } else {
+                        _self.urlM = "/Material/Search?text" + val;
+                    }
+                    yui.$axiosget(_self.urlM).then(function (res) {
+                        _self.MaterialList = res.data.rows;
+                        var html = "<option value=''>请选择</option>";
+                        for (var item in _self.MaterialList) {
+                            html += "<option value='" + _self.MaterialList[item].MaterialId + "' " + "data-subtext='" + _self.MaterialList[item].MaterialNo + "'>" + _self.MaterialList[item].MaterialName + "</option>"
+                        }
+                        if (type !== 1) {
+                            $("#MaterialId").empty();
+                        }
+                        $("#MaterialId").append(html)
+                        $('#MaterialId').selectpicker('refresh');
+                        $('#MaterialId').selectpicker('val', _self.MaterialId);
+                    }).catch(function (res) {
+                    });
+                },
+                searchInvntory: function () {
+                    var _self = this;
+                    if (_self.MaterialId.length > 0) {
+                        yui.$axiosget('/StockOut/SearchInventory?id=' + _self.MaterialId).then(function (res) {
+                            _self.StorageRackList = res.data.rows;
+                            var html = "<option value=''>请选择</option>";
+                            for (var item in _self.StorageRackList) {
+                                html += "<option value='" + _self.StorageRackList[item].StorageRackId + "' " + "data-subtext='" + _self.StorageRackList[item].StorageRackNo + "'>" + _self.StorageRackList[item].StorageRackName + "</option>"
+                            }
+                            $("#StoragerackId").empty();
+                            $("#StoragerackId").append(html)
+                            $('#StoragerackId').selectpicker('refresh');
+                            $('#StoragerackId').selectpicker('val', _self.StoragerackId);
+                            _self.qtyL(_self.StoragerackId);
+                        }).catch(function (res) {
+                        });
+                    }
+                },
+                qtyL: function (val) {
+                    var _self = this;
+                    for (var item in _self.StorageRackList) {
+                        if (_self.StorageRackList[item].StorageRackId == val) {
+                            _self.Qty = _self.StorageRackList[item].Qty;
+                        }
+                    }
+                },
+                addL: function () {
+                   var _self = this;
+                    if (_self.MaterialId.length <= 0) {
+                        layer.msg("请选择物料", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.StoragerackId.length <= 0) {
+                        layer.msg("请选择出库货架", { icon: 2 });
+                        return false;
+                    }
+                    if (!yui.signlessInteger(_self.PlanOutQty)) {
+                        layer.msg("计划数量为正整数", { icon: 2 });
+                        return false;
+                    }
+                    if (!yui.signlessInteger(_self.ActOutQty)) {
+                        layer.msg("实际数量为正整数", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.ActOutQty > _self.Qty) {
+                        layer.msg("实际数量大于库存数量", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var data = {
+                        id: _self.StockOutDetailId,
+                        StockOutId: _self.StockOutId,
+                        MaterialId: _self.MaterialId,
+                        StoragerackId: _self.StoragerackId,
+                        PlanOutQty: _self.PlanOutQty,
+                        ActOutQty: _self.ActOutQty,
+                        Remark: _self.Remark
+                    };
+                    yui.$axiospostform('/StockOut/AddOrUpdateD', data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close3();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

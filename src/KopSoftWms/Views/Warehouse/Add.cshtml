@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "_LayoutH";
+    @model Wms_warehouse
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">仓库编号</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="WarehouseNo" v-focus type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">仓库名称</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="WarehouseName" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                WarehouseId:"@Model.WarehouseId",
+                Remark: "@Model.Remark",
+                WarehouseName: "@Model.WarehouseName",
+                WarehouseNo:"@Model.WarehouseNo"
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            methods: {
+                addL: function () {
+                    var _self = this;
+                    if (_self.WarehouseNo.length <= 0) {
+                        layer.msg("仓库编号不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.WarehouseName.length <= 0) {
+                        layer.msg("仓库名称不能为空", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var data = {
+                        id: _self.WarehouseId,
+                        WarehouseName: _self.WarehouseName,
+                        WarehouseNo: _self.WarehouseNo,
+                        Remark: _self.Remark
+                    };
+                    yui.$axiospostform('/Warehouse/AddOrUpdate', data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close2();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "_LayoutH";
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                @*<label class="col-sm-2 control-label"></label>*@
+                <div class="col-sm-12">
+                    <a style="color:red;text-decoration:underline;" v-on:click="downloadL">
+                        无模板，请下载模板
+                    </a>
+                </div>
+            </div>
+            <div class="input-group">
+                <input class="form-control" placeholder="请选择文件" v-model="fileName" v-focus type="text">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" v-on:click="fileL">选择文件</button>
+                </span>
+            </div>
+            <input class="file" style="display:none" ref="fileClick" v-on:change="changeL($event)" accept=".xlsx,.xls" name="file" v-focus type="file">
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="uploadL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "导入",
+                param: [],
+                acceptFile: [".xlsx", ".xls"],
+                fileName: '',
+            },
+            methods: {
+                fileL: function () {
+                    this.$refs.fileClick.click();
+                },
+                downloadL: function () {
+                    location.href = "/Customer/Download";
+                },
+                changeL: function (e) {
+                    var file = e.target.files[0];
+                    var _self = this;
+                    if (file.size > 0) {
+                        _self.param = new FormData();
+                        _self.param.append('file', file);
+                        _self.fileName = file.name;
+                    }
+                    //console.info(file.size);
+                    //console.info(file.name);
+                    //console.log(this.param.get('file'));
+                },
+                uploadL: function () {
+                    var _self = this;
+                    if (_self.param.length <= 0) {
+                        layer.msg("请选择文件", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    axios.post('/Customer/ImportExcel', _self.param, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'fileExcel': 'fileExcel'
+                        }
+                    }).then(function (response) {
+                        if (response.data.Item1 === 101) {
+                            layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                tips: [1, '#3595CC'],
+                                time: 3000
+                            });
+                            layer.close(index);
+                            return false;
+                        }
+                        if (response.data.Item1) {
+                            layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                            setTimeout(function () {
+                                yui.layer_close3();
+                            }, 500);
+                        } else {
+                            layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                        }
+                        layer.close(index);
+                    }).catch(function (error) {
+                        layer.close(index);
+                    });
+                }
+            }
+        });
+    </script>
+}

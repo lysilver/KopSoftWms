@@ -1,0 +1,49 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="keywords" content="@ViewBag.title">
+    <meta name="description" content="@ViewBag.title">
+    <link rel="Bookmark" href="/favicon.ico">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    @await Html.PartialAsync("_Css")
+    <title>@ViewBag.customer</title>
+    <style>
+        .col-sm-2-1 {
+            padding-top: 7px;
+        }
+    </style>
+    @RenderSection("styles", false)
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div id="app" class="wrapper" v-cloak>
+        @await Html.PartialAsync("_Header")
+
+        <!-- Left side column. contains the logo and sidebar -->
+        @await Html.PartialAsync("_Sidebar", "menu")
+
+        @*@await Component.InvokeAsync("Menu")*@
+
+        <!-- Content Wrapper. Contains page content -->
+        @RenderBody()
+        @await Html.PartialAsync("_Footer")
+
+        <!-- Control Sidebar -->
+        @await Html.PartialAsync("_Aside")
+    </div>
+    @await Html.PartialAsync("_Js")
+    @RenderSection("scripts", false)
+    <script type="text/javascript">
+        function userInfo() {
+            yui.layershow("个人信息", "/User/Info", 600, 400);
+        };
+        function updatePwd() {
+            yui.layershow("修改密码", "/User/UpdatePwd", 600, 400);
+        };
+    </script>
+</body>
+</html>

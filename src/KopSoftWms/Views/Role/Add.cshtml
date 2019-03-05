@@ -1,0 +1,274 @@
+﻿@using YL.Core.Dto
+@using YL.Utils.Json
+
+@{
+    Layout = "_LayoutH";
+    @model RoleMenuDto
+}
+<div id="app" v-cloak>
+    <form class="form form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="c-red">*</span>角色名称：</label>
+                <div class="col-sm-10">
+                    <input v-model="RoleName" type="text" class="form-control" v-focus>
+                </div>
+            </div>
+            @*<div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名称：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input v-model="RoleName" type="text" class="input-text" v-focus>
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <label class="control-label col-sm-2">备注：</label>
+                <div class="col-sm-10">
+                    <textarea v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input v-on:click="checkAll" class="btn btn-primary radius" type="button" value="全选">
+                    <input v-on:click="inverse" class="btn btn-primary radius" type="button" value="反选">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">系统角色：</label>
+                <div class="col-sm-10">
+                    <dl class="permission-list" v-for="item in list">
+                        <dt>
+                            <label>
+                                <input type="checkbox" v-on:click="checkMenu(item,item.Children)" v-model="checkedNames" :value="item.Id">
+                                {{item.Name}}
+                            </label>
+                        </dt>
+                        <dd>
+                            <dl class="cl permission-list2">
+                                <dt v-for="item2 in item.Children">
+                                    <label>
+                                        <input type="checkbox" v-model="checkedNames" :value="item2.Id">
+                                        {{item2.Name}}
+                                    </label>
+                                </dt>
+                            </dl>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="pull-right box-tools">
+                    <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section styles{
+    <style>
+        .permission-list {
+            border: solid 1px #eee;
+        }
+
+            .permission-list > dt {
+                background-color: #efefef;
+                padding: 5px 10px;
+            }
+
+            .permission-list > dd {
+                padding: 10px;
+                padding-left: 30px;
+            }
+
+                .permission-list > dd > dl {
+                    border-bottom: solid 1px #eee;
+                    padding: 5px 0;
+                }
+
+                    .permission-list > dd > dl > dt {
+                        display: inline-block;
+                        float: left;
+                        white-space: nowrap;
+                        width: 100px;
+                    }
+
+        dl {
+            margin-top: 0;
+            /*margin-bottom:15px;*/
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        $(function () {
+            //parent.$("span[class='layui-layer-setwin']")[0].childNodes[1].onclick = function () {
+            //    var index = parent.layer.getFrameIndex(window.name);
+            //    parent.$("#layui-layer-iframe" + index)[0].style.height = parent.document.body.clientHeight + "px";
+            //};
+        });
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                RoleId:"@Model.RoleId",
+                Remark: "@Model.Remark",
+                RoleName: "@Model.RoleName",
+                checked: "",
+                updateList:@Html.Raw(Model.Children.JilToJson()),
+                checkedNames: [],
+                list: []
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            watch: {
+                updateList: function () {
+                    var _self = this;
+                    var obj = _self.updateList;
+                    var arr = [];
+                    if (obj.length > 0) {
+                        for (var item in obj) {
+                            arr.push(obj[item].MenuId.toString());
+                        }
+                    }
+                    _self.checkedNames = arr;
+                }
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    _self.loadL();
+                    _self.updateList=@Html.Raw(Model.Children.JilToJson());
+                });
+            },
+            methods: {
+                distinct: function (arr) {
+                    let result = []
+                    let obj = {}
+                    for (let i of arr) {
+                        if (!obj[i]) {
+                            result.push(i)
+                            obj[i] = 1
+                        }
+                    }
+                    return result;
+                },
+                checkAll: function () {
+                    var _self = this;
+                    _self.list.forEach(function (item, index) {
+                        if (_self.checkedNames.indexOf(item.Id.toString()) < 0) {
+                            _self.checkedNames.push(item.Id.toString());
+                        }
+                        item.Children.forEach(function (c, i) {
+                            if (_self.checkedNames.indexOf(c.Id.toString())<0) {
+                                _self.checkedNames.push(c.Id.toString())
+                            }
+                        });
+                    });
+                },
+                inverse: function () {
+                    var _self = this;
+                    _self.checkedNames = [];
+                },
+                recursion: function (arr, id, c) {
+                    //for (var item in arr) {
+                    //    if (arr[item].id == id) {
+                    //        arr.splice(item, 1);
+                    //        me.recursion(arr, id);
+                    //    }
+                    //}
+                    for (var k in arr) {
+                        if (arr[k].toString() === id) {
+                            arr.splice(k, 1);
+                        }
+                    }
+                    for (var j in c) {
+                        if (c[j].ParentId.toString() === id) {
+                            var cid = c[j].Id.toString();
+                            for (var i in arr) {
+                                if (arr[i].toString() === cid) {
+                                    arr.splice(i, 1);
+                                }
+                            }
+                        }
+                    }
+                },
+                checkMenu: function (p,c) {
+                    var _self = this;
+                    if (_self.checkedNames.indexOf(p.Id.toString()) > -1) {
+                        _self.recursion(_self.checkedNames, p.Id.toString(), c);
+                    } else {
+                        _self.checkedNames.push(p.Id.toString());
+                        for (var i of c) {
+                            if (i.ParentId.toString() === p.Id.toString()) {
+                                _self.checkedNames.push(i.Id.toString());
+                            }
+                        }
+                    }
+                },
+                loadL: function () {
+                    var _self = this;
+                    axios.get('/Role/GetMenuList')
+                        .then(function (response) {
+                            _self.list = response.data;
+                        })
+                        .catch(function (error) {
+                            layer.msg(error.message, { icon: 5 });
+                        });
+                },
+                addL:function () {
+                    var _self = this;
+                    if (_self.RoleName.length <= 0) {
+                        layer.msg("角色名称不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.checkedNames.length <= 0) {
+                        layer.msg("请选择菜单", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var data = {
+                        id: _self.RoleId,
+                        menuId: _self.distinct(_self.checkedNames),
+                        RoleName: _self.RoleName,
+                        Remark: _self.Remark
+                    };
+                    yui.$axiospostform('/Role/AddOrUpdate',data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close3();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

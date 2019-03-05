@@ -1,0 +1,253 @@
+﻿@{
+    Layout = "_LayoutH";
+    @model Wms_material
+}
+<div id="app" v-cloak>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">物料编号</label>
+                <div class="col-sm-10">
+                    <input class="form-control" v-model="MaterialNo" v-focus type="text">
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label class="col-sm-2 control-label">物料名称</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" v-model="MaterialName" type="text">
+                    </div>
+                </div>*@
+            <yl-input lable="物料名称" v-model="MaterialName"></yl-input>
+
+            @await Component.InvokeAsync("Dict", YL.Utils.Pub.PubDictType.material.ToString())
+            @await Component.InvokeAsync("Dict", YL.Utils.Pub.PubDictType.unit.ToString())
+            @await Component.InvokeAsync("Warehouse")
+            <div class="form-group">
+                <label class="form-label col-sm-2">所属库区</label>
+                <div class="col-sm-10">
+                    <select class="form-control" v-model="ReservoirAreaId" size="1">
+                        <option value="">请选择</option>
+                        <template v-for="item in rlist">
+                            <option :value="item.value">{{item.name}}</option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label col-sm-2">所属货架</label>
+                <div class="col-sm-10">
+                    <select class="form-control" v-model="StoragerackId" size="1">
+                        <option value="">请选择</option>
+                        <template v-for="item in slist">
+                            <option :value="item.value">{{item.name}}</option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+            <yl-input lable="安全库存" id="Qty" v-model="Qty"></yl-input>
+            <yl-input lable="有效期(天)" id="ExpiryDate" v-model="ExpiryDate"></yl-input>
+            @*<div class="form-group">
+                    <label class="col-sm-2 control-label">有效期(天)</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="ExpiryDate" v-model="ExpiryDate" type="text">
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea v-model.trim="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right box-tools">
+                <input v-on:click="addL" class="btn btn-primary radius" type="submit" v-model="submit">
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+    <script type="text/x-template" id="yl-select">
+        <div class="form-group">
+            <label class="form-label col-sm-2">{{lable}}</label>
+            <div class="col-sm-10">
+                <select class="form-control" v-bind:value="value" v-on="inputListeners" size="1">
+                    <option value="">{{option}}</option>
+                    <template v-for="item in list">
+                        <option :value="item.value">{{item.name}}</option>
+                    </template>
+                </select>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-template" id="yl-input">
+        <div class="form-group">
+            <label class="form-label col-sm-2">{{lable}}</label>
+            <div class="col-sm-10">
+                <input :id="id" class="form-control" type="text"
+                       v-bind:value="value" v-on="inputListeners">
+            </div>
+        </div>
+    </script>
+    <script>
+        //v-on:input="$emit('input', $event.target.value)"
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                Remark: "@Model.Remark",
+                MaterialId:"@Model.MaterialId",
+                MaterialNo:"@Model.MaterialNo",
+                MaterialName: "@Model.MaterialName",
+                MaterialType: "@Model.MaterialType",
+                Unit: "@Model.Unit",
+                Qty: "@Model.Qty",
+                ExpiryDate: "@Model.ExpiryDate",
+                WarehouseId: "@Model.WarehouseId",
+                ReservoirAreaId: "@Model.ReservoirAreaId",
+                StoragerackId:"@Model.StoragerackId",
+                rlist: [],//库区
+                slist: []//货架
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            watch: {
+                WarehouseId: function () {
+                    var _self = this;
+                    _self.loadL(_self.WarehouseId,1);
+                },
+                ReservoirAreaId: function () {
+                    var _self = this;
+                    _self.loadL(_self.ReservoirAreaId,2);
+                },
+                Qty: function () {
+                    var _self = this;
+                    if (!yui.isRealNum2(_self.Qty)) {
+                        layer.tips('请输入正整数', '#Qty', {
+                            tips: [1, '#78BA32']
+                        });
+                        _self.Qty = "";
+                    }
+
+                },
+                ExpiryDate: function () {
+                    var _self = this;
+                    if (!yui.isRealNum2(_self.ExpiryDate)) {
+                        layer.tips('请输入正整数', '#ExpiryDate', {
+                            tips: [1, '#78BA32']
+                        });
+                        _self.ExpiryDate = "";
+                    }
+                }
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    if (_self.WarehouseId.length > 1) {
+                        _self.loadL(_self.WarehouseId, 1);
+                    }
+                    if (_self.ReservoirAreaId.length > 1) {
+                        //console.info(_self.ReservoirAreaId);
+                        _self.loadL(_self.ReservoirAreaId, 2);
+                    }
+                });
+            },
+            methods: {
+                loadL: function (id,type) {
+                    var _self = this;
+                    if (type === 1) {
+                        yui.$axiosget('/StorageRack/GetReservoirarea2?id=' + id).then(function (response) {
+                            _self.rlist = response.data;
+                        });
+                    } else {
+                        yui.$axiosget('/StorageRack/GetStoragerack?id=' + id).then(function (response) {
+                            _self.slist = response.data;
+                        });
+                    }
+                },
+                addL: function () {
+                    var _self = this;
+                    if (_self.MaterialNo.length <= 0) {
+                        layer.msg("物料编号不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.MaterialName.length <= 0) {
+                        layer.msg("物料名称不能为空", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.MaterialType.length <= 0) {
+                        layer.msg("请选择物料分类", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.Unit.length <= 0) {
+                        layer.msg("请选择单位类别", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.WarehouseId.length <= 0) {
+                        layer.msg("请选择仓库", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.ReservoirAreaId.length <= 0) {
+                        layer.msg("请选择库区", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.StoragerackId.length <= 0) {
+                        layer.msg("请选择货架", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.Qty.length <= 0 || _self.Qty<=0) {
+                        layer.msg("安全库存必须大于0", { icon: 2 });
+                        return false;
+                    }
+                    if (_self.ExpiryDate.length <= 0 || _self.ExpiryDate <= 0) {
+                        layer.msg("有效期天数必须大于0", { icon: 2 });
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var data = {
+                        id: _self.MaterialId,
+                        MaterialNo: _self.MaterialNo,
+                        MaterialName: _self.MaterialName,
+                        MaterialType: _self.MaterialType,
+                        Unit: _self.Unit,
+                        WarehouseId: _self.WarehouseId,
+                        ReservoirAreaId: _self.ReservoirAreaId,
+                        StoragerackId: _self.StoragerackId,
+                        Remark: _self.Remark,
+                        Qty: _self.Qty,
+                        ExpiryDate: _self.ExpiryDate
+                    };
+                    yui.$axiospostform('/Material/AddOrUpdate', data)
+                        .then(function (response) {
+                            if (response.data.Item1 === 101) {
+                                layer.tips(response.data.Item2, '.layui-layer-setwin', {
+                                    tips: [1, '#3595CC'],
+                                    time: 3000
+                                });
+                                layer.close(index);
+                                return false;
+                            }
+                            if (response.data.Item1) {
+                                layer.msg(response.data.Item2, { icon: 1, time: 1000 });
+                                setTimeout(function () {
+                                    yui.layer_close3();
+                                }, 500);
+                            } else {
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                            layer.close(index);
+                        })
+                        .catch(function (error) {
+                            layer.close(index);
+                        });
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="keywords" content="WMS仓库管理系统,MES制造执行系统">
+    <meta name="description" content="WMS仓库管理系统,MES制造执行系统">
+    <link rel="Bookmark" href="/favicon.ico">
+    <style>
+        .c-red {
+            color: red;
+        }
+
+        .textarea-numberbar {
+            position: absolute;
+            right: 20px;
+            bottom: 5px;
+            z-index: 1;
+            margin-bottom: 0;
+        }
+
+        .textarea-length {
+            font-style: normal;
+        }
+    </style>
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    @await Html.PartialAsync("_CssAdd")
+    <title>@ViewBag.title</title>
+    @RenderSection("styles", false)
+</head>
+<body>
+    @RenderBody()
+    @await Html.PartialAsync("_JsAdd")
+    @RenderSection("scripts", false)
+</body>
+</html>

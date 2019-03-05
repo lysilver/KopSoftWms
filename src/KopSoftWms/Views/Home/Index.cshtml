@@ -1,0 +1,139 @@
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration _config
+@using Microsoft.Extensions.Configuration;
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            仪表盘
+            <small>控制面板</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">仪表盘</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">简介</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered text-nowrap table-hover">
+                            <tr>
+                                <td>服务器（自动获取）</td>
+                                <td>@YL.Utils.Pub.PubSys.IsSystem()</td>
+                            </tr>
+                            @{
+                                var arr = _config.GetSection("Des").Get<YL.Core.Dto.ProjectDes>();
+
+                                if (arr != null && arr.Content.Length > 0)
+                                {
+                                    foreach (var item in arr.Content)
+                                    {
+                                        <tr>
+                                            <td>@item.Split(':')[0]</td>
+                                            <td>@item.Split(':')[1]</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                            @*<tr>
+                                    <td>开发语言</td>
+                                    <td>c#</td>
+                                </tr>
+                                <tr>
+                                    <td>平台</td>
+                                    <td>net core</td>
+                                </tr>
+                                <tr>
+                                    <td>框架</td>
+                                    <td>net core mvc</td>
+                                </tr>
+                                <tr>
+                                    <td>部署</td>
+                                    <td>windows iis+nginx;linux Kestrel+nginx;由于linux上无法连接sqlserver 2008 ，linux上数据库修改为mysql</td>
+                                </tr>
+                                <tr>
+                                    <td>页面</td>
+                                    <td>bootstrap、adminlte、bootstrap-table、bootstrap-select、bootstrap-treeview</td>
+                                </tr>
+                                <tr>
+                                    <td>js</td>
+                                    <td>vue、polyfill、qs、 axios</td>
+                                </tr>
+                                <tr>
+                                    <td>orm</td>
+                                    <td>sqlsugar</td>
+                                </tr>
+                                <tr>
+                                    <td>后台字段验证</td>
+                                    <td>FluentValidation</td>
+                                </tr>
+                                <tr>
+                                    <td>json</td>
+                                    <td>Jil</td>
+                                </tr>
+                                <tr>
+                                    <td>IOC</td>
+                                    <td>DI</td>
+                                </tr>
+                                <tr>
+                                    <td>Xss</td>
+                                    <td>Ganss</td>
+                                </tr>
+                                <tr>
+                                    <td>Log</td>
+                                    <td>Nlog</td>
+                                </tr>
+                                <tr>
+                                    <td>主键</td>
+                                    <td>雪花算法</td>
+                                </tr>
+                                <tr>
+                                    <td>测试</td>
+                                    <td>Xunit</td>
+                                </tr>*@
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                menuList: []
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    //if (!navigator.userAgent.match(/x64/i)) {
+                    //    console.info("32位浏览器");
+                    //} else {
+                    //    console.info("64位浏览器");
+                    //}
+                });
+            },
+            methods: {
+                loadL: function () {
+
+                },
+            }
+        });
+    </script>
+}

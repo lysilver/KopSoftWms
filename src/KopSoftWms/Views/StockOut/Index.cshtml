@@ -1,0 +1,610 @@
+﻿<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            仓库管理
+            <small>出库管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="#">仓库管理</a></li>
+            <li class="active">出库管理</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row" style="padding-bottom:1px;">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">搜索条件</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" id="test" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">日期范围</span>
+                            <input type="text" ref="datemin" id="datemin" class="form-control" style="width:120px;">
+                            <input type="text" ref="datemax" id="datemax" class="form-control" style="width:120px;margin-left:10px;">
+
+                            <select class="form-control" v-model="StockOutType" style="width:150px;margin-left:10px;">
+                                <option value="">全部类型</option>
+                                @{
+                                    if (ViewBag.StockInType != null || ViewBag.StockInType.Count > 0)
+                                    {
+                                        foreach (var item in ViewBag.StockInType)
+                                        {
+                                            <option value="@item.DictId">@item.DictName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                            <select class="form-control" v-model="StockOutStatus" style="width:150px;margin-left:10px;">
+                                <option value="">全部状态</option>
+                                @{
+                                    if (ViewBag.StockInStatus != null || ViewBag.StockInStatus.Count > 0)
+                                    {
+                                        foreach (var item in ViewBag.StockInStatus)
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="input-group" style="margin-top:5px;margin-left:-10px">
+                            <button name="search" v-on:click="searchL" type="submit" class="btn btn-success" style="margin-left:10px;"><i class="fa fa-search"></i> 搜出库</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div id="toolbar" class="btn-group">
+                            <button id="btn_add" v-on:click="showL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                            </button>
+                            <button id="btn_edit" v-on:click="editL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                            </button>
+                            <button id="btn_auditin" v-on:click="deliveryAdd" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>发货
+                            </button>
+                            <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                            </button>
+                        </div>
+                        <table id="bootstraptable" class="table table-bordered text-nowrap table-hover"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section scripts{
+    <script src="~/lib/lodop/LodopFuncs.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                datemin: '',
+                datemax: '',
+                StockOutType: '',
+                StockOutStatus: '',
+                stockOutList: [],
+                stockOutDList: [],
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    //显示active
+                    _self.$refs.StockOut.parentNode.parentNode.classList.add("active");
+                    _self.$refs.StockOut.classList.add("active");
+                    _self.$refs.datemin.value = _self.getCurrentMonthFirst();
+                    _self.$refs.datemax.value = _self.getCurrentMonthLast();
+                    //_self.datemin = _self.getCurrentMonthFirst();
+                    //_self.datemax = _self.getCurrentMonthLast();
+                    $('#datemin').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    $('#datemax').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    setTimeout(function () {
+                        _self.loadL();
+                        yui.getDomById("test").click();
+                        $("div[class='pull-right search']")[0].children[0].setAttribute("placeholder", "出库单号或订单号");
+                    }, 500);
+                });
+            },
+            methods: {
+                loadL: function () {
+                    _self = this;
+                    var obj = [{
+                        checkbox: true,             //是否显示复选框
+                        visible: true
+                    },
+                    {
+                        field: 'StockOutId',
+                        title: 'Id',
+                        visible: false
+                    }, {
+                        field: 'StockOutStatus',
+                        title: '操作',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            var html = [];
+                            var arr = [2, 5];
+                            if (arr.indexOf(value)==-1) {
+                                html.push('<button id="addDetailL" type="button" class="btn btn-link" style="margin-top:-8px;">添加明细</button>'
+                                    , '<button id="auditinL" type="button" class="btn btn-link" style="margin-top:-8px;margin-left:-10px;">审核</button>'
+                                );
+                            }
+                            html.push('<button id="previewL" type="button" class="btn btn-link" style="margin-top:-8px;margin-left:-10px;">预览</button>'
+                                , '<button id="printL" type="button" class="btn btn-link" style="margin-top:-8px;margin-left:-10px;">打印</button>'
+                            );
+                            return html.join('');
+                        },
+                        events: {
+                            'click #addDetailL': function (e, value, row, index) {
+                                if (value === 1) {
+                                    app.addDetailL(row.StockOutId);
+                                } else {
+                                    layer.msg("初始转态才允许添加！", { icon: 5 });
+                                }
+                            },
+                            'click #auditinL': function (e, value, row, index) {
+                                if (value === 1) {
+                                    app.auditinL(row.StockOutId);
+                                } else {
+                                    layer.msg("初始转态才允许审核！", { icon: 5 });
+                                }
+                            },
+                            'click #previewL': function (e, value, row, index) {
+                                app.previewL(row.StockOutId);
+
+                            },
+                            'click #printL': function (e, value, row, index) {
+                                app.printL(row.StockOutId);
+                            }
+                        },
+                    }, {
+                        field: 'StockOutNo',
+                        title: '出库单号',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'OrderNo',
+                        title: '订单号',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'StockOutType',
+                        title: '出库类型',
+                        align: 'center',
+                        sortable: true
+                    }
+                        , {
+                        field: 'CustomerNo',
+                        title: '客户编号',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'CustomerName',
+                        title: '客户名称',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'StockOutStatus',
+                        title: '状态',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            switch (value) {
+                                case 1:
+                                    return '<span class="label label-success radius">初始</span>';
+                                //return "初始";
+                                case 2:
+                                    return '<span class="label label-success radius">审核通过</span>';
+                                //return "审核通过";
+                                case 3:
+                                    return '<span class="label label-success radius">审核未通过</span>';
+                                case 5:
+                                    return '<span class="label label-success radius">已发货</span>';
+                                // "审核未通过";
+                                default:
+                                    return '<span class="label label-success radius">-</span>';
+                            }
+                        }
+                    }, {
+                        field: 'Remark',
+                        align: 'center',
+                        title: '备注'
+                    }, {
+                        field: 'CName',
+                        title: '创建人',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'CreateDate',
+                        align: 'center',
+                        title: '创建时间',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }, {
+                        field: 'UName',
+                        align: 'center',
+                        title: '修改人',
+                        sortable: true
+                    }, {
+                        field: 'ModifiedDate',
+                        title: '修改时间',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }];
+                    var qParams = {
+                        StockOutStatus: _self.StockOutStatus,
+                        StockOutType: _self.StockOutType
+                    };
+                    var objSub = [{
+                        checkbox: true,             //是否显示复选框
+                        visible: true
+                    },
+                    {
+                        field: 'StockOutDetailId',
+                        title: 'Id',
+                        visible: false
+                    }, {
+                        field: 'Status',
+                        title: '操作',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            if (value != 2) {
+                                return ['<button id="deleteDetailL" type="button" class="btn btn-link" style="margin-top:-8px;">删除</button>'
+                                    , '<button id="editDetailL" type="button" class="btn btn-link" style="margin-top:-8px;">修改</button>'
+                                ].join('');
+                            } else {
+                                return '';
+                            }
+                        },
+                        events: {
+                            'click #deleteDetailL': function (e, value, row, index) {
+                                if (value === 1) {
+                                    app.deleteDetailL(row.StockOutDetailId);
+                                } else {
+                                    layer.msg("初始转态才允许添加！", { icon: 5 });
+                                }
+                            },
+                            'click #editDetailL': function (e, value, row, index) {
+                                var arr = [2, 5];
+                                if (arr.indexOf(value)==-1) {
+                                    app.editDetailL(row.StockOutDetailId);
+                                } else {
+                                    layer.msg("初始转态才允许修改！", { icon: 5 });
+                                }
+                            },
+                        },
+                    }, {
+                        field: 'MaterialNo',
+                        title: '物料编号',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'MaterialName',
+                        title: '物料名称',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'PlanOutQty',
+                        title: '计划数量',
+                        align: 'center',
+                        sortable: true
+                    }
+                        , {
+                        field: 'ActOutQty',
+                        title: '实际数量',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'StorageRackNo',
+                        title: '货架编号',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'StorageRackName',
+                        title: '货架名称',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'Status',
+                        title: '状态',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            switch (value) {
+                                case 1:
+                                    return '<span class="label label-success radius">待审核</span>';
+                                case 2:
+                                    return '<span class="label label-success radius">审核通过</span>';
+                                case 3:
+                                    return '<span class="label label-success radius">审核未通过</span>';
+                                default:
+                                    return '<span class="label label-success radius">-</span>';
+                            }
+                        }
+                    }, {
+                        field: 'AName',
+                        title: '审核人',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'AuditinTime',
+                        align: 'center',
+                        title: '审核时间',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }, {
+                        field: 'Remark',
+                        align: 'center',
+                        title: '备注'
+                    }, {
+                        field: 'CName',
+                        title: '创建人',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'CreateDate',
+                        align: 'center',
+                        title: '创建时间',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }, {
+                        field: 'UName',
+                        align: 'center',
+                        title: '修改人',
+                        sortable: true
+                    }, {
+                        field: 'ModifiedDate',
+                        title: '修改时间',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }];
+
+                    yui.table2("bootstraptable", "/StockOut/List", "/StockOut/ListDetail", obj, objSub, "POST", "StockOutId", "StockOutId", true, qParams);
+                    //yui.table("bootstraptable", "/StockIn/List", obj, "POST", "StockInId", true, qParams);
+                },
+                showL: function () {
+                    yui.layershow("出库", "/StockOut/Add", 600, 500);
+                },
+                addDetailL: function (val) {
+                    yui.layershow("出库明细", "/StockOut/Detail?pid=" + val, 600, 500);
+                },
+                htmlL: function (val, type) {
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    var html = "";
+                    yui.$axiosget('/StockOut/PreviewJson?id=' + val)
+                        .then(function (response) {
+                            _self.stockOutList = response.data.Item2;
+                            _self.stockOutDList = response.data.Item4;
+                            html = response.data.Item5;
+                            if (_self.stockOutList.length > 0) {
+                                html = html.replace("{StockOutNo}", _self.stockOutList[0].StockOutNo);
+                                html = html.replace("{OrderNo}", _self.stockOutList[0].OrderNo);
+                                html = html.replace("{CustomerNo}", _self.stockOutList[0].CustomerNo);
+                                html = html.replace("{CustomerName}", _self.stockOutList[0].CustomerName);
+                            }
+                            var detail = "";
+                            if (_self.stockOutDList.length > 0) {
+                                for (var item in _self.stockOutDList) {
+                                    detail += "<tr>";
+                                    detail += "<td>" + _self.stockOutDList[item].MaterialNo + "</td>";
+                                    detail += "<td>" + _self.stockOutDList[item].MaterialName + "</td>";
+                                    detail += "<td>" + _self.stockOutDList[item].PlanOutQty + "</td>";
+                                    detail += "<td>" + _self.stockOutDList[item].ActOutQty + "</td>";
+                                    detail += "<td>" + _self.stockOutDList[item].StorageRackNo + "</td>";
+                                    detail += "<td>" + _self.stockOutDList[item].StorageRackName + "</td>";
+                                    detail += "<td>" + _self.stockOutDList[item].Status + "</td>";
+                                    detail += "<td>" + _self.formatNull(_self.stockOutDList[item].AName) + "</td>";
+                                    detail += "<td>" + _self.formatL(_self.stockOutDList[item].AuditinTime) + "</td>";
+                                    detail += "</tr>";
+                                }
+                            }
+                            html = html.replace("{Content}", detail);
+                            var LODOP = _self.LODOPL();
+                            LODOP.PRINT_INIT("入库单")
+                            LODOP.ADD_PRINT_HTM(0, 100, "100%", "100%", html);
+                            if (type === 1) {
+                                LODOP.PREVIEW();
+                                //LODOP.PRINT_DESIGN();
+                            } else {
+                                LODOP.PRINT();
+                            }
+                        })
+                        .catch(function (error) {
+                            layer.msg("请安装Lodop插件", { icon: 5 });
+                            //layer.msg(error.message, { icon: 5 });
+                        });
+                    layer.close(index);
+                },
+                previewL: function (val) {
+                    var _self = this;
+                    _self.htmlL(val, 1);
+                },
+                printL: function (val) {
+                    var _self = this;
+                    _self.htmlL(val, 2);
+                },
+                LODOPL: function () {
+                        var LODOP = getLodop();
+                        return LODOP;
+                },
+                formatNull: function (val) {
+                    if (typeof (val) == "undefined" || val == "" || val == null || val == " " || val == "null") {
+                        return "";
+                    }
+                    return val;
+                },
+                formatL: function (val) {
+                    return this.jsonDateFormat(val);
+                },
+                searchL: function () {
+                    var qParams = {
+                        StockOutStatus: _self.StockOutStatus,
+                        StockOutType: _self.StockOutType
+                    };
+                    var query = {
+                        silent: true,
+                        query: qParams
+                    };
+                    $("#bootstraptable").bootstrapTable('refresh', query);
+                },
+                editL: function () {
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        if (arr[0].StockOutStatus == 2 || arr[0].StockOutStatus==5) {
+                            layer.msg("已审核或已发货，不允许修改", { icon: 5 });
+                            return false;
+                        }
+                        var index = layer.confirm("您确定要修改吗？", { btn: ["确定", "取消"] }, function () {
+                            layer.close(index);
+                            var id = arr[0].StockOutId;
+                            yui.layershow("修改入库", "/StockOut/Add?id=" + id, 600, 500);
+                        }, function () {
+
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                editDetailL: function (val) {
+                    if (val.length > 0) {
+                        var index = layer.confirm("您确定要修改明细吗？", { btn: ["确定", "取消"] }, function () {
+                            layer.close(index);
+                            yui.layershow("修改明细", "/StockOut/Detail?id=" + val, 600, 500);
+                        }, function () {
+
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                auditinL: function (val) {
+                    if (val.length > 0) {
+                        var index = layer.confirm("您确定要审核吗？", { btn: ["确定", "取消"] }, function () {
+                            yui.$axiosget('/StockOut/Auditin?id=' + val)
+                                .then(function (response) {
+                                    if (response.data.Item1) {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                                        _self.searchL();
+                                    } else {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    layer.msg(error.message, { icon: 5 });
+                                });
+                            layer.close(index);
+                        }, function () {
+
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                deleteDetailL: function (val) {
+                    if (val.length > 0) {
+                        var index = layer.confirm("您确定要删除明细吗？", { btn: ["确定", "取消"] }, function () {
+                            yui.$axiosget('/StockOut/DeleteDetail?id=' + val)
+                                .then(function (response) {
+                                    if (response.data.Item1) {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                                        _self.searchL();
+                                    } else {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    layer.msg(error.message, { icon: 5 });
+                                });
+                            layer.close(index);
+                        }, function () {
+
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                deleteL: function () {
+                    var _self = this;
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        var index = layer.confirm("您确定要删除吗？", { btn: ["确定", "取消"] }, function () {
+                            var id = arr[0].StockOutId;
+                            yui.$axiosget('/StockOut/Delete?id=' + id)
+                                .then(function (response) {
+                                    if (response.data.Item1) {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                                        _self.searchL();
+                                    } else {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    layer.msg(error.message, { icon: 5 });
+                                });
+                            layer.close(index);
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                deliveryAdd: function () {
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        if (arr[0].StockOutStatus === 5) {
+                            layer.msg("不允许重复发货", { icon: 5 });
+                            return false;
+                        }
+                        if (arr[0].StockOutStatus !== 2) {
+                            layer.msg("未通过审核，不允许发货", { icon: 5 });
+                            return false;
+                        }
+                        var id = arr[0].StockOutId;
+                        yui.layershow("发货", "/Delivery/Add?stockOutId="+id, 600, 500);
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+
+            }
+        });
+    </script>
+}

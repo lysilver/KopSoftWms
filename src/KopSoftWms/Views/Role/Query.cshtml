@@ -1,0 +1,156 @@
+﻿@using YL.Core.Dto
+@using YL.Utils.Json
+@{
+    Layout = "_LayoutH";
+    @model RoleMenuDto
+}
+<div id="app" v-cloak>
+    <form class="form form-horizontal" onsubmit="return false">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="c-red">*</span>角色名称：</label>
+                <div class="col-sm-10">
+                    <input readonly v-model="RoleName" type="text" class="form-control" v-focus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">备注：</label>
+                <div class="col-sm-10">
+                    <textarea readonly v-model="Remark" class="form-control" rows="3" placeholder="备注...100个字符以内"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">{{count}}</em>/100</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">系统角色：</label>
+                <div class="col-sm-10">
+                    <dl class="permission-list" v-for="item in list">
+                        <dt>
+                            <label>
+                                <input disabled type="checkbox" v-on:click="checkAll($event)" v-model="checkedNames" :value="item.Id">
+                                {{item.Name}}
+                            </label>
+                        </dt>
+                        <dd>
+                            <dl class="cl permission-list2">
+                                <dt v-for="item2 in item.Children">
+                                    <label>
+                                        <input disabled type="checkbox" v-model="checkedNames" :value="item2.Id">
+                                        {{item2.Name}}
+                                    </label>
+                                </dt>
+                            </dl>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section styles{
+    <style>
+        .permission-list {
+            border: solid 1px #eee;
+        }
+
+            .permission-list > dt {
+                background-color: #efefef;
+                padding: 5px 10px;
+            }
+
+            .permission-list > dd {
+                padding: 10px;
+                padding-left: 30px;
+            }
+
+                .permission-list > dd > dl {
+                    border-bottom: solid 1px #eee;
+                    padding: 5px 0;
+                }
+
+                    .permission-list > dd > dl > dt {
+                        display: inline-block;
+                        float: left;
+                        white-space: nowrap;
+                        width: 100px;
+                    }
+
+        dl {
+            margin-top: 0;
+            /*margin-bottom: 15px;*/
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                submit: "添加",
+                RoleId:"@Model.RoleId",
+                Remark: "@Model.Remark",
+                RoleName: "@Model.RoleName",
+                checked: "",
+                updateList:@Html.Raw(Model.Children.JilToJson()),
+                checkedNames: [],
+                list: []
+            },
+            computed: {
+                count: function () {
+                    return this.strLength(this.Remark, false);
+                }
+            },
+            watch: {
+                updateList: function () {
+                    var _self = this;
+                    var obj = _self.updateList;
+                    if (obj.length > 0) {
+                        var arr = [];
+                        for (var item in obj) {
+                            arr.push(obj[item].MenuId);
+                        }
+                    }
+                    _self.checkedNames = arr;
+                }
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    _self.loadL();
+                    _self.updateList=@Html.Raw(Model.Children.JilToJson());
+                });
+            },
+            methods: {
+                checkAll: function (e) {
+                    var _self = this;
+                    _self.$nextTick(function () {
+
+                    });
+                },
+                loadL: function () {
+                    var _self = this;
+                    yui.$axiosget('/Role/GetMenuList').then(function (response) {
+                        _self.list = response.data;
+                    })
+                        .catch(function (error) {
+                            layer.msg(error.message, { icon: 5 });
+                        });
+
+                    //axios.get('/Role/GetMenuList')
+                    //    .then(function (response) {
+                    //        _self.list = response.data;
+                    //    })
+                    //    .catch(function (error) {
+                    //        layer.msg(error.message, { icon: 5 });
+                    //    });
+                },
+            }
+        });
+    </script>
+}

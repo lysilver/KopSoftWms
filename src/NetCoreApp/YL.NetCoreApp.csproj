@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YL.NetCoreApp</RootNamespace>
+    <AssemblyName>YL.NetCoreApp</AssemblyName>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dto\Dto.csproj" />
+    <ProjectReference Include="..\NetCore\YL.NetCore.csproj" />
+    <ProjectReference Include="..\YL.Utils\YL.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

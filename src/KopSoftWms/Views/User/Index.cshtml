@@ -1,0 +1,332 @@
+﻿<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            系统管理
+            <small>用户管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="#">系统管理</a></li>
+            <li class="active">用户管理</li>
+        </ol>
+    </section>
+    <section class="content">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">日期范围</span>
+                            <input type="text" v-model="datemin" ref="datemin" id="datemin" class="form-control" style="width:120px;">
+                            <input type="text" v-model="datemax" ref="datemax" id="datemax" class="form-control" style="width:120px;margin-left:10px;">
+                            <button name="search" v-on:click="searchL" type="submit" class="btn btn-success" style="margin-left:10px;"><i class="fa fa-search"></i> 搜用户</button>
+                        </div>
+
+                        <div id="toolbar" class="btn-group">
+                            <button id="btn_add" v-on:click="showL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                            </button>
+                            <button id="btn_edit" v-on:click="editL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                            </button>
+                            <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                            </button>
+                            <button id="btn_delete" v-on:click="enableL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>启用
+                            </button>
+                        </div>
+                        <table id="bootstraptable" class="table table-bordered text-nowrap table-hover"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="table-responsive">
+                <table id="bootstraptable" class="table text-nowrap"></table>
+            </div>*@
+    </section>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        //$(function () {
+        //    var obj = [{
+        //        checkbox: true,             //是否显示复选框
+        //        visible: true
+        //    },
+        //    {
+        //        field: 'UserId',
+        //        title: 'Id',
+        //        visible: false
+        //    }, {
+        //        field: 'UserName',
+        //        title: '姓名',
+        //        sortable: true
+        //    }, {
+        //        field: 'UserNickname',
+        //        title: '昵称',
+        //        sortable: true
+        //    }, {
+        //        field: 'Tel',
+        //        title: '手机'
+        //    }, {
+        //        field: 'Email',
+        //        title: '邮箱'
+        //    }, {
+        //        field: 'Sex',
+        //        title: '性别',
+        //        formatter: function (value, row, index) {
+        //            if (value === 1) {
+        //                return "男";
+        //            } else {
+        //                return "女";
+        //            }
+        //        }
+        //    }, {
+        //        field: 'Remark',
+        //        title: '备注'
+        //    }, {
+        //        field: 'CName',
+        //        title: '创建人',
+        //        sortable: true
+        //    }, {
+        //        field: 'CreateDate',
+        //        title: '创建时间',
+        //        sortable: true,
+        //        formatter: function (value, row, index) {
+        //            return _self.jsonDateFormat(value);
+        //        }
+        //    }, {
+        //        field: 'UName',
+        //        title: '修改人',
+        //        sortable: true
+        //    }, {
+        //        field: 'ModifiedDate',
+        //        title: '修改时间',
+        //        sortable: true,
+        //        formatter: function (value, row, index) {
+        //            return _self.jsonDateFormat(value);
+        //        }
+        //    }];
+        //    yui.table("bootstraptable", "/User/List", obj, "POST", "UserId");
+        //});
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                UserNickname: '',
+                datemin: '',
+                datemax: ''
+            },
+            //beforeCreate: function () {
+            //    this.$nextTick(function () {
+            //        this.load();
+            //    });
+            //},
+            //created: function () {
+            //    this.$nextTick(function () {
+            //        this.load();
+            //    });
+            //},
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    _self.$refs.User.parentNode.parentNode.classList.add("active");
+                    _self.$refs.User.classList.add("active");
+
+                    _self.datemin = _self.getCurrentMonthFirst();
+                    _self.datemax = _self.getCurrentMonthLast();
+                    $('#datemin').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    $('#datemax').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    setTimeout(function () {
+                        _self.loadL();
+                        $("div[class='pull-right search']")[0].children[0].setAttribute("placeholder", "姓名或昵称");
+                    }, 500);
+                    //$('#datemin')
+                    //    .datetimepicker()
+                    //    .on('changeDate', function (ev) {
+                    //        this.datemin = $('#datemin').val();
+                    //    });
+                });
+            },
+            methods: {
+                loadL: function () {
+                    _self = this;
+                    var obj = [{
+                        checkbox: true,             //是否显示复选框
+                        visible: true
+                    },
+                    {
+                        field: 'UserId',
+                        title: 'Id',
+                        visible: false
+                    }, {
+                        field: 'UserName',
+                        title: '姓名',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'UserNickname',
+                        title: '昵称',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'DeptName',
+                        align: 'center',
+                        title: '部门'
+                    }, {
+                        field: 'RoleName',
+                        align: 'center',
+                        title: '角色'
+                    }, {
+                        field: 'Tel',
+                        align: 'center',
+                        title: '手机'
+                    }, {
+                        field: 'Email',
+                        align: 'center',
+                        title: '邮箱'
+
+                    }, {
+                        field: 'Sex',
+                        title: '性别',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (value === 1) {
+                                return "男";
+                            } else {
+                                return "女";
+                            }
+                        }
+                    }, {
+                        field: 'IsEabled',
+                        title: '是否启用',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (value === 1) {
+                                return '<span class="label label-success radius">启用</span>';
+                            } else {
+                                return '<span class="label label-danger radius">禁用</span>';
+                            }
+                        }
+                    }, {
+                        field: 'Remark',
+                        align: 'center',
+                        title: '备注'
+                    }, {
+                        field: 'CName',
+                        title: '创建人',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'CreateDate',
+                        align: 'center',
+                        title: '创建时间',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }, {
+                        field: 'UName',
+                        align: 'center',
+                        title: '修改人',
+                        sortable: true
+                    }, {
+                        field: 'ModifiedDate',
+                        title: '修改时间',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }];
+                    yui.table("bootstraptable", "/User/List", obj, "POST", "UserId");
+                },
+                showL: function () {
+                    yui.layershow("添加用户", "/User/Add", 500, 500);
+                },
+                searchL: function () {
+                    $("#bootstraptable").bootstrapTable('refresh');
+                },
+                editL: function () {
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        var index = layer.confirm("您确定要修改吗？", { btn: ["确定", "取消"] }, function () {
+                            layer.close(index);
+                            var id = arr[0].UserId;
+                            yui.layershow("修改用户", "/User/Add?id=" + id, 500, 500);
+                        }, function () {
+
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                enableL: function () {
+                    var _self = this;
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        var value = arr[0].IsEabled;
+                        var content = "启用";
+                        if (value === 1) {
+                            content = "禁用";
+                        }
+                        var index = layer.confirm("您确定要" + content + "吗？", { btn: ["确定", "取消"] }, function () {
+                            var id = arr[0].UserId;
+                            axios.get('/User/Enable?id=' + id + "&type=" + value)
+                                .then(function (response) {
+                                    if (response.data.Item1) {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                                        _self.searchL();
+                                    } else {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    layer.msg(error.message, { icon: 5 });
+                                });
+                            layer.close(index);
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                },
+                deleteL: function () {
+                    _self = this;
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        var index = layer.confirm("您确定要删除吗？", { btn: ["确定", "取消"] }, function () {
+                            var id = arr[0].UserId;
+                            yui.$axiosget('/User/Delete?id=' + id)
+                                .then(function (response) {
+                                    if (response.data.Item1) {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                                        _self.searchL();
+                                    } else {
+                                        layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    layer.msg(error.message, { icon: 5 });
+                                });
+                            layer.close(index);
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                }
+            }
+        });
+    </script>
+}
