@@ -24,7 +24,7 @@ namespace YL.Core.Orm.SqlSugar
                                             return $"CONVERT (VARCHAR (10), {expInfo.Args[0].MemberName}, 121 )";
 
                                         case DbType.MySql:
-                                            return $"DATE_FORMAT( {expInfo.Args[0].MemberName}, '%Y-%d-%m' ) ";
+                                            return $"DATE_FORMAT( {expInfo.Args[0].MemberName}, '%Y-%m-%d' ) ";
 
                                         case DbType.Sqlite:
                                             return $"date({expInfo.Args[0].MemberName})";
