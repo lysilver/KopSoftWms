@@ -11,6 +11,7 @@ using Repository;
 using Services;
 using SqlSugar;
 using System;
+using System.Text;
 using YL.Core.Orm.SqlSugar;
 using YL.NetCore.Attributes;
 using YL.NetCore.Conventions;
@@ -75,7 +76,7 @@ namespace YL
             });
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();
-            //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             services.AddBr(); //br压缩
             services.AddResponseCompression();//添加压缩
             services.AddResponseCaching(); //响应式缓存
