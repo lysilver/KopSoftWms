@@ -1,4 +1,4 @@
-/*
+﻿/*
  Navicat Premium Data Transfer
 
  Source Server         : (local-sqlserver)
@@ -284,7 +284,7 @@ CREATE TABLE [dbo].[Sys_log] (
   [LogType] nvarchar(10) COLLATE Chinese_PRC_CI_AS  NULL,
   [Description] nvarchar(1000) COLLATE Chinese_PRC_CI_AS  NULL,
   [Url] nvarchar(150) COLLATE Chinese_PRC_CI_AS  NULL,
-  [Browser] nvarchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Browser] nvarchar(500) COLLATE Chinese_PRC_CI_AS  NULL,
   [CreateBy] bigint  NULL,
   [CreateDate] datetime  NULL,
   [ModifiedBy] bigint  NULL,

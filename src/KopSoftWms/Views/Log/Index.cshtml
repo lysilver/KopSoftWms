@@ -1,0 +1,222 @@
+﻿<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            日志管理
+            <small>系统日志</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="#">日志管理</a></li>
+            <li class="active">系统日志</li>
+        </ol>
+    </section>
+    @*<section class="content">
+            <div class="row">
+                <div class="pd-20">
+                    <div class="text-c">
+                        日期范围：
+                        <input type="text" v-model="datemin" ref="datemin" id="datemin" class="input-text Wdate" style="width:120px;">
+                        -
+                        <input type="text" v-model="datemax" ref="datemax" id="datemax" class="input-text Wdate" style="width:120px;">
+                        <button v-on:click="searchL" type="submit" class="btn btn-success" id="" name=""><i class="icon-search"></i> 搜日志</button>
+                    </div>
+                    <div id="toolbar" class="btn-group">
+                        <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="bootstraptable" class="table text-nowrap"></table>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">日期范围</span>
+                            <input type="text" v-model="datemin" ref="datemin" id="datemin" class="form-control" style="width:120px;">
+                            <input type="text" v-model="datemax" ref="datemax" id="datemax" class="form-control" style="width:120px;margin-left:10px;">
+                            <button v-on:click="searchL" type="submit" class="btn btn-success" style="margin-left:10px;"><i class="fa fa-search"></i> 搜日志</button>
+                        </div>
+                        @*<div class="text-c">
+                                日期范围：
+                                <input type="text" v-model="datemin" ref="datemin" id="datemin" class="" style="width:120px;">
+                                -
+                                <input type="text" v-model="datemax" ref="datemax" id="datemax" class="" style="width:120px;">
+                                <button v-on:click="searchL" type="submit" class="btn btn-success"><i class="fa fa-search"></i> 搜日志</button>
+                            </div>*@
+                        <div id="toolbar" class="btn-group">
+                            <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                            </button>
+                        </div>
+                        @*<table id="bootstraptable" class="table table-bordered table-hover"></table>*@
+                        @*table-condensed*@
+                        <table id="bootstraptable" class="table table-bordered text-nowrap table-hover"></table>
+                    </div>
+                </div>
+            </div>
+            @*<div class="table-responsive">
+                    <table id="bootstraptable" class="table text-nowrap"></table>
+                </div>*@
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                datemin: '',
+                datemax: '',
+                isActive: true,
+                url: '/Log'
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    //显示active
+                    _self.$refs.Log.parentNode.parentNode.classList.add("active");
+                    _self.$refs.Log.classList.add("active");
+
+                    _self.datemin = _self.getCurrentMonthFirst();
+                    _self.datemax = _self.getCurrentMonthLast();
+                    $('#datemin').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    $('#datemax').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    setTimeout(function () {
+                        _self.loadL();
+                        //$("input[class='form-control']")[0].setAttribute("placeholder", "日志类型");
+                        $("div[class='pull-right search']")[0].children[0].setAttribute("placeholder", "日志类型");
+                    }, 500);
+                });
+            },
+            methods: {
+                loadL: function () {
+                    _self = this;
+                    var obj = [{
+                        checkbox: true,             //是否显示复选框
+                        visible: true
+                    },
+                    {
+                        field: 'LogId',
+                        title: 'Id',
+                        visible: false
+                    }, {
+                        field: 'LogType',
+                        title: '日志类型',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'Description',
+                        align: 'center',
+                        title: '描述'
+                    }, {
+                        field: 'Url',
+                        title: 'Url',
+                        align: 'center',
+                    }, {
+                        field: 'Browser',
+                        title: '浏览器',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'LogIp',
+                        title: 'IP',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'CName',
+                        title: '创建人',
+                        align: 'center',
+                        sortable: true
+                    }, {
+                        field: 'CreateDate',
+                        align: 'center',
+                        title: '创建时间',
+                        sortable: true,
+                        formatter: function (value, row, index) {
+                            return _self.jsonDateFormat(value);
+                        }
+                    }];
+                    yui.table("bootstraptable", "/Log/List", obj, "POST", "LogId", false);
+                },
+                searchL: function () {
+                    $("#bootstraptable").bootstrapTable('refresh');
+                },
+                deleteL: function () {
+                    var _self = this;
+                    var arr = $("#bootstraptable").bootstrapTable('getSelections');
+                    if (arr.length > 0) {
+                        var index = layer.confirm("您确定要删除吗？", { btn: ["确定", "取消"] }, function () {
+                            //var id = arr[0].LogId;
+                            //var ids = [];
+                            var ids2 = [];
+                            for (var item in arr) {
+                                //ids.push({ Id: arr[item].LogId });
+                                ids2.push(arr[item].LogId);
+                            }
+                            //var ids = []; ids.push({ Id: arr[item].LogId }); List<PubDelete> ids
+                            //var ids2 = []; ids2.push(arr[item].LogId); List<string> ids
+                            //$.ajax({
+                            //    url: '/Log/Delete',
+                            //    type: 'post',
+                            //    contentType: 'application/json',
+                            //    data: JSON.stringify(ids2),
+                            //    success: function (data) {
+                            //        alert("不使用ViewModel:" + data);
+                            //    }
+                            //});
+                            yui.$axiospostjson('/Log/Delete', ids2).then(function (response) {
+                                if (response.data.Item1) {
+                                    layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                                    _self.searchL();
+                                } else {
+                                    layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                                }
+                                layer.close(index);
+                            }).catch(function (error) {
+                                layer.msg(error.message, { icon: 5 });
+                                layer.close(index);
+                            });
+
+                            //axios.post('/Log/Delete', ids2, {
+                            //    headers: {
+                            //        'Content-Type': 'application/json; charset=UTF-8'
+                            //    }
+                            //})
+                            //    .then(function (response) {
+                            //        if (response.data.Item1) {
+                            //            layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
+                            //            _self.searchL();
+                            //        } else {
+                            //            layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            //        }
+                            //    })
+                            //    .catch(function (error) {
+                            //        layer.msg(error.message, { icon: 5 });
+                            //    });
+                            //layer.close(index);
+                        });
+                    } else {
+                        layer.alert("请选中行", { icoon: 3, skin: "layer-ext-moon" });
+                    }
+                }
+            }
+        });
+    </script>
+}

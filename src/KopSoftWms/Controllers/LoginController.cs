@@ -16,6 +16,7 @@ using YL.NetCore.NetCoreApp;
 using YL.Utils.Extensions;
 using YL.Utils.Pub;
 using YL.Utils.Security;
+using MediatR;
 
 namespace KopSoftWms.Controllers
 {
@@ -26,14 +27,16 @@ namespace KopSoftWms.Controllers
         private readonly ISys_logServices _logServices;
         private readonly IConfiguration _configuration;
         private readonly Xss _xss;
+        private readonly IMediator _mediator;
 
-        public LoginController(Xss xss, ISys_logServices logServices, IHttpContextAccessor httpContext, IConfiguration configuration, ISys_userServices sys_User)
+        public LoginController(Xss xss, ISys_logServices logServices, IHttpContextAccessor httpContext, IConfiguration configuration, ISys_userServices sys_User, IMediator mediator)
         {
             _httpContext = httpContext;
             _configuration = configuration;
             _userServices = sys_User;
             _logServices = logServices;
             _xss = xss;
+            _mediator = mediator;
         }
 
         //string returnUrl = null
@@ -76,7 +79,7 @@ namespace KopSoftWms.Controllers
             }
             else
             {
-                _logServices.Insert(new Sys_log
+                _mediator.Publish(new Sys_log
                 {
                     LogId = PubId.SnowflakeId,
                     Browser = GetBrowser(),
@@ -85,6 +88,15 @@ namespace KopSoftWms.Controllers
                     Url = GetUrl(),
                     LogType = LogType.login.EnumToString()
                 });
+                //_logServices.Insert(new Sys_log
+                //{
+                //    LogId = PubId.SnowflakeId,
+                //    Browser = GetBrowser(),
+                //    Description = $"{_xss.Filter(sys.UserNickname)}登录失败",
+                //    LogIp = GetIp(),
+                //    Url = GetUrl(),
+                //    LogType = LogType.login.EnumToString()
+                //});
             }
             item.Item3 = null;
             return Json(item);

@@ -18,6 +18,7 @@ using YL.NetCore.Conventions;
 using YL.NetCore.DI;
 using YL.NetCoreApp.Extensions;
 using YL.Utils.Json;
+using MediatR;
 
 namespace YL
 {
@@ -81,7 +82,7 @@ namespace YL
             services.AddResponseCompression();//添加压缩
             services.AddResponseCaching(); //响应式缓存
             services.AddMemoryCache();
-
+            services.AddMediatR();
             //@1 DependencyInjection 注册
             services.AddNlog(); //添加Nlog
             RegisterBase(services);
@@ -128,6 +129,7 @@ namespace YL
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseGlobalCore();
             app.UseExecuteTime();
             app.UseTimedJob();

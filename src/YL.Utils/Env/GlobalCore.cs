@@ -5,7 +5,9 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using YL.Utils.Extensions;
 using YL.Utils.Pub;
 
@@ -23,7 +25,26 @@ namespace YL.Utils.Env
             _app = app ?? throw new ArgumentNullException(nameof(app));
         }
 
-        public static T GetRequiredService<T>() => _app.ApplicationServices.GetRequiredService<T>();
+        /// <summary>
+        ///
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T GetRequiredService<T>()
+        {
+            try
+            {
+                //var t = _app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider.GetRequiredService<T>();
+                return _app.ApplicationServices.GetService<T>();
+            }
+            catch
+            {  //生命周期为ServiceLifetime.Scoped 需通过这种方式
+                using (var scope = GetServiceProvider.CreateScope())
+                {
+                    return scope.ServiceProvider.GetRequiredService<T>();
+                }
+            }
+        }
 
         public static IServiceProvider GetServiceProvider => GetRequiredService<IServiceProvider>();
 
@@ -61,6 +82,19 @@ namespace YL.Utils.Env
         {
             var req = Current.Request;
             return $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
+        }
+
+        public static IEnumerable<Claim> GetClaim()
+        {
+            var isAuthenticated = Current.User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                return Current.User.Claims;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static string GetBrowser() => Current.Request.Headers["User-Agent"].ToString();

@@ -1,0 +1,146 @@
+﻿<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            日志管理
+            <small>登录统计</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="#">日志管理</a></li>
+            <li class="active">登录统计</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">日期范围</span>
+                            <input type="text" v-model="datemin" ref="datemin" id="datemin" class="form-control" style="width:120px;">
+                            <input type="text" v-model="datemax" ref="datemax" id="datemax" class="form-control" style="width:120px;margin-left:10px;">
+                            <button v-on:click="searchL" type="submit" class="btn btn-success" style="margin-left:10px;"><i class="fa fa-search"></i> 统计</button>
+                        </div>
+                        @*<div id="toolbar" class="btn-group">
+                                <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                                </button>
+                            </div>*@
+                        <div id="container" style="min-width:700px;height:400px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                datemin: '',
+                datemax: '',
+                isActive: true,
+                url: '/Log/Bar',
+                legendData: [],
+                xAxisData: [],
+                seriesData: []
+            },
+            mounted: function () {
+                var _self = this;
+                _self.$nextTick(function () {
+                    //显示active
+                    _self.$refs.LogBar.parentNode.parentNode.classList.add("active");
+                    _self.$refs.LogBar.classList.add("active");
+
+                    _self.datemin = _self.getCurrentMonthFirst();
+                    _self.datemax = _self.getCurrentMonthLast();
+                    $('#datemin').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    $('#datemax').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        minView: 2,
+                        autoclose: true,
+                        language: "zh-CN"
+                    });
+                    setTimeout(function () {
+                        _self.loadL();
+                    }, 500);
+                });
+            },
+            methods: {
+                loadL: function () {
+                    var _self = this;
+                    _self.xAxisData = [];
+                    _self.seriesData = [];
+                    var data = {
+                        datemin: _self.$refs.datemin.value,
+                        datemax: _self.$refs.datemax.value
+                    };
+                    yui.$axiospostform(_self.url, data).then(function (response) {
+                        var res = response.data;
+                        if (res.length > 0) {
+                            for (var item in res) {
+                                _self.xAxisData.push(res[item].CreateDate);
+                                _self.seriesData.push(res[item].COUNT);
+                            }
+                        }
+                        var myChart = echarts.init(document.getElementById('container'));
+                        var options = {
+                            //title: {
+                            //    text: '登录次数',
+                            //    left: 50,
+                            //    //x: 'center'
+                            //},
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            toolbox: {
+                                feature: {
+                                    dataView: { show: true, readOnly: false },
+                                    magicType: { show: true, type: ['line', 'bar'] },
+                                    restore: { show: true },
+                                    saveAsImage: { show: true }
+                                }
+                            },
+                            legend: {
+                                data: ['登录Bar', '登录Line']
+                            },
+                            //X轴设置
+                            xAxis: {
+                                type: 'category',
+                                data: _self.xAxisData
+                            },
+                            yAxis: {
+                                type: 'value',
+                                name: '次数',
+                            },
+                            series: [{
+                                name:"登录Bar",
+                                data: _self.seriesData,
+                                type: 'bar'
+                            }, {
+                                name: "登录Line",
+                                data: _self.seriesData,
+                                type: 'line'
+                            }]
+                        };
+                        myChart.setOption(options);
+                    }).catch(function (error) {
+                        console.info(error);
+                    });
+                },
+                searchL: function () {
+                    this.loadL();
+                },
+
+            }
+        });
+    </script>
+}

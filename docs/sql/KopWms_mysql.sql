@@ -1,4 +1,4 @@
-/*
+﻿/*
  Navicat Premium Data Transfer
 
  Source Server         : local-mysql
@@ -112,7 +112,7 @@ CREATE TABLE `sys_log`  (
   `LogType` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `Url` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Browser` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `Browser` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `CreateBy` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   `CreateDate` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `ModifiedBy` bigint(20) NULL DEFAULT NULL COMMENT '修改人',

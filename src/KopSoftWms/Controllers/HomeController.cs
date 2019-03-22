@@ -11,6 +11,7 @@ using YL.NetCore.Attributes;
 using YL.NetCore.NetCoreApp;
 using YL.Utils.Pub;
 using YL.Utils.Extensions;
+using MediatR;
 
 namespace KopSoftWms.Controllers
 {
@@ -20,22 +21,24 @@ namespace KopSoftWms.Controllers
         private readonly ISys_logServices _logServices;
         private readonly ISys_roleServices _roleServices;
         private readonly IMemoryCache _cache;
+        private readonly IMediator _mediator;
 
         public HomeController(ISys_logServices logServices,
             ISys_userServices sysUserServices,
-            ISys_roleServices roleServices, IMemoryCache cache)
+            ISys_roleServices roleServices, IMemoryCache cache, IMediator mediator)
         {
             _logServices = logServices;
             _userServices = sysUserServices;
             _roleServices = roleServices;
             _cache = cache;
+            _mediator = mediator;
         }
 
         public IActionResult Index()
         {
             //TempData["returnUrl"] = returnUrl;
             _userServices.Login(UserDtoCache.UserId, GetIp());
-            _logServices.Insert(new Sys_log
+            _mediator.Publish(new Sys_log
             {
                 LogId = PubId.SnowflakeId,
                 Browser = GetBrowser(),
@@ -45,6 +48,16 @@ namespace KopSoftWms.Controllers
                 Url = GetUrl(),
                 LogType = LogType.login.EnumToString(),
             });
+            //_logServices.Insert(new Sys_log
+            //{
+            //    LogId = PubId.SnowflakeId,
+            //    Browser = GetBrowser(),
+            //    CreateBy = UserDtoCache.UserId,
+            //    Description = $"{UserDtoCache.UserNickname}登录成功",
+            //    LogIp = GetIp(),
+            //    Url = GetUrl(),
+            //    LogType = LogType.login.EnumToString(),
+            //});
             ViewBag.title = GetDescriptor("title");
             ViewBag.company = GetDescriptor("company");
             ViewBag.customer = GetDescriptor("customer");

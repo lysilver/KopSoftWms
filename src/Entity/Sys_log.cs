@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using MediatR;
+using SqlSugar;
 using System;
 
 namespace YL.Core.Entity
@@ -6,7 +7,7 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
-    public partial class Sys_log
+    public partial class Sys_log : INotification
     {
         public Sys_log()
         {
