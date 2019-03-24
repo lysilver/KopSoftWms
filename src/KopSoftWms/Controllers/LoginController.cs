@@ -51,14 +51,14 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult CheckLoginAsync([FromBody]SysUserDto sys)
+        public async Task<IActionResult> CheckLoginAsync([FromBody]SysUserDto sys)
         {
             ClearCache("user");
             ClearCache("menu");
             var item = _userServices.CheckLogin(sys);
             if (item.Item1)
             {
-                HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 var claims = new List<Claim>
                   {
                       new Claim(ClaimTypes.Name, item.Item3.UserName),
@@ -71,7 +71,7 @@ namespace KopSoftWms.Controllers
                claims,
                CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentitys);
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties
                 {
                     IsPersistent = true,
                     ExpiresUtc = DateTimeOffset.Now.AddDays(1),
@@ -79,7 +79,7 @@ namespace KopSoftWms.Controllers
             }
             else
             {
-                _mediator.Publish(new Sys_log
+                await _mediator.Publish(new Sys_log
                 {
                     LogId = PubId.SnowflakeId,
                     Browser = GetBrowser(),
@@ -103,11 +103,11 @@ namespace KopSoftWms.Controllers
         }
 
         [HttpGet]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
             ClearCache("menu"); //清除菜单
             ClearCache("user");
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Login");
         }
     }

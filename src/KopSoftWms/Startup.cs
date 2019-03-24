@@ -52,15 +52,20 @@ namespace YL
             services.AddOptions();
             services.AddXsrf();
             services.AddXss();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, cfg =>
+            services.AddAuthentication(c =>
+            {
+                c.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                c.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(cfg =>
             {
                 cfg.LoginPath = "/Login/Index";
-                cfg.ExpireTimeSpan = TimeSpan.FromDays(1);
-                cfg.Cookie.Expiration = TimeSpan.FromDays(1);
+                cfg.LogoutPath = "/Login/Logout";
+                //cfg.ExpireTimeSpan = TimeSpan.FromDays(1);
+                //cfg.Cookie.Expiration = TimeSpan.FromDays(1);
                 cfg.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;
                 cfg.Cookie.Path = "/";
                 cfg.Cookie.HttpOnly = true;
-                cfg.SlidingExpiration = true;
+                //cfg.SlidingExpiration = true;
             });
             var sqlSugarConfig = SqlSugarConfig.GetConnectionString(Configuration);
             services.AddSqlSugarClient<SqlSugarClient>(config =>
@@ -135,9 +140,11 @@ namespace YL
             app.UseTimedJob();
             app.UseResponseCompression();  //使用压缩
             app.UseResponseCaching();    //使用缓存
-            app.UseAuthentication();
+
             app.UseStaticFiles(); //使用静态文件
             app.UseCookiePolicy();
+            app.UseAuthentication();
+
             app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
             app.UseMvc(routes =>
             {
