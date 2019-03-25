@@ -73,8 +73,9 @@ namespace KopSoftWms.Controllers
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentitys);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties
                 {
+                    IssuedUtc = DateTime.Now,
                     IsPersistent = true,
-                    ExpiresUtc = DateTimeOffset.Now.AddDays(1),
+                    ExpiresUtc = DateTime.Now.AddDays(1),
                 });
             }
             else

@@ -183,10 +183,7 @@ namespace YL.NetCore.NetCoreApp
             {
                 ip = HttpContext.Connection.RemoteIpAddress.ToString();
             }
-            if (PubSys.IsLinux())
-            {
-                return ip.Replace("::ffff:", "");
-            }
+            ip.Replace("::ffff:", ""); //
             return ip == "::1" ? "127.0.0.1" : ip;
         }
 

@@ -80,8 +80,9 @@
     <script src="~/js/snow.min.js"></script>
     <script src="~/lib/layer/layer.js"></script>
     <script src="~/js/vqypa.min.js"></script>
-
+    <script src="~/js/eruda.min.js"></script>
     <script type="text/javascript">
+        //eruda.init();
         var app = new Vue({
             el: '#app',
             data: {
@@ -127,6 +128,7 @@
                             _self.disabled = false;
                             _self.isSelected = false;
                             if (response.data.item1) {
+                                //_self.speeh("正在跳转请稍后");
                                 _self.submit = "正在跳转。。。请稍后！";
                                 location.href = "/Home";
                             } else {
@@ -143,6 +145,14 @@
                 cancel: function () {
                     var _self = this;
                     _self.Pwd = _self.UserNickname = "";
+                },
+                speeh: function (val) {
+                    //只支持PC
+                    var msg = new SpeechSynthesisUtterance(val);
+                    msg.volume = 100;
+                    msg.rate = 1;
+                    msg.pitch = 1.5;
+                    window.speechSynthesis.speak(msg);
                 }
             }
         });
