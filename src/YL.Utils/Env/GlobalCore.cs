@@ -32,21 +32,11 @@ namespace YL.Utils.Env
         /// <returns></returns>
         public static T GetRequiredService<T>()
         {
-            try
+            using (var scope = _app.ApplicationServices.GetRequiredService<IServiceProvider>().CreateScope())
             {
-                //var t = _app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider.GetRequiredService<T>();
-                return _app.ApplicationServices.GetService<T>();
-            }
-            catch
-            {  //生命周期为ServiceLifetime.Scoped 需通过这种方式
-                using (var scope = GetServiceProvider.CreateScope())
-                {
-                    return scope.ServiceProvider.GetRequiredService<T>();
-                }
+                return scope.ServiceProvider.GetRequiredService<T>();
             }
         }
-
-        public static IServiceProvider GetServiceProvider => GetRequiredService<IServiceProvider>();
 
         public static IHostingEnvironment GetHostingEnvironment => GetRequiredService<IHostingEnvironment>();
 
