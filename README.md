@@ -1,4 +1,5 @@
-# KopSoftWms基于.net core 2.2的跨平台wms版本（demo）
+# Asp.net Core Mvc开源WMS仓库管理系统
+<http://www.kopsoft.cn/>
 
 
 ## 仓库地址
