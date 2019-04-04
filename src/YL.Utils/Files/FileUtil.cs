@@ -73,11 +73,16 @@ namespace YL.Utils.Files
                 if (File.Exists(path))
                 {
                     StreamReader sr = new StreamReader(path, BytesExt.GetEncoding(type));
-                    while ((line = sr.ReadLine()) != null)
+                    if (!sr.EndOfStream)
                     {
                         line = sr.ReadToEnd();
                         return line;
                     }
+                    //while ((line = sr.ReadLine()) != null)
+                    //{
+                    //    line += sr.ReadToEnd();
+                    //    return line;
+                    //}
                 }
                 return line;
             }, line);

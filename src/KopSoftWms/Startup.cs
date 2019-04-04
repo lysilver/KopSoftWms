@@ -19,6 +19,9 @@ using YL.NetCore.DI;
 using YL.NetCoreApp.Extensions;
 using YL.Utils.Json;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace YL
 {
@@ -80,6 +83,7 @@ namespace YL
             {
                 o.JsonType = JsonType.Jil;
             });
+            services.AddDIProperty();
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
