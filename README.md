@@ -1,17 +1,13 @@
-# Asp.net Core Mvc开源WMS仓库管理系统
-<http://www.kopsoft.cn/>
+#
 
+Asp.net Core Mvc开源WMS仓库管理系统
+http://www.kopsoft.cn/
 
 ## 仓库地址
 
 * Github：https://github.com/lysilver/KopSoftWms
 
 * Gitee: https://gitee.com/yulou/KopSoftWms
-
-# 效果如下：
-![home](https://github.com/lysilver/KopSoftWms/blob/master/docs/img/20190305145657.png)
-![login](https://github.com/lysilver/KopSoftWms/blob/master/docs/img/20190305145807.png)
-![log](https://github.com/lysilver/KopSoftWms/blob/master/docs/img/20190305145740.png)
 
 ## 功能模块
 - [x] 用户管理
@@ -48,9 +44,8 @@
 
 
 ## 演示直达
-* 演示地址： http://mes.kopsoft.cn
-* 密码默认
-* 账号admin 密码123 
+* 演示地址： http://wms.kopsoft.cn
+* 账号guest 密码000000
 
 ## 申明
 * 本代码只做学习交流使用，生产使用，概不负责！！！
