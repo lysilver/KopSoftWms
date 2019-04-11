@@ -28,7 +28,7 @@ namespace YL.NetCore.DI
             var filterType = filterItem.Filter.GetType();
             if (!_publicPropertyCache.ContainsKey(filterType.FullName))
             {
-                var ps = filterType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                var ps = filterType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic)
                     .Where(c => c.GetCustomAttribute<InjectionAttribute>() != null);
                 _publicPropertyCache[filterType.FullName] = ps;
             }
@@ -46,6 +46,15 @@ namespace YL.NetCore.DI
                     throw new InvalidOperationException($"Unable to resolve service for type '{item.PropertyType.FullName}' while attempting to activate '{filterType.FullName}'");
                 }
                 item.SetValue(filterItem.Filter, service);
+            }
+
+            foreach (FieldInfo field in filterType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                var autowiredAttr = field.GetCustomAttribute<InjectionAttribute>();
+                if (autowiredAttr != null)
+                {
+                    field.SetValue(filterItem.Filter, serviceProvider.GetService(field.FieldType));
+                }
             }
         }
     }

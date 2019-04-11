@@ -54,7 +54,7 @@ namespace YL.NetCore.DI
             {
                 if (!_publicPropertyCache.ContainsKey(controllerTypeInfo.FullName))
                 {
-                    var ps = controllerTypeInfo.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    var ps = controllerTypeInfo.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic)
                         .Where(c => c.GetCustomAttribute<InjectionAttribute>() != null);
                     _publicPropertyCache[controllerTypeInfo.FullName] = ps;
                 }
@@ -68,6 +68,14 @@ namespace YL.NetCore.DI
                         throw new InvalidOperationException($"Unable to resolve service for type '{item.PropertyType.FullName}' while attempting to activate '{controllerTypeInfo.FullName}'");
                     }
                     item.SetValue(instance, service);
+                }
+                foreach (FieldInfo field in controllerTypeInfo.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+                {
+                    var autowiredAttr = field.GetCustomAttribute<InjectionAttribute>();
+                    if (autowiredAttr != null)
+                    {
+                        field.SetValue(instance, serviceProvider.GetService(field.FieldType));
+                    }
                 }
             }
             return instance;
