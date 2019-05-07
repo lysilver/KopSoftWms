@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.60.1" />
+    <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="sqlSugarCore" Version="4.9.9.3" />
+    <PackageReference Include="sqlSugarCore" Version="4.9.9.10" />
   </ItemGroup>
 
   <ItemGroup>
