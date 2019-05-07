@@ -84,7 +84,7 @@ namespace Services
 
         public byte[] ExportList(Bootstrap.BootstrapParams bootstrap)
         {
-            bootstrap.sort = "´´½¨Ê±¼ä";
+            bootstrap.sort = "åˆ›å»ºæ—¶é—´";
             bootstrap.order = "desc";
             var query = _client.Queryable<Wms_material, Sys_dict, Sys_dict, Wms_storagerack, Wms_reservoirarea, Wms_warehouse, Sys_user, Sys_user>
                 ((s, t, ut, r, k, w, c, u) => new object[] {
@@ -99,27 +99,27 @@ namespace Services
                  .Where((s, t, ut, r, k, w, c, u) => s.IsDel == 1 && t.IsDel == 1 && ut.IsDel == 1 && r.IsDel == 1 && k.IsDel == 1 && w.IsDel == 1)
                  .Select((s, t, ut, r, k, w, c, u) => new
                  {
-                     ÎïÁÏ±àºÅ = s.MaterialNo,
-                     ÎïÁÏÃû³Æ = s.MaterialName,
-                     µ¥Î»Àà±ð = ut.DictName,
-                     ÎïÁÏ·ÖÀà = t.DictName,
-                     °²È«¿â´æ = s.Qty,
-                     ÓÐÐ§ÆÚ = s.ExpiryDate,
-                     »õ¼Ü±àºÅ = r.StorageRackNo,
-                     »õ¼ÜÃû³Æ = r.StorageRackName,
-                     ¿âÇø±àºÅ = k.ReservoirAreaNo,
-                     ¿âÇøÃû³Æ = k.ReservoirAreaName,
-                     ²Ö¿â±àºÅ = w.WarehouseNo,
-                     ²Ö¿âÃû³Æ = w.WarehouseName,
-                     ±¸×¢ = s.Remark,
-                     ´´½¨ÈË = c.UserNickname,
-                     ´´½¨Ê±¼ä = s.CreateDate,
-                     ÐÞ¸ÄÈË = u.UserNickname,
-                     ÐÞ¸ÄÊ±¼ä = s.ModifiedDate
+                     ç‰©æ–™ç¼–å· = s.MaterialNo,
+                     ç‰©æ–™åç§° = s.MaterialName,
+                     å•ä½ç±»åˆ« = ut.DictName,
+                     ç‰©æ–™åˆ†ç±» = t.DictName,
+                     å®‰å…¨åº“å­˜ = s.Qty,
+                     æœ‰æ•ˆæœŸ = s.ExpiryDate,
+                     è´§æž¶ç¼–å· = r.StorageRackNo,
+                     è´§æž¶åç§° = r.StorageRackName,
+                     åº“åŒºç¼–å· = k.ReservoirAreaNo,
+                     åº“åŒºåç§° = k.ReservoirAreaName,
+                     ä»“åº“ç¼–å· = w.WarehouseNo,
+                     ä»“åº“åç§° = w.WarehouseName,
+                     å¤‡æ³¨ = s.Remark,
+                     åˆ›å»ºäºº = c.UserNickname,
+                     åˆ›å»ºæ—¶é—´ = s.CreateDate,
+                     ä¿®æ”¹äºº = u.UserNickname,
+                     ä¿®æ”¹æ—¶é—´ = s.ModifiedDate
                  }).MergeTable();
             if (!bootstrap.datemin.IsEmpty() && !bootstrap.datemax.IsEmpty())
             {
-                query.Where(s => s.´´½¨Ê±¼ä > bootstrap.datemin.ToDateTimeB() && s.´´½¨Ê±¼ä <= bootstrap.datemax.ToDateTimeE());
+                query.Where(s => s.åˆ›å»ºæ—¶é—´ > bootstrap.datemin.ToDateTimeB() && s.åˆ›å»ºæ—¶é—´ <= bootstrap.datemax.ToDateTimeE());
             }
             if (bootstrap.order.Equals("desc", StringComparison.OrdinalIgnoreCase))
             {
