@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KopSoftWms", "KopSoftWms\KopSoftWms.csproj", "{AB10278E-541F-43A6-BB31-360B8F43AE92}"
 EndProject
@@ -40,6 +40,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestKopSoftWms", "..\test\XUnitTestKopSoftWms\XUnitTestKopSoftWms.csproj", "{27CB3914-2BBB-4E13-84B6-14B5E397A28C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{5ECAA16F-5715-4310-B2C9-68C4BA72B432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopSoftWms_bak", "KopSoftWms_bak\KopSoftWms_bak.csproj", "{6E2C38A1-B70B-4A88-A5B9-FE44270D454F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2C38A1-B70B-4A88-A5B9-FE44270D454F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2C38A1-B70B-4A88-A5B9-FE44270D454F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2C38A1-B70B-4A88-A5B9-FE44270D454F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2C38A1-B70B-4A88-A5B9-FE44270D454F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{FCA45070-6064-40DB-A5E8-4778E0C99E2D} = {37A7799B-1F85-4746-A9EA-B0F219831CDA}
 		{27CB3914-2BBB-4E13-84B6-14B5E397A28C} = {113E9737-A3EA-493C-9C39-2F044C12C41C}
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432} = {8FA3375D-7742-471C-8012-99F882F13CE0}
+		{6E2C38A1-B70B-4A88-A5B9-FE44270D454F} = {34B22F89-6684-4AD7-B92A-8C452BA1AFB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D493867C-D775-4AEC-9F0A-298A298D9FFE}
