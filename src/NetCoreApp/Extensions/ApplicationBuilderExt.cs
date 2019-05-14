@@ -1,20 +1,18 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.IO;
-using YL.Utils.Env;
-using YL.NetCore.Middlewares;
-using Microsoft.AspNetCore.Diagnostics;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using YL.Utils.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Reflection;
+using System.Threading.Tasks;
+using YL.NetCore.Middlewares;
+using YL.Utils.Env;
 using YL.Utils.Extensions;
+using YL.Utils.Http;
 
 namespace YL.NetCoreApp.Extensions
 {
