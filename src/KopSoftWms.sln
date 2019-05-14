@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{113E9737-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{5ECAA16F-5715-4310-B2C9-68C4BA72B432}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestKopSoftWms", "..\test\XUnitTestKopSoftWms\XUnitTestKopSoftWms.csproj", "{B3B2E6B4-3457-449F-9144-6030A795D2AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B2E6B4-3457-449F-9144-6030A795D2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B2E6B4-3457-449F-9144-6030A795D2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B2E6B4-3457-449F-9144-6030A795D2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B2E6B4-3457-449F-9144-6030A795D2AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +116,7 @@ Global
 		{5B9D28EC-6ACE-464E-AF09-141ED6E451F7} = {37A7799B-1F85-4746-A9EA-B0F219831CDA}
 		{FCA45070-6064-40DB-A5E8-4778E0C99E2D} = {37A7799B-1F85-4746-A9EA-B0F219831CDA}
 		{5ECAA16F-5715-4310-B2C9-68C4BA72B432} = {8FA3375D-7742-471C-8012-99F882F13CE0}
+		{B3B2E6B4-3457-449F-9144-6030A795D2AD} = {113E9737-A3EA-493C-9C39-2F044C12C41C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D493867C-D775-4AEC-9F0A-298A298D9FFE}
