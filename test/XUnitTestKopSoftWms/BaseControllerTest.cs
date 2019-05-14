@@ -12,6 +12,9 @@ using YL.Core.Orm.SqlSugar;
 using Services;
 using YL.Utils.Configs;
 using YL.Utils.Table;
+using Microsoft.AspNetCore.Builder.Internal;
+using YL.Utils.Json;
+using MediatR;
 
 namespace XUnitTestKopSoftWms
 {
@@ -25,24 +28,31 @@ namespace XUnitTestKopSoftWms
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             var Configuration = services.BuildServiceProvider().GetService<IConfiguration>();
+
+            services.AddJson(o =>
+            {
+                o.JsonType = JsonType.Jil;
+            });
+            services.AddDIProperty();
             services.AddOptions();
             services.AddXsrf();
             services.AddXss();
             var config2 = ConfigUtil.GetJsonConfig();
-            var lo = config2["SqlSugar:ConnectionString"];
+            var sqlSugarConfig = SqlSugarConfig.GetConnectionString(config2);
             services.AddSqlSugarClient<SqlSugarClient>(config =>
-                {
-                    //Configuration["sql:mssql"]
-                    config.ConnectionString = lo;
-                    config.DbType = DbType.SqlServer;
-                    config.IsAutoCloseConnection = true;
-                    config.InitKeyType = InitKeyType.Attribute;
-                });
+            {
+                config.ConnectionString = sqlSugarConfig.Item2;
+                config.DbType = sqlSugarConfig.Item1;
+                config.IsAutoCloseConnection = true;
+                config.InitKeyType = InitKeyType.Attribute;
+                //config.IsShardSameThread = true;
+            });
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();
             services.AddBr(); //br压缩
             services.AddResponseCompression();//添加压缩
             services.AddMemoryCache();
+            services.AddMediatR(typeof(BaseControllerTest).GetTypeInfo().Assembly);
 
             services.AddNlog(); //添加Nlog
             services.AddLogging();
@@ -50,6 +60,9 @@ namespace XUnitTestKopSoftWms
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");
             serviceDescriptors = services;
+            services.AddSingleton<IApplicationBuilder>(new ApplicationBuilder(services.BuildServiceProvider()));
+            var app = services.BuildServiceProvider().GetService<IApplicationBuilder>();
+            app.UseGlobalCore();
             return services.BuildServiceProvider();
         }
 
