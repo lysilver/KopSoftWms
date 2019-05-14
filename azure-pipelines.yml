@@ -4,6 +4,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  buildConfiguration: 'Release'
+
 steps:
 - task: UseDotNet@2
   inputs:
@@ -12,21 +15,10 @@ steps:
     includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
-    command: 'restore'
-    feedsToUse: 'select'
-    versioningScheme: 'off'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    feedsToUse: 'select'
-    versioningScheme: 'off'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'run'
-    feedsToUse: 'select'
-    versioningScheme: 'off'
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
 
 
