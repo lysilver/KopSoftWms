@@ -74,7 +74,7 @@ namespace KopSoftWms.Controllers
             {
                 if (_materialServices.IsAny(c => c.MaterialNo == model.MaterialNo || c.MaterialName == model.MaterialName))
                 {
-                    return BootJsonH((false, PubConst.Warehouse5));
+                    return BootJsonH((false, PubConst.Material1));
                 }
                 model.MaterialId = PubId.SnowflakeId;
                 model.CreateBy = UserDtoCache.UserId;
