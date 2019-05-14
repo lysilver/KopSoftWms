@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YLLibraryStandard
+namespace YL.Utils.Table
 {
     public class JqGridModel
     {
