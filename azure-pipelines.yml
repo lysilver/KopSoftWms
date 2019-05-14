@@ -5,6 +5,12 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '2.2.0'
+    includePreviewVersions: true
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
