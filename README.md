@@ -1,7 +1,7 @@
 #
 
-Asp.net Core Mvc开源WMS仓库管理系统
-官方网址 http://kopsoft.cn/
+* Asp.net Core Mvc开源WMS仓库管理系统
+* 官方网址 http://kopsoft.cn/
 
 ## 仓库地址
 
