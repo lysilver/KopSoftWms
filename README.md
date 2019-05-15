@@ -1,4 +1,4 @@
-#
+[![Build Status](https://lysilver.visualstudio.com/kopsoftwms/_apis/build/status/lysilver.KopSoftWms?branchName=master)](https://lysilver.visualstudio.com/kopsoftwms/_build/latest?definitionId=3&branchName=master)
 
 * Asp.net Core Mvc开源WMS仓库管理系统
 * 官方网址 http://kopsoft.cn/
