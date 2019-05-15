@@ -193,7 +193,7 @@ namespace Services
                     exist.Qty = exist.Qty - c.ActOutQty;
                     exist.ModifiedBy = userId;
                     exist.ModifiedDate = DateTimeExt.DateTime;
-                    _client.Updateable(exist);
+                    _client.Updateable(exist).ExecuteCommand();
                 });
 
                 //ÐÞ¸ÄÃ÷Ï¸×´Ì¬ 2

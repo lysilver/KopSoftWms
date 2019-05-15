@@ -199,7 +199,7 @@ namespace Services
                         inventory.Qty = c.ActInQty;
                         inventory.MaterialId = c.MaterialId;
                         //inventoryListAdd.Add(exist);
-                        _client.Insertable(inventory);
+                        _client.Insertable(inventory).ExecuteCommand();
                     }
                     else
                     {
@@ -208,7 +208,7 @@ namespace Services
                         exist.ModifiedBy = UserId;
                         exist.ModifiedDate = DateTimeExt.DateTime;
                         //inventoryListUpdate.Add(exist);
-                        _client.Updateable(exist);
+                        _client.Updateable(exist).ExecuteCommand();
                     }
                     inventoryDetail.Add(new Wms_inventoryrecord
                     {
@@ -220,7 +220,7 @@ namespace Services
                 });
                 //_inventory.Insert(inventoryListAdd);
                 //_inventory.Update(inventoryListUpdate);
-                _client.Insertable(inventoryDetail);
+                _client.Insertable(inventoryDetail).ExecuteCommand();
                 //ÐÞ¸ÄÃ÷Ï¸×´Ì¬ 2
                 _client.Updateable(new Wms_stockindetail { Status = StockInStatus.egis.ToByte(), AuditinId = UserId, AuditinTime = DateTimeExt.DateTime, ModifiedBy = UserId, ModifiedDate = DateTimeExt.DateTime }).UpdateColumns(c => new { c.Status, c.AuditinId, c.AuditinTime, c.ModifiedBy, c.ModifiedDate })
                 .Where(c => c.StockInId == stockInId && c.IsDel == 1).ExecuteCommand();
