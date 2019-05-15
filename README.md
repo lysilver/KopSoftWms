@@ -5,9 +5,9 @@
 
 ## 仓库地址
 
-* Github：https://github.com/lysilver/KopSoftWms
+* Github https://github.com/lysilver/KopSoftWms
 
-* Gitee: https://gitee.com/yulou/KopSoftWms
+* Gitee https://gitee.com/yulou/KopSoftWms
 
 ## 功能模块
 - [x] 用户管理
