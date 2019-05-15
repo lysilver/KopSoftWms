@@ -1,13 +1,10 @@
 [![Build Status](https://lysilver.visualstudio.com/kopsoftwms/_apis/build/status/lysilver.KopSoftWms?branchName=master)](https://lysilver.visualstudio.com/kopsoftwms/_build/latest?definitionId=3&branchName=master)
 
-* Asp.net Core Mvc开源WMS仓库管理系统
-* 官方网址 http://kopsoft.cn/
-
-## 仓库地址
-
-* Github https://github.com/lysilver/KopSoftWms
-
-* Gitee https://gitee.com/yulou/KopSoftWms
+* KopSoftWms WMS仓库管理系统
+* 官网 http://kopsoft.cn/
+* Demo http://wms.kopsoft.cn/
+* github源码 https://github.com/lysilver/KopSoftWms
+* gitee源码 https://gitee.com/yulou/KopSoftWms
 
 ## 功能模块
 - [x] 用户管理
