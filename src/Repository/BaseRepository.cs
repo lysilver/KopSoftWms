@@ -12,7 +12,7 @@ namespace Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class, new()
     {
-        public static SqlSugarClient _db;
+        public SqlSugarClient _db;
 
         public BaseRepository(SqlSugarClient dbContext)
         {
