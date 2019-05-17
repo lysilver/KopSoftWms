@@ -12,7 +12,7 @@ namespace Services
 {
     public class BaseServices<T> : IBaseServices<T> where T : class, new()
     {
-        public static IBaseRepository<T> _baseRepository;
+        public IBaseRepository<T> _baseRepository;
         //public IBaseRepository<T> _baseRepository = ServiceResolve.Resolve<IBaseRepository<T>>();
 
         public BaseServices(IBaseRepository<T> repository)
