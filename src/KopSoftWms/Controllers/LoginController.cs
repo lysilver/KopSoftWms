@@ -46,6 +46,8 @@ namespace KopSoftWms.Controllers
         {
             //TempData["returnUrl"] = returnUrl;
             ViewBag.title = GetDescriptor("title");
+            ViewBag.company = GetDescriptor("company");
+            ViewBag.customer = GetDescriptor("customer");
             return View();
         }
 

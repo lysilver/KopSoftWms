@@ -46,22 +46,20 @@
                     <li><a href="/Home"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
                 </ul>
             </li>
-
             @{
                 if (menus.Count > 0)
                 {
                     foreach (var item in menus)
                     {
                         <li class="treeview">
-                            <a href="#">
+                            <a href="javascript:;">
                                 <i class="fa fa-pie-chart"></i>
                                 <span>@item.Name</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
-
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu active">
                                 @foreach (var item2 in item.Children)
                                 {
                                     <li ref="@item2.Url?.Replace("/","")"><a href="@item2.Url"><i class="fa fa-circle-o"></i> @item2.Name</a></li>

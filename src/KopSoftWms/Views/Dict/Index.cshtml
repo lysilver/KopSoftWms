@@ -67,12 +67,19 @@
                 datemax: '',
                 DictType: ''
             },
+            //beforeCreate: function () {
+            //    this.$nextTick(function () {
+            //        this.$refs.Dict.parentNode.parentNode.classList.add("active");
+            //        this.$refs.Dict.classList.add("active");
+            //    });
+            //},
             mounted: function () {
                 var _self = this;
                 _self.$nextTick(function () {
                     //显示active
                     _self.$refs.Dict.parentNode.parentNode.classList.add("active");
                     _self.$refs.Dict.classList.add("active");
+
                     _self.$refs.datemin.value = _self.getCurrentMonthFirst();
                     _self.$refs.datemax.value = _self.getCurrentMonthLast();
                     //_self.datemin = _self.getCurrentMonthFirst();
