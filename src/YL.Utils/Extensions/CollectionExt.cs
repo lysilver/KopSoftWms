@@ -183,5 +183,18 @@ namespace YL.Utils.Extensions
 
             return sb.ToString();
         }
+
+        public static DataTable ToDataTable(string tableName, Dictionary<string, Type> columnMappings)
+        {
+            var table = new DataTable(tableName);
+            foreach (var column in columnMappings)
+            {
+
+                var dataColumn = new DataColumn(column.Key, column.Value);
+                table.Columns.Add(dataColumn);
+
+            }
+            return table;
+        }
     }
 }
