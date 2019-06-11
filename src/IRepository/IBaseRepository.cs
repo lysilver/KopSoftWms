@@ -1,6 +1,7 @@
 ﻿using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
 using YL.NetCore;
@@ -114,5 +115,13 @@ namespace IRepository
         List<T> SqlQueryToList(string sql, object obj = null);
 
         #endregion query
+
+        #region Procedure
+
+        DataTable UseStoredProcedureToDataTable(string procedureName, List<SugarParameter> parameters);
+
+        (DataTable, List<SugarParameter>) UseStoredProcedureToTuple(string procedureName, List<SugarParameter> parameters);
+
+        #endregion Procedure
     }
 }

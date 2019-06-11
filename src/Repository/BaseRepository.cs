@@ -2,6 +2,7 @@
 using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
 using YL.Utils.Extensions;
@@ -281,5 +282,33 @@ namespace Repository
         }
 
         #endregion query
+
+        /// <summary>
+        /// 此方法不带output返回值
+        /// var list = new List<SugarParameter>();
+        /// list.Add(new SugarParameter(ParaName, ParaValue)); input
+        /// </summary>
+        /// <param name="procedureName"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public DataTable UseStoredProcedureToDataTable(string procedureName, List<SugarParameter> parameters)
+        {
+            return _db.Ado.UseStoredProcedure().GetDataTable(procedureName, parameters);
+        }
+
+        /// <summary>
+        /// 带output返回值
+        /// var list = new List<SugarParameter>();
+        /// list.Add(new SugarParameter(ParaName, ParaValue, true));  output
+        /// list.Add(new SugarParameter(ParaName, ParaValue)); input
+        /// </summary>
+        /// <param name="procedureName"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public (DataTable, List<SugarParameter>) UseStoredProcedureToTuple(string procedureName, List<SugarParameter> parameters)
+        {
+            var result = (_db.Ado.UseStoredProcedure().GetDataTable(procedureName, parameters), parameters);
+            return result;
+        }
     }
 }

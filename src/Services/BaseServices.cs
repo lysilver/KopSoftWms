@@ -7,6 +7,7 @@ using System.Dynamic;
 using System.Linq.Expressions;
 using YL.Utils.Table;
 using YL.Utils.Extensions;
+using System.Data;
 
 namespace Services
 {
@@ -245,5 +246,15 @@ namespace Services
         }
 
         #endregion query
+
+        public DataTable UseStoredProcedureToDataTable(string procedureName, List<SugarParameter> parameters)
+        {
+            return _baseRepository.UseStoredProcedureToDataTable(procedureName, parameters);
+        }
+
+        public (DataTable, List<SugarParameter>) UseStoredProcedureToTuple(string procedureName, List<SugarParameter> parameters)
+        {
+            return _baseRepository.UseStoredProcedureToTuple(procedureName, parameters);
+        }
     }
 }
