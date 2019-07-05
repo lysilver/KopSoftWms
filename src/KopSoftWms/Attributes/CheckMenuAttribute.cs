@@ -31,9 +31,14 @@ namespace YL.NetCore.Attributes
             var cache = services.GetService(typeof(IMemoryCache)) as IMemoryCache;
             var roleServices = services.GetService(typeof(ISys_roleServices)) as ISys_roleServices;
             if (viewData != null)
+            {
                 if (context.HttpContext.User != null)
-                    // ReSharper disable once PossibleNullReferenceException
-                    viewData["menu"] = cache.Get("menu") ?? roleServices?.GetMenu(claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value.ToInt64());
+                {
+                    var UserId = claims.SingleOrDefault(c => c.Type == ClaimTypes.Sid).Value;
+                    viewData["menu"] = cache.Get("menu_" + UserId) ?? roleServices?.GetMenu(claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value.ToInt64());
+                }
+                // ReSharper disable once PossibleNullReferenceException
+            }
             if (viewBag != null)
             {
                 viewBag.title = properties["title"].ToString();

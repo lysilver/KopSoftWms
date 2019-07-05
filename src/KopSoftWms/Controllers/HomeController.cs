@@ -37,17 +37,17 @@ namespace KopSoftWms.Controllers
         public IActionResult Index()
         {
             //TempData["returnUrl"] = returnUrl;
-            _userServices.Login(UserDtoCache.UserId, GetIp());
-            _mediator.Publish(new Sys_log
-            {
-                LogId = PubId.SnowflakeId,
-                Browser = GetBrowser(),
-                CreateBy = UserDtoCache.UserId,
-                Description = $"{UserDtoCache.UserNickname}登录成功",
-                LogIp = GetIp(),
-                Url = GetUrl(),
-                LogType = LogType.login.EnumToString(),
-            });
+            //_userServices.Login(UserDtoCache.UserId, GetIp());
+            //_mediator.Publish(new Sys_log
+            //{
+            //    LogId = PubId.SnowflakeId,
+            //    Browser = GetBrowser(),
+            //    CreateBy = UserDtoCache.UserId,
+            //    Description = $"{UserDtoCache.UserNickname}登录成功",
+            //    LogIp = GetIp(),
+            //    Url = GetUrl(),
+            //    LogType = LogType.login.EnumToString(),
+            //});
             //_logServices.Insert(new Sys_log
             //{
             //    LogId = PubId.SnowflakeId,
@@ -64,9 +64,9 @@ namespace KopSoftWms.Controllers
             ViewBag.nickname = UserDtoCache.UserNickname;
             ViewBag.headimg = UserDtoCache.HeadImg;
 
-            //菜单
+            ////菜单
             var menus = _roleServices.GetMenu(UserDtoCache.RoleId.Value);
-            GetMemoryCache.Set("menu", menus);
+            GetMemoryCache.Set("menu_" + UserDtoCache.UserId, menus);
             ViewData["menu"] = menus;
             return View();
         }

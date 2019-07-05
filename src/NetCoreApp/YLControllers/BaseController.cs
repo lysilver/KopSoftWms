@@ -10,6 +10,9 @@ using YL.Utils.Json;
 using YL.Utils.Table;
 using YL.Utils.Pub;
 using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Collections;
 
 namespace YL.NetCore.NetCoreApp
 {
@@ -44,6 +47,19 @@ namespace YL.NetCore.NetCoreApp
             }
         }
 
+        public List<string> GetCacheKeys()
+        {
+            var flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            var entries = GetMemoryCache.GetType().GetField("_entries", flags).GetValue(GetMemoryCache);
+            var keys = new List<string>();
+            if (!(entries is IDictionary cacheItems)) return keys;
+            foreach (DictionaryEntry cacheItem in cacheItems)
+            {
+                keys.Add(cacheItem.Key.ToString());
+            }
+            return keys;
+        }
+
         protected IConfiguration GetConfiguration
         {
             get
@@ -74,10 +90,6 @@ namespace YL.NetCore.NetCoreApp
                         RoleId = claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value.ToInt64(),
                         HeadImg = claims.SingleOrDefault(c => c.Type == ClaimTypes.Uri).Value
                     };
-                    //var _cache = CreateService<IMemoryCache>();
-                    //_cache?.Set("user", sys);
-                    GetMemoryCache.Set("user", sys);
-                    //var sda = User.Claims.ToList();
                     return sys;
                 }
                 else
@@ -91,10 +103,24 @@ namespace YL.NetCore.NetCoreApp
         {
             get
             {
-                //var _cache = CreateService<IMemoryCache>();
-                //_cache.TryGetValue("user", out SysUserDto sys);
-                GetMemoryCache.TryGetValue("user", out SysUserDto sys);
+                GetMemoryCache.TryGetValue("user_" + UserDto?.UserId, out SysUserDto sys);
                 return sys ?? UserDto;
+            }
+        }
+
+        protected string MenuKey
+        {
+            get
+            {
+                return "menu_" + UserDtoCache?.UserId;
+            }
+        }
+
+        protected string UserKey
+        {
+            get
+            {
+                return "user_" + UserDtoCache?.UserId;
             }
         }
 
@@ -103,6 +129,14 @@ namespace YL.NetCore.NetCoreApp
             //var _cache = CreateService<IMemoryCache>();
             //_cache.Remove(key);
             GetMemoryCache.Remove(key);
+        }
+
+        protected virtual void ClearAllCache()
+        {
+            foreach (var key in GetCacheKeys())
+            {
+                GetMemoryCache.Remove(key);
+            }
         }
 
         protected IActionResult RedirectToLocal(string returnUrl)
