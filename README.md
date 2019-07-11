@@ -42,9 +42,6 @@
 * 后端采用 asp.net mvc core 2.2、sqlsugar、fluentValidation、nlog、Jil、DI、Ganss、雪花算法、Xunit、npoi（因在linux上报错，后期替换掉，bug修复（https://www.cnblogs.com/Robbery/p/10115234.html））等
 
 
-## 演示直达
-* 演示地址： http://wms.kopsoft.cn
-* 账号guest 密码000000
 
 ## 申明
 * 本代码只做学习交流使用！
