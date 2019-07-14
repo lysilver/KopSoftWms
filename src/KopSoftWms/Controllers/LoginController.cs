@@ -17,6 +17,7 @@ using YL.NetCore.NetCoreApp;
 using YL.Utils.Extensions;
 using YL.Utils.Pub;
 using YL.Utils.Security;
+using YL.Utils.Json;
 using MediatR;
 
 namespace KopSoftWms.Controllers
@@ -86,13 +87,13 @@ namespace KopSoftWms.Controllers
                 sys.RoleId = item.Item3.RoleId;
                 sys.HeadImg = item.Item3.HeadImg;
                 GetMemoryCache.Set("user_" + item.Item3.UserId, sys);
-                _userServices.Login(UserDtoCache.UserId, GetIp());
+                _userServices.Login(item.Item3.UserId, GetIp());
                 await _mediator.Publish(new Sys_log
                 {
                     LogId = PubId.SnowflakeId,
                     Browser = GetBrowser(),
-                    CreateBy = UserDtoCache.UserId,
-                    Description = $"{UserDtoCache.UserNickname}登录成功",
+                    CreateBy = sys.UserId,
+                    Description = $"{sys.UserNickname}登录成功",
                     LogIp = GetIp(),
                     Url = GetUrl(),
                     LogType = LogType.login.EnumToString(),
@@ -120,7 +121,8 @@ namespace KopSoftWms.Controllers
                 //});
             }
             item.Item3 = null;
-            return Json(item);
+            //return Json(item);
+            return Content(item.ToJsonL());
         }
 
         [HttpGet]

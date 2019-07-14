@@ -46,7 +46,8 @@ namespace YL.NetCore.Attributes
                 {
                     context.Result = new ContentResult()
                     {
-                        Content = (false, "异常").JilToJson()
+                        //Content = (false, "异常").JilToJson()
+                        Content = (false, dt.Message).JilToJson()
                     };
                 }
                 else if (context.HttpContext.Request.Headers["fileExcel"] == "fileExcel")

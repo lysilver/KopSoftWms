@@ -125,13 +125,13 @@
                         .then(function (response) {
                             _self.disabled = false;
                             _self.isSelected = false;
-                            if (response.data.item1) {
+                            if (response.data.Item1) {
                                 //_self.speeh("正在跳转请稍后");
                                 _self.submit = "正在跳转。。。请稍后！";
                                 location.href = "/Home";
                             } else {
                                 layer.close(index);
-                                layer.msg(response.data.item2 || errorMsg, { icon: 5 });
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
                             }
                         })
                         .catch(function (error) {

@@ -81,7 +81,7 @@ namespace KopSoftWms.Controllers
                 Data = DateTime.Now.ToString(),
                 Event = "message",
                 Id = Guid.NewGuid().ToString(),
-                Retry = "1000",
+                Retry = "3000",
             };
             StringBuilder sb = new StringBuilder();
             sb.Append($"id:{a.Id}\n");

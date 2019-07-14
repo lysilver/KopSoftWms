@@ -18,7 +18,7 @@ namespace YL.NetCore.DI
     /// <remarks>
     /// **用法**
     /// 在Startup.ConfigureServices()方法中添加下面一行代码：
-    /// services.Replace(ServiceDescriptor.Transient<IControllerActivator, PropertiesAutowiredControllerActivator>());
+    ///// services.Replace(ServiceDescriptor.Transient<IControllerActivator, PropertiesAutowiredControllerActivator>());
     /// </remarks>
     public class PropertiesAutowiredControllerActivator : IControllerActivator
     {

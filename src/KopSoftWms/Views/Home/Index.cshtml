@@ -127,6 +127,28 @@
                     //} else {
                     //    console.info("64位浏览器");
                     //}
+                    //home
+                    //if (typeof (EventSource) !== 'undefined') {
+                    //    var eventSource = new EventSource(`http://${location.host}/Home/ServerSendMsg`);
+                    //    eventSource.onopen = function () {
+                    //        //console.log('连接打开。。。');
+                    //    }
+                    //    eventSource.onerror = function (e) {
+                    //        //console.log(e);
+                    //    }
+                    //    eventSource.onmessage = function (event) {
+                    //        console.log(event.data);
+                    //        var origin = event.origin
+                    //        var last = event.lastEventId
+                    //    }
+                    //    //eventSource.addEventListener('message', function (event) {
+                    //    //    var origin = event.origin;
+                    //    //    var lastEventId = event.lastEventId;
+                    //    //    console.log(event.data, 2);
+                    //    //}, false);
+                    //} else {
+                    //    console.info('浏览器不支持EventSource')
+                    //}
                 });
             },
             methods: {

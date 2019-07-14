@@ -16,7 +16,7 @@ namespace YL.NetCore.DI
     /// <remarks>
     /// **用法**
     /// 在Startup.ConfigureServices()方法中添加下面一行代码：
-    /// services.Replace(ServiceDescriptor.Transient<IFilterProvider, PropertiesAutowiredFilterProvider>());
+    ///// services.Replace(ServiceDescriptor.Transient<IFilterProvider, PropertiesAutowiredFilterProvider>());
     /// </remarks>
     public class PropertiesAutowiredFilterProvider : DefaultFilterProvider
     {
