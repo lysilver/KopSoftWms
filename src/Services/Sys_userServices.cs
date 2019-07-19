@@ -31,18 +31,22 @@ namespace Services
                 flag = false;
                 return (flag, PubConst.Login2, null);
             }
-            var sys = _UserRepository.QueryableToEntity(c => c.UserNickname == dto.UserNickname && c.Pwd == dto.Pwd.ToMd5());
+            var sys = _UserRepository.QueryableToEntity(c => c.UserNickname == dto.UserNickname &&c.IsDel==1);
             if (sys.IsNullT())
             {
                 flag = false;
-                return (flag, PubConst.Login2, null);
+                return (flag, PubConst.Login4, null);
             }
             if (sys.IsEabled == 0)
             {
                 flag = false;
                 return (flag, PubConst.Login3, null);
             }
-
+            if (sys.Pwd != dto.Pwd.ToMd5())
+            {
+                flag = false;
+                return (flag, PubConst.Login2, null);
+            }
             return (flag, PubConst.Login1, new SysUserDto
             {
                 UserId = sys.UserId,

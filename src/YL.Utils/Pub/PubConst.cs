@@ -9,6 +9,7 @@ namespace YL.Utils.Pub
         public const string Login1 = "登录成功";
         public const string Login2 = "账号或密码错误";
         public const string Login3 = "账号被禁用，请联系管理员";
+        public const string Login4 = "账号不存在，请联系管理员";
 
         public const string Add1 = "添加成功";
         public const string Add2 = "添加失败";

@@ -379,7 +379,11 @@ namespace YL.Utils.Excel
                     return cell.BooleanCellValue;
 
                 case CellType.Numeric: //NUMERIC:
+                  if(DateUtil.IsCellDateFormatted(cell)){
+                    return cell.DateCellValue;
+                  }else{
                     return cell.NumericCellValue;
+                  }
 
                 case CellType.String: //STRING:
                     return cell.StringCellValue;
