@@ -12,7 +12,8 @@
 * GitHub https://github.com/williamyang1984/KopSoftPrint
 * 码云 https://gitee.com/william_yang/KopSoftPrint
 ****
-* KopSoftMes制造执行系统 http://mes.kopsoft.cn/
+* KopSoftMes制造执行系统
+* D http://mes.kopsoft.cn/
 ****
 
 ## 功能模块
