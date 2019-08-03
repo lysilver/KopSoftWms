@@ -7,6 +7,7 @@
 * github源码 https://github.com/lysilver/KopSoftWms
 * gitee源码 https://gitee.com/yulou/KopSoftWms
 
+KopSoftMes制造执行系统 http://mes.kopsoft.cn/
 ****
 
 ## 功能模块
