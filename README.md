@@ -13,7 +13,7 @@
 * 码云 https://gitee.com/william_yang/KopSoftPrint
 ****
 * KopSoftMes制造执行系统
-* D http://mes.kopsoft.cn/
+* Demo http://mes.kopsoft.cn/
 ****
 
 ## 功能模块
