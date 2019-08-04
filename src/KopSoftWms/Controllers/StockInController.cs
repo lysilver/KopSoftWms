@@ -43,7 +43,7 @@ namespace KopSoftWms.Controllers
         [CheckMenu]
         public IActionResult Index()
         {
-            var list = _dictServices.Queryable().Where(c => c.IsDel == 1 && c.DictType == PubDictType.stockin.ToString()).ToList();
+            var list = _dictServices.Queryable().Where(c => c.IsDel == 1 && c.DictType == PubDictType.stockin.ToInt32().ToString()).ToList();
             var stockInStatus = EnumExt.ToKVListLinq<StockInStatus>();
             ViewBag.StockInType = list;
             ViewBag.StockInStatus = stockInStatus;
