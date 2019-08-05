@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http.Extensions;
 using System.Linq;
 using System.Security.Claims;
 using YL.Core.Dto;
@@ -225,6 +226,21 @@ namespace YL.NetCore.NetCoreApp
         {
             var req = HttpContext.Request;
             return $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
+        }
+        
+        protected virtual string GetDisplayUrl()
+        {
+            return UriHelper.GetDisplayUrl(HttpContext.Request);
+        }
+
+        protected virtual string GetEncodedPathAndQuery()
+        {
+            return UriHelper.GetEncodedPathAndQuery(HttpContext.Request);
+        }
+
+        protected virtual string GetEncodedUrl()
+        {
+           return UriHelper.GetEncodedUrl(HttpContext.Request);
         }
 
         protected virtual string GetBrowser()
