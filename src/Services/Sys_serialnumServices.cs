@@ -23,7 +23,7 @@ namespace Services
                 model.SerialCount = 0;
             }
             model.SerialCount++;
-            var num = model.Prefix + DateTimeExt.GetDateTimeS(DateTimeExt.DateTimeFormatString) + model.SerialCount.ToString($"x{model.Mantissa}");
+            var num = model.Prefix + DateTimeExt.GetDateTimeS(DateTimeExt.DateTimeFormatString) + model.SerialCount.ToString().PadLeft(model.Mantissa.Value, '0');
             var flag = _repository.Update(new Sys_serialnum { SerialNumberId = model.SerialNumberId, SerialNumber = num, SerialCount = model.SerialCount, ModifiedBy = userId, ModifiedDate = DateTimeExt.DateTime }, c => new { c.SerialNumber, c.SerialCount, c.ModifiedBy, c.ModifiedDate });
             return num;
         }
@@ -37,7 +37,7 @@ namespace Services
                 model.SerialCount = 0;
             }
             model.SerialCount++;
-            var num = model.Prefix + DateTimeExt.GetDateTimeS(DateTimeExt.DateTimeFormatString) + model.SerialCount.ToString($"x{model.Mantissa}");
+            var num = model.Prefix + DateTimeExt.GetDateTimeS(DateTimeExt.DateTimeFormatString) + model.SerialCount.ToString().PadLeft(model.Mantissa.Value, '0');
             model.SerialNumber = num;
             _repository.Update(new Sys_serialnum { SerialNumberId = model.SerialNumberId, SerialCount = model.SerialCount, ModifiedBy = userId, ModifiedDate = DateTimeExt.DateTime }, c => new { c.SerialNumber, c.SerialCount, c.ModifiedBy, c.ModifiedDate });
             return model;
