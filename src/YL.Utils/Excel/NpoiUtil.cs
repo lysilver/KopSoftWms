@@ -36,8 +36,8 @@ namespace YL.Utils.Excel
         public static byte[] Export(DataTable dt, ExcelVersion version = ExcelVersion.V2007)
         {
             IWorkbook workbook;
-            ICellStyle cellStyle = null;
-            IFont font = null;
+            ICellStyle cellStyle;
+            IFont font;
             switch (version)
             {
                 case ExcelVersion.V2007:
@@ -94,8 +94,8 @@ namespace YL.Utils.Excel
         public static MemoryStream ExportDataTableToExcel(DataTable sourceTable, ExcelVersion version = ExcelVersion.V2007)
         {
             IWorkbook workbook;
-            ICellStyle cellStyle = null;
-            IFont font = null;
+            ICellStyle cellStyle;
+            IFont font;
             switch (version)
             {
                 case ExcelVersion.V2007:
@@ -124,7 +124,7 @@ namespace YL.Utils.Excel
             }
 
             int dtRowsCount = sourceTable.Rows.Count;
-            int SheetCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dtRowsCount) / Max));
+            int _ = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dtRowsCount) / Max));
             int SheetNum = 1;
             int rowIndex = 1;
             int tempIndex = 1; //标示
@@ -137,7 +137,7 @@ namespace YL.Utils.Excel
                     foreach (DataColumn column in sourceTable.Columns)
                         headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
                 }
-                HSSFRow dataRow = (HSSFRow)sheet.CreateRow(tempIndex);
+                var dataRow = sheet.CreateRow(tempIndex);
                 foreach (DataColumn column in sourceTable.Columns)
                 {
                     dataRow.CreateCell(column.Ordinal).SetCellValue(sourceTable.Rows[i][column].ToString());
@@ -156,17 +156,14 @@ namespace YL.Utils.Excel
             workbook.Write(ms);
             ms.Flush();
             ms.Position = 0;
-            sheet = null;
-            // headerRow = null;
-            workbook = null;
             return ms;
         }
 
         public static byte[] ExportToByte(DataTable dt, ExcelVersion version = ExcelVersion.V2007)
         {
             IWorkbook workbook;
-            ICellStyle cellStyle = null;
-            IFont font = null;
+            ICellStyle cellStyle;
+            IFont font;
             switch (version)
             {
                 case ExcelVersion.V2007:
@@ -239,10 +236,9 @@ namespace YL.Utils.Excel
             {
                 return null;
             }
-            string sheetname = "sheet1";
             IWorkbook workbook;
-            ICellStyle cellStyle = null;
-            IFont font = null;
+            ICellStyle cellStyle;
+            IFont font;
             switch (version)
             {
                 case ExcelVersion.V2007:
@@ -278,7 +274,7 @@ namespace YL.Utils.Excel
             }
             for (int i = 0; i < sheetCount; i++)
             {
-                sheetname = "sheet" + (i + 1);
+                string sheetname = "sheet" + (i + 1);
                 ISheet sheet = workbook.CreateSheet(sheetname);
                 IRow row = sheet.CreateRow(0);
                 Type entityType = list[0].GetType();
@@ -379,11 +375,14 @@ namespace YL.Utils.Excel
                     return cell.BooleanCellValue;
 
                 case CellType.Numeric: //NUMERIC:
-                  if(DateUtil.IsCellDateFormatted(cell)){
-                    return cell.DateCellValue;
-                  }else{
-                    return cell.NumericCellValue;
-                  }
+                    if (DateUtil.IsCellDateFormatted(cell))
+                    {
+                        return cell.DateCellValue;
+                    }
+                    else
+                    {
+                        return cell.NumericCellValue;
+                    }
 
                 case CellType.String: //STRING:
                     return cell.StringCellValue;

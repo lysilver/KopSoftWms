@@ -5,6 +5,8 @@ using Xunit;
 using YL.Utils.Json;
 using YL.Utils.Pub;
 using YL.Core.Dto;
+using AutoFixture.Xunit2;
+using AutoFixture;
 
 namespace XUnitTestKopSoftWms
 {
@@ -13,12 +15,20 @@ namespace XUnitTestKopSoftWms
         [Fact]
         public void JilToJson()
         {
-            var a = new PubResult
-            {
-                Data = null,
-                Flag = true,
-                Msg = "123"
-            };
+            //var a = new PubResult
+            //{
+            //    Data = null,
+            //    Flag = true,
+            //    Msg = "123"
+            //};
+            Fixture fixture = new Fixture();
+            var a = fixture.Create<PubResult>();
+            Assert.NotNull(a.JilToJson());
+        }
+
+        [Theory, AutoData]
+        public void JilToJson2(PubResult a)
+        {
             Assert.NotNull(a.JilToJson());
         }
 
