@@ -1,19 +1,15 @@
 [![Build Status](https://lysilver.visualstudio.com/kopsoftwms/_apis/build/status/lysilver.KopSoftWms?branchName=master)](https://lysilver.visualstudio.com/kopsoftwms/_build/latest?definitionId=3&branchName=master)
 
 ****
-* KopSoftPrint二维码标签打印软件
-* Demo http://mes.kopsoft.cn/KopSoftPrint/
+* KopSoftPrint二维码标签打印软件 http://mes.kopsoft.cn/KopSoftPrint/
 * GitHub https://github.com/williamyang1984/KopSoftPrint
 * 码云 https://gitee.com/william_yang/KopSoftPrint
 ****
-* KopSoftWms仓库管理系统
-* Demo http://wms.kopsoft.cn/
+* KopSoftWms仓库管理系统 http://wms.kopsoft.cn/
 * GitHub https://github.com/lysilver/KopSoftWms
 * 码云 https://gitee.com/yulou/KopSoftWms
 ****
-* KopSoftMes制造执行系统
-* Demo http://mes.kopsoft.cn/
-* 官网 http://mes.kopsoft.cn/Desktop/
+* KopSoftMes制造执行系统 http://mes.kopsoft.cn/
 ****
 
 ## 功能模块
