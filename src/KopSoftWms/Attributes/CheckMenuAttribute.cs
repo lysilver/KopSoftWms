@@ -22,10 +22,6 @@ namespace YL.NetCore.Attributes
             var viewData = (context.Controller as Controller)?.ViewData;
             var viewBag = (context.Controller as Controller)?.ViewBag;
             var services = context.HttpContext.RequestServices;
-            //var log = services.GetService(typeof(ILoggerFactory)) as ILoggerFactory;
-            //ILogger<CheckMenuAttribute> logger = log.CreateLogger<CheckMenuAttribute>();
-            //logger.LogInformation("");
-
             var properties = context.ActionDescriptor.Properties;
             var claims = context.HttpContext.User?.Claims;
             var cache = services.GetService(typeof(IMemoryCache)) as IMemoryCache;
@@ -41,7 +37,8 @@ namespace YL.NetCore.Attributes
             }
             if (viewBag != null)
             {
-                viewBag.title = properties["title"].ToString();
+                viewBag.keywords = properties["keywords"].ToString();
+                viewBag.description = properties["description"].ToString();
                 viewBag.company = properties["company"].ToString();
                 viewBag.customer = properties["customer"].ToString();
                 viewBag.nickname = claims.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value;
