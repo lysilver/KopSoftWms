@@ -38,16 +38,6 @@ namespace KopSoftWms.Controllers
         {
             //TempData["returnUrl"] = returnUrl;
             //_userServices.Login(UserDtoCache.UserId, GetIp());
-            //_mediator.Publish(new Sys_log
-            //{
-            //    LogId = PubId.SnowflakeId,
-            //    Browser = GetBrowser(),
-            //    CreateBy = UserDtoCache.UserId,
-            //    Description = $"{UserDtoCache.UserNickname}登录成功",
-            //    LogIp = GetIp(),
-            //    Url = GetUrl(),
-            //    LogType = LogType.login.EnumToString(),
-            //});
             //_logServices.Insert(new Sys_log
             //{
             //    LogId = PubId.SnowflakeId,
@@ -58,13 +48,14 @@ namespace KopSoftWms.Controllers
             //    Url = GetUrl(),
             //    LogType = LogType.login.EnumToString(),
             //});
-            ViewBag.title = GetDescriptor("title");
+            ViewBag.keywords = GetDescriptor("keywords");
+            ViewBag.description = GetDescriptor("description");
             ViewBag.company = GetDescriptor("company");
             ViewBag.customer = GetDescriptor("customer");
             ViewBag.nickname = UserDtoCache.UserNickname;
             ViewBag.headimg = UserDtoCache.HeadImg;
 
-            ////菜单
+            //菜单
             var menus = _roleServices.GetMenu(UserDtoCache.RoleId.Value);
             GetMemoryCache.Set("menu_" + UserDtoCache.UserId, menus);
             ViewData["menu"] = menus;
@@ -93,7 +84,7 @@ namespace KopSoftWms.Controllers
 
         public IActionResult Welcome()
         {
-            ViewBag.title = GetDescriptor("title");
+            //ViewBag.keywords = GetDescriptor("keywords");
             return View();
         }
 

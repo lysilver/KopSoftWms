@@ -41,7 +41,8 @@ namespace YL
             {
                 option.Filters.Add<BaseExceptionAttribute>();
                 //option.Filters.Add<FilterXSSAttribute>();
-                option.Conventions.Add(new ApplicationDescription("title", Configuration["sys:title"]));
+                option.Conventions.Add(new ApplicationDescription("keywords", Configuration["sys:keywords"]));
+                option.Conventions.Add(new ApplicationDescription("description", Configuration["sys:description"]));
                 option.Conventions.Add(new ApplicationDescription("company", Configuration["sys:company"]));
                 option.Conventions.Add(new ApplicationDescription("customer", Configuration["sys:customer"]));
             }).SetCompatibilityVersion(CompatibilityVersion.Latest);

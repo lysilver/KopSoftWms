@@ -47,7 +47,9 @@ namespace KopSoftWms.Controllers
         public IActionResult Index()
         {
             //TempData["returnUrl"] = returnUrl;
-            ViewBag.title = GetDescriptor("title");
+
+            ViewBag.keywords = GetDescriptor("keywords");
+            ViewBag.description = GetDescriptor("description");
             ViewBag.company = GetDescriptor("company");
             ViewBag.customer = GetDescriptor("customer");
             return View();
@@ -110,15 +112,6 @@ namespace KopSoftWms.Controllers
                     Url = GetUrl(),
                     LogType = LogType.login.EnumToString()
                 });
-                //_logServices.Insert(new Sys_log
-                //{
-                //    LogId = PubId.SnowflakeId,
-                //    Browser = GetBrowser(),
-                //    Description = $"{_xss.Filter(sys.UserNickname)}登录失败",
-                //    LogIp = GetIp(),
-                //    Url = GetUrl(),
-                //    LogType = LogType.login.EnumToString()
-                //});
             }
             item.Item3 = null;
             //return Json(item);

@@ -1,39 +1,39 @@
 ﻿@{
-	Layout = null;
+    Layout = null;
 }
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-	<meta http-equiv="Cache-Control" content="no-siteapp">
-	<meta name="keywords" content="@Html.Raw(@ViewBag.title)">
-	<meta name="description" content="@Html.Raw(@ViewBag.title)">
-	<link rel="stylesheet" href="~/css/bootstrap.table.min.css" />
-	<link rel="stylesheet" href="~/lib/adminlte/css/AdminLTE.icon.font.min.css" />
-	<title>
-		@Html.Raw(@ViewBag.customer)-@Html.Raw(@ViewBag.title)
-	</title>
-	<style>
-		body {
-			background: url('../../image/background.jpg') no-repeat center center !important;
-			background-size: cover;
-		}
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="keywords" content="@Html.Raw(@ViewBag.keywords)">
+    <meta name="description" content="@Html.Raw(@ViewBag.description)">
+    <link rel="stylesheet" href="~/css/bootstrap.table.min.css" />
+    <link rel="stylesheet" href="~/lib/adminlte/css/AdminLTE.icon.font.min.css" />
+    <title>
+        @Html.Raw(@ViewBag.customer)-@Html.Raw(@ViewBag.company)-@Html.Raw(@ViewBag.description)
+    </title>
+    <style>
+        body {
+            background: url('../image/background.jpg') no-repeat center center !important;
+            background-size: cover;
+        }
 
-		html {
-			overflow-y: hidden;
-		}
+        html {
+            overflow-y: hidden;
+        }
 
-		.login-box-body {
-			background: none;
-			z-index: 999999;
-		}
+        .login-box-body {
+            background: none;
+            z-index: 999999;
+        }
 
-		.login-logo a {
-			color: #fff;
-		}
+        .login-logo a {
+            color: #fff;
+        }
 
 		.snow-container {
 			position: fixed;
@@ -47,113 +47,145 @@
 	</style>
 </head>
 <body class="hold-transition login-page">
-	<div id="app">
-		<div class="snow-container">
-		</div>
-		<div class="login-box">
-			<div class="login-logo">
-				<a href="http://kopsoft.cn/" target="_blank"><b>@Html.Raw(@ViewBag.company)</b></a>
-			</div>
-			<div class="login-box-body" :keydown.enter="checkLogin">
-				<form method="post" onsubmit="return false">
-					<div class="form-group has-feedback">
-						<input type="text" v-model="UserNickname" v-focus class="form-control" placeholder="账号">
-						<span class="fa fa-user form-control-feedback"></span>
-					</div>
-					<div class="form-group has-feedback">
-						<input type="password" v-model="Pwd" class="form-control" placeholder="密码" autocomplete="off">
-						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<button type="submit" :disabled="disabled" class="btn btn-primary btn-block btn-flat" v-bind:class="{ 'btn-grey': isSelected}" v-on:click="checkLogin">{{submit}}</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div id="app">
+        <div class="snow-container">
+        </div>
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="http://mes.kopsoft.cn/AboutUs/" target="_blank"><b>@Html.Raw(@ViewBag.company)</b></a>
+            </div>
+            <div class="login-box-body" :keydown.enter="checkLogin">
+                <form method="post" onsubmit="return false">
+                    <div class="form-group has-feedback">
+                        <input type="text" v-model="UserNickname" id="test" autofocus class="form-control" placeholder="账号">
+                        <span class="fa fa-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" v-model="Pwd" class="form-control" placeholder="密码" autocomplete="off">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="submit" :disabled="disabled" class="btn btn-primary btn-block btn-flat" v-bind:class="{ 'btn-grey': isSelected}" v-on:click="checkLogin">{{submit}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="tree" style="margin-top:10px;"></div>
 
-	<script src="~/lib/jquery/3.0/jquery.min.js"></script>
-	<script src="~/js/snow.min.js"></script>
-	<script src="~/lib/layer/layer.js"></script>
-	<script src="~/js/vqypa.min.js"></script>
-	<script src="~/js/eruda.min.js"></script>
-	<script type="text/javascript">
-		//eruda.init();
-		var app = new Vue({
-			el: '#app',
-			data: {
-				UserNickname: 'william',
-				Pwd: '000000',
-				disabled: false,
-				submit: "登录",
-				reset: "取消",
-				isSelected: false
-			},
-			methods: {
-				checkLogin: function () {
-					var _self = this;
-					_self.disabled = true;
-					_self.isSelected = true;
-					//es5写法
-					if (_self.UserNickname.length <= 0) {
-						layer.msg('账号不能为空', { icon: 5 });
-						_self.disabled = false;
-						_self.isSelected = false;
-						return false;
-					}
-					if (_self.Pwd.length <= 0) {
-						layer.msg('密码不能为空', { icon: 5 });
-						_self.disabled = false;
-						_self.isSelected = false;
-						return false;
-					}
-					var index = layer.load(1, {
-						shade: [0.1, '#fff'] //0.1透明度的白色背景
-					});
-					//n = {
-					//    "sys": {
-					//        UserNickname: _self.UserNickname,
-					//        Pwd: _self.Pwd
-					//    }
-					//};
-					yui.$axiospost('/Login/CheckLoginAsync', {
-						UserNickname: _self.UserNickname,
-						Pwd: _self.Pwd
-					})
-						.then(function (response) {
-							_self.disabled = false;
-							_self.isSelected = false;
-							if (response.data.Item1) {
-								//_self.speeh("正在跳转请稍后");
-								_self.submit = "正在跳转。。。请稍后！";
-								location.href = "/Home";
-							} else {
-								layer.close(index);
-								layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
-							}
-						})
-						.catch(function (error) {
-							_self.disabled = false;
-							_self.isSelected = false;
-							layer.close(index);
-						});
-				},
-				cancel: function () {
-					var _self = this;
-					_self.Pwd = _self.UserNickname = "";
-				},
-				speeh: function (val) {
-					//只支持PC
-					var msg = new SpeechSynthesisUtterance(val);
-					msg.volume = 100;
-					msg.rate = 1;
-					msg.pitch = 1.5;
-					window.speechSynthesis.speak(msg);
-				}
-			}
-		});
-	</script>
+    <script src="~/lib/jquery/3.0/jquery.min.js"></script>
+    <script src="~/js/snow.min.js"></script>
+    <script src="~/lib/layer/layer.js"></script>
+    <script src="~/js/vqypa.min.js"></script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?565933c75a20f86c52ee02915c673e37";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                UserNickname: '',
+                Pwd: '',
+                disabled: false,
+                submit: "登录",
+                reset: "取消",
+                isSelected: false
+            },
+            methods: {
+                checkLogin: function () {
+                    var _self = this;
+                    _self.disabled = true;
+                    _self.isSelected = true;
+                    //es5写法
+                    if (_self.UserNickname.length <= 0) {
+                        layer.msg('账号不能为空', { icon: 5 });
+                        _self.disabled = false;
+                        _self.isSelected = false;
+                        return false;
+                    }
+                    if (_self.Pwd.length <= 0) {
+                        layer.msg('密码不能为空', { icon: 5 });
+                        _self.disabled = false;
+                        _self.isSelected = false;
+                        return false;
+                    }
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+
+                    //n = {
+                    //    "sys": {
+                    //        UserNickname: _self.UserNickname,
+                    //        Pwd: _self.Pwd
+                    //    }
+                    //};
+
+                    yui.$axiospost('/Login/CheckLoginAsync', {
+                        UserNickname: _self.UserNickname,
+                        Pwd: _self.Pwd
+                    })
+                        .then(function (response) {
+                            _self.disabled = false;
+                            _self.isSelected = false;
+                            if (response.data.Item1) {
+                                _self.submit = "正在跳转。。。请稍后！";
+                                location.href = "/Home";
+                            } else {
+                                layer.close(index);
+                                layer.msg(response.data.Item2 || errorMsg, { icon: 5 });
+                            }
+                        })
+                        .catch(function (error) {
+                            _self.disabled = false;
+                            _self.isSelected = false;
+                            layer.close(index);
+                        });
+                },
+                cancel: function () {
+                    var _self = this;
+                    _self.Pwd = _self.UserNickname = "";
+                }
+            },
+            mounted() {
+                setTimeout(function () {
+                    yui.getDomById("test").focus();
+                }, 500);
+                //_self.$nextTick(function () {
+                //    yui.getDomById("test").focus();
+                //});
+                //    if (typeof (EventSource) !== 'undefined') {
+                //        var eventSource = new EventSource(`http://${location.host}/Home/ServerSendMsg`);
+                //        eventSource.onopen = function () {
+                //            //console.log('连接打开。。。');
+                //        }
+                //        eventSource.onerror = function (e) {
+                //            //console.log(e);
+                //        }
+                //        eventSource.onmessage = function (event) {
+                //            console.log(event.data);
+                //            var origin = event.origin
+                //            var last = event.lastEventId
+                //        }
+                //        //eventSource.addEventListener('message', function (event) {
+                //        //    var origin = event.origin;
+                //        //    var lastEventId = event.lastEventId;
+                //        //    console.log(event.data, 2);
+                //        //}, false);
+                //    } else {
+                //        console.info('浏览器不支持EventSource')
+                //    }
+            }
+        });
+    </script>
 </body>
 </html>
