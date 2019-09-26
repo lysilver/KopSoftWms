@@ -12,6 +12,11 @@
 * KopSoftMes制造执行系统 http://mes.kopsoft.cn/
 ****
 
+|  版本   | 分支  |
+|  ----  | ----  |
+| netcore2.2  | master |
+| netcore3.0  | netcore3.0 |
+
 ## 功能模块
 - [x] 用户管理
 - [x] 部门管理
