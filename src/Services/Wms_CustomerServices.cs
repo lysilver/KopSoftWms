@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using YL.Core.Entity;
 using YL.Core.Entity.Fluent.Validation;
-using YL.NetCore.DI;
+using YL.Utils.Env;
 using YL.Utils.Extensions;
 using YL.Utils.Json;
 using YL.Utils.Log;
@@ -125,7 +125,7 @@ namespace Services
             }
             else
             {
-                var _nlog = ServiceResolve.Resolve<ILogUtil>();
+                var _nlog = GlobalCore.GetRequiredService<ILogUtil>();
                 _nlog.Debug(flag.ErrorMessage);
                 return (false, PubConst.Import3);
             }

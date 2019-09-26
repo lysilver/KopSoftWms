@@ -31,9 +31,9 @@ namespace YL.NetCore.NetCoreApp
     {
         private IMemoryCache _memory;
         private IConfiguration _configuration;
-        public string AppRoot { get { return CreateService<IHostingEnvironment>().ContentRootPath; } }
+        public string AppRoot { get { return CreateService<IWebHostEnvironment>().ContentRootPath; } }
 
-        public string WebRoot { get { return CreateService<IHostingEnvironment>().WebRootPath; } }
+        public string WebRoot { get { return CreateService<IWebHostEnvironment>().WebRootPath; } }
 
         protected IMemoryCache GetMemoryCache
         {
@@ -227,7 +227,7 @@ namespace YL.NetCore.NetCoreApp
             var req = HttpContext.Request;
             return $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
         }
-        
+
         protected virtual string GetDisplayUrl()
         {
             return UriHelper.GetDisplayUrl(HttpContext.Request);
@@ -240,7 +240,7 @@ namespace YL.NetCore.NetCoreApp
 
         protected virtual string GetEncodedUrl()
         {
-           return UriHelper.GetEncodedUrl(HttpContext.Request);
+            return UriHelper.GetEncodedUrl(HttpContext.Request);
         }
 
         protected virtual string GetBrowser()

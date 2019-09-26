@@ -38,7 +38,7 @@ namespace YL.Utils.Env
             }
         }
 
-        public static IHostingEnvironment GetHostingEnvironment => GetRequiredService<IHostingEnvironment>();
+        //public static IWebHostEnvironment GetHostingEnvironment => GetRequiredService<IWebHostEnvironment>();
 
         public static HttpContext Current => GetRequiredService<IHttpContextAccessor>().HttpContext;
 
@@ -46,13 +46,13 @@ namespace YL.Utils.Env
 
         public static IMemoryCache Cache => GetRequiredService<IMemoryCache>();
 
-        public static string WebRootPath => GetHostingEnvironment?.WebRootPath;
+        //public static string WebRootPath => GetHostingEnvironment?.WebRootPath;
 
-        public static string ContentRootPath => GetHostingEnvironment?.ContentRootPath;
+        //public static string ContentRootPath => GetHostingEnvironment?.ContentRootPath;
 
-        public static string EnvironmentName => GetHostingEnvironment?.EnvironmentName;
+        //public static string EnvironmentName => GetHostingEnvironment?.EnvironmentName;
 
-        public static string ApplicationName => GetHostingEnvironment?.ApplicationName;
+        //public static string ApplicationName => GetHostingEnvironment?.ApplicationName;
 
         public static string GetIp()
         {

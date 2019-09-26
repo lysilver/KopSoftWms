@@ -132,7 +132,7 @@ namespace Repository
             };
             }
             //_db.Updateable(entity).IgnoreColumns(c => list.Contains(c)).Where(isNull).ExecuteCommand()
-            return _db.Updateable(entity).IgnoreColumns(isNull).IgnoreColumns(c => list.Contains(c)).ExecuteCommand() > 0;
+            return _db.Updateable(entity).IgnoreColumns(isNull).IgnoreColumns(list.ToArray()).ExecuteCommand() > 0;
         }
 
         public bool Update(List<T> entity)

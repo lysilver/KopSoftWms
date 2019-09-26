@@ -8,15 +8,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.2" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
+    <Compile Remove="Autofac\**" />
+    <Compile Remove="Conventions\**" />
+    <Compile Remove="DI\**" />
+    <Compile Remove="HtmlExtensions\**" />
+    <Compile Remove="Middlewares\**" />
+    <EmbeddedResource Remove="Autofac\**" />
+    <EmbeddedResource Remove="Conventions\**" />
+    <EmbeddedResource Remove="DI\**" />
+    <EmbeddedResource Remove="HtmlExtensions\**" />
+    <EmbeddedResource Remove="Middlewares\**" />
+    <None Remove="Autofac\**" />
+    <None Remove="Conventions\**" />
+    <None Remove="DI\**" />
+    <None Remove="HtmlExtensions\**" />
+    <None Remove="Middlewares\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Autofac\AutofacConfig.cs" />
+    <Compile Include="Autofac\AutofacResolver.cs" />
+    <Compile Include="Autofac\ContainerManager.cs" />
+    <Compile Include="Autofac\IResolver.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.0.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="4.5.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>

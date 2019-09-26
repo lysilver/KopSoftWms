@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -14,14 +15,9 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using YL.Utils.Check;
 using YL.Utils.Extensions;
+using YL.Utils.Json;
 using YL.Utils.Log;
 using YL.Utils.Security;
-using YL.Utils.Json;
-using System;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using YL.NetCore.DI;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace YL.NetCoreApp.Extensions
 {
@@ -58,7 +54,8 @@ namespace YL.NetCoreApp.Extensions
 
         public static IServiceCollection AddContextFactory(this IServiceCollection services)
         {
-            return services.AddSingleton<IHttpContextFactory, HttpContextFactory>();
+            //HttpContextFactory
+            return services.AddSingleton<IHttpContextFactory, DefaultHttpContextFactory>();
         }
 
         /// <summary>
@@ -300,14 +297,6 @@ namespace YL.NetCoreApp.Extensions
                 default:
                     return services.AddTransient(typeof(Lazy<>));
             }
-        }
-
-        public static IServiceCollection AddDIProperty(this IServiceCollection services)
-        {
-            //替换控制器构建者类，实现控制器和Filter类属性注入功能
-            services.Replace(ServiceDescriptor.Transient<IControllerActivator, PropertiesAutowiredControllerActivator>());
-            services.Replace(ServiceDescriptor.Transient<IFilterProvider, PropertiesAutowiredFilterProvider>());
-            return services;
         }
     }
 }

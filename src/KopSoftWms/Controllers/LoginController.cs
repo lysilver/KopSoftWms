@@ -46,15 +46,15 @@ namespace KopSoftWms.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            //HttpContext.Request.EnableRewind();
             //TempData["returnUrl"] = returnUrl;
-
-            ViewBag.keywords = GetDescriptor("keywords");
-            ViewBag.description = GetDescriptor("description");
+            ViewBag.title = GetDescriptor("title");
             ViewBag.company = GetDescriptor("company");
             ViewBag.customer = GetDescriptor("customer");
             return View();
         }
 
+        [Route("Login/CheckLoginAsync")]
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> CheckLoginAsync([FromBody]SysUserDto sys)
@@ -112,6 +112,15 @@ namespace KopSoftWms.Controllers
                     Url = GetUrl(),
                     LogType = LogType.login.EnumToString()
                 });
+                //_logServices.Insert(new Sys_log
+                //{
+                //    LogId = PubId.SnowflakeId,
+                //    Browser = GetBrowser(),
+                //    Description = $"{_xss.Filter(sys.UserNickname)}登录失败",
+                //    LogIp = GetIp(),
+                //    Url = GetUrl(),
+                //    LogType = LogType.login.EnumToString()
+                //});
             }
             item.Item3 = null;
             //return Json(item);

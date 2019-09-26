@@ -12,7 +12,6 @@ using YL.Core.Orm.SqlSugar;
 using Services;
 using YL.Utils.Configs;
 using YL.Utils.Table;
-using Microsoft.AspNetCore.Builder.Internal;
 using YL.Utils.Json;
 using MediatR;
 
@@ -33,7 +32,7 @@ namespace XUnitTestKopSoftWms
             {
                 o.JsonType = JsonType.Jil;
             });
-            services.AddDIProperty();
+            //services.AddDIProperty();
             services.AddOptions();
             services.AddXsrf();
             services.AddXss();

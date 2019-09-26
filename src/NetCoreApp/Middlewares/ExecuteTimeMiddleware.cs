@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using YL.Utils.Log;
 
 namespace YL.NetCore.Middlewares
 {
@@ -34,7 +31,8 @@ namespace YL.NetCore.Middlewares
 
         private async Task<string> FormatRequest(HttpRequest request)
         {
-            request.EnableRewind();
+            //request.EnableRewind();
+            request.EnableBuffering();
             request.Body.Seek(0, SeekOrigin.Begin);
             var text = await new StreamReader(request.Body).ReadToEndAsync();
             request.Body.Seek(0, SeekOrigin.Begin);

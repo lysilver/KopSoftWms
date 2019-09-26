@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using YL.Utils.Configs;
 
 namespace YL
@@ -11,19 +11,25 @@ namespace YL
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        public static IHostBuilder CreateWebHostBuilder(string[] args)
         {
             var config = ConfigUtil.GetConfiguration;
             if (string.IsNullOrWhiteSpace(config["urls"]))
             {
-                return WebHost.CreateDefaultBuilder(args)
-                 .UseStartup<Startup>();
+                return Host.CreateDefaultBuilder(args)
+                           .ConfigureWebHostDefaults(webBuilder =>
+                           {
+                               webBuilder.UseStartup<Startup>();
+                           });
             }
             else
             {
-                return WebHost.CreateDefaultBuilder(args)
-                    .UseConfiguration(ConfigUtil.GetConfiguration)
-                    .UseStartup<Startup>();
+                return Host.CreateDefaultBuilder(args)
+                           .ConfigureWebHostDefaults(webBuilder =>
+                           {
+                               webBuilder.UseConfiguration(ConfigUtil.GetConfiguration);
+                               webBuilder.UseStartup<Startup>();
+                           });
             }
         }
     }
