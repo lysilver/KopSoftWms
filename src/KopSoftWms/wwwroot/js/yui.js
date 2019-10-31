@@ -419,7 +419,8 @@
                         temp.datemin = _self.$refs.datemin.value;
                         temp.datemax = _self.$refs.datemax.value;
                     }
-                    return yui.extend(temp, qParams);
+                    return yui.extend(temp, app.qParams);
+                    //return yui.extend(temp, qParams);
                     //return $.extend(temp, qParams);
                 },
                 queryParamsType: 'limit',
@@ -487,7 +488,7 @@
                         temp.datemin = _self.$refs.datemin.value;
                         temp.datemax = _self.$refs.datemax.value;
                     }
-                    return yui.extend(temp, qParams);
+                    return yui.extend(temp, app.qParams);
                     //return $.extend(temp, qParams);
                 },
                 //queryParams: function (params) {
@@ -568,7 +569,7 @@
                         temp.datemin = _self.$refs.datemin.value;
                         temp.datemax = _self.$refs.datemax.value;
                     }
-                    return yui.extend(temp, qParams);
+                    return yui.extend(temp, app.qParams);
                     //return $.extend(temp, qParams);
                 },
                 //queryParams: function (params) {

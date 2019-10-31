@@ -98,6 +98,15 @@
                 stockOutList: [],
                 stockOutDList: [],
             },
+            computed: {
+                qParams: function () {
+                    var data = {
+                        StockOutStatus: _self.StockOutStatus,
+                        StockOutType: _self.StockOutType
+                    };
+                    return data;
+                }
+            },
             mounted: function () {
                 var _self = this;
                 _self.$nextTick(function () {
@@ -396,7 +405,7 @@
                         }
                     }];
 
-                    yui.table2("bootstraptable", "/StockOut/List", "/StockOut/ListDetail", obj, objSub, "POST", "StockOutId", "StockOutId", true, qParams);
+                    yui.table2("bootstraptable", "/StockOut/List", "/StockOut/ListDetail", obj, objSub, "POST", "StockOutId", "StockOutId", true, _self.qParams);
                     //yui.table("bootstraptable", "/StockIn/List", obj, "POST", "StockInId", true, qParams);
                 },
                 showL: function () {

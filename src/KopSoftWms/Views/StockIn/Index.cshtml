@@ -72,8 +72,8 @@
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
                             </button>
                             @*<button id="btn_auditin" v-on:click="auditinL" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>审核
-                                </button>*@
+                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>审核
+                            </button>*@
                             <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                             </button>
@@ -97,6 +97,15 @@
                 StockInStatus: '',
                 stockInList: [],
                 stockInDList: [],
+            },
+            computed: {
+                qParams: function () {
+                    var data = {
+                        StockInStatus: this.StockInStatus,
+                        StockInType: this.StockInType
+                    };
+                    return data;
+                }
             },
             mounted: function () {
                 var _self = this;
@@ -392,7 +401,7 @@
                         }
                     }];
 
-                    yui.table2("bootstraptable", "/StockIn/List", "/StockIn/ListDetail", obj, objSub, "POST", "StockInId", "StockInId", true, qParams);
+                    yui.table2("bootstraptable", "/StockIn/List", "/StockIn/ListDetail", obj, objSub, "POST", "StockInId", "StockInId", true, _self.qParams);
                     //yui.table("bootstraptable", "/StockIn/List", obj, "POST", "StockInId", true, qParams);
                 },
                 showL: function () {
