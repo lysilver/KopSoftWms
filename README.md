@@ -9,7 +9,7 @@
 * GitHub https://github.com/lysilver/KopSoftWms
 * 码云 https://gitee.com/yulou/KopSoftWms
 *
-*技术QQ群:421635
+* 技术QQ群:421635
 ****
 
 |  版本   | 分支  |
