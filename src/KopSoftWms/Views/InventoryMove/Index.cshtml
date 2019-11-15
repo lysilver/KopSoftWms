@@ -539,7 +539,7 @@
                     if (arr.length > 0) {
                         var index = layer.confirm("您确定要删除吗？", { btn: ["确定", "取消"] }, function () {
                             var id = arr[0].InventorymoveId;
-                            yui.$axiosget('/InventoryMoveId/Delete?id=' + id)
+                            yui.$axiosget('/InventoryMove/Delete?id=' + id)
                                 .then(function (response) {
                                     if (response.data.Item1) {
                                         layer.msg(response.data.Item2 || errorMsg, { icon: 1 });
