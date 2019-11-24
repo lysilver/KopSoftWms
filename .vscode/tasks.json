@@ -13,13 +13,17 @@
         },
         {
             "label": "publish",
-            "command": "dotnet",
+            "command":"dotnet",
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/KopSoftWms/KopSoftWms.csproj"
+                "${workspaceFolder}/src/KopSoftWms/KopSoftWms.csproj",
             ],
-            "problemMatcher": "$tsc"
+            "problemMatcher": "$tsc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "watch",
@@ -30,6 +34,9 @@
                 "run",
                 "${workspaceFolder}/src/KopSoftWms/KopSoftWms.csproj"
             ],
+            "options": {
+                "cwd": "${workspaceFolder}/src/KopSoftWms"
+            },
             "problemMatcher": "$tsc"
         }
     ]

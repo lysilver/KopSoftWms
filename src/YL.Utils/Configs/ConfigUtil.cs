@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
+using System;
 using System.IO;
 
 namespace YL.Utils.Configs
@@ -17,7 +18,9 @@ namespace YL.Utils.Configs
             {
                 if (_config != null) return _config;
                 var configBuilder =
-                    new ConfigurationBuilder().Add(new JsonConfigurationSource()
+                    new ConfigurationBuilder()
+                    .SetBasePath(AppContext.BaseDirectory)
+                    .Add(new JsonConfigurationSource()
                     {
                         Path = "appsettings.json",
                         ReloadOnChange = true,
