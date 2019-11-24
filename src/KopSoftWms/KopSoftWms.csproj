@@ -9,11 +9,6 @@
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
-    <Content Remove="wwwroot\js\vqypa.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\vqypa.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +21,6 @@
     <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\js\locales\bootstrap-datetimepicker.zh-CN.js" />
     <None Include="wwwroot\js\locales\bootstrap-datetimepicker.zh-TW.js" />
-    <None Include="wwwroot\js\vqypa.min.js" />
   </ItemGroup>
 
   <ItemGroup>
