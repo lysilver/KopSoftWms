@@ -65,17 +65,17 @@ namespace Services
 
         public bool ExecuteCommand(string sql, object parameters)
         {
-            throw new NotImplementedException();
+            return _baseRepository.ExecuteCommand(sql, parameters);
         }
 
         public bool ExecuteCommand(string sql, params SugarParameter[] parameters)
         {
-            throw new NotImplementedException();
+            return _baseRepository.ExecuteCommand(sql, parameters);
         }
 
         public bool ExecuteCommand(string sql, List<SugarParameter> parameters)
         {
-            throw new NotImplementedException();
+            return _baseRepository.ExecuteCommand(sql, parameters);
         }
 
         #endregion add
