@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using YL.NetCore;
 using YL.Utils.Table;
 
@@ -13,13 +14,21 @@ namespace IServices
     {
         #region add
 
-        bool Insert(T t);
+        bool Insert(T t, bool IgnoreNullColumn = true);
+
+        bool InsertIgnoreNullColumn(T t);
+
+        bool InsertIgnoreNullColumn(T t, params string[] columns);
 
         bool Insert(SqlSugarClient client, T t);
 
         long InsertBigIdentity(T t);
 
         bool Insert(List<T> t);
+
+        bool InsertIgnoreNullColumn(List<T> t);
+
+        bool InsertIgnoreNullColumn(List<T> t, params string[] columns);
 
         DbResult<bool> InsertTran(T t);
 
@@ -82,6 +91,8 @@ namespace IServices
         //ISugarQueryable<T, T1, T2> Queryable<T1, T2>() where T1 : class where T2 : new();
 
         List<T> QueryableToList(Expression<Func<T, bool>> expression);
+
+        Task<List<T>> QueryableToListAsync(Expression<Func<T, bool>> expression);
 
         string QueryableToJson(string select, Expression<Func<T, bool>> expressionWhere);
 

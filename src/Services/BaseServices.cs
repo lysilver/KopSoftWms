@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using YL.Utils.Table;
 using YL.Utils.Extensions;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -23,9 +24,19 @@ namespace Services
 
         #region add
 
-        public bool Insert(T t)
+        public bool Insert(T t, bool IgnoreNullColumn = true)
         {
-            return _baseRepository.Insert(t);
+            return _baseRepository.Insert(t, IgnoreNullColumn);
+        }
+
+        public bool InsertIgnoreNullColumn(T t)
+        {
+            return _baseRepository.InsertIgnoreNullColumn(t);
+        }
+
+        public bool InsertIgnoreNullColumn(T t, params string[] columns)
+        {
+            return _baseRepository.InsertIgnoreNullColumn(t, columns);
         }
 
         public bool Insert(SqlSugarClient client, T t)
@@ -36,6 +47,16 @@ namespace Services
         public bool Insert(List<T> t)
         {
             return _baseRepository.Insert(t);
+        }
+
+        public bool InsertIgnoreNullColumn(List<T> t)
+        {
+            return _baseRepository.InsertIgnoreNullColumn(t);
+        }
+
+        public bool InsertIgnoreNullColumn(List<T> t, params string[] columns)
+        {
+            return _baseRepository.InsertIgnoreNullColumn(t, columns);
         }
 
         public long InsertBigIdentity(T t)
@@ -194,6 +215,11 @@ namespace Services
         public List<T> QueryableToList(Expression<Func<T, bool>> expression)
         {
             return _baseRepository.QueryableToList(expression);
+        }
+
+        public Task<List<T>> QueryableToListAsync(Expression<Func<T, bool>> expression)
+        {
+            return _baseRepository.QueryableToListAsync(expression);
         }
 
         public List<T> QueryableToList(string tableName)
