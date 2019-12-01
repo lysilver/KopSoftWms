@@ -12,6 +12,7 @@ using YL.NetCore.NetCoreApp;
 using YL.Utils.Pub;
 using YL.Utils.Extensions;
 using MediatR;
+using SqlSugar;
 
 namespace KopSoftWms.Controllers
 {
@@ -22,10 +23,12 @@ namespace KopSoftWms.Controllers
         private readonly ISys_roleServices _roleServices;
         private readonly IMemoryCache _cache;
         private readonly IMediator _mediator;
+        //private readonly Func<string, SqlSugarClient> _serviceAccessor;
 
         public HomeController(ISys_logServices logServices,
             ISys_userServices sysUserServices,
-            ISys_roleServices roleServices, IMemoryCache cache, IMediator mediator)
+            ISys_roleServices roleServices, IMemoryCache cache, IMediator mediator
+            )
         {
             _logServices = logServices;
             _userServices = sysUserServices;

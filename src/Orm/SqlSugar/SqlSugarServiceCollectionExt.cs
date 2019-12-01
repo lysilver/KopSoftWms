@@ -76,19 +76,28 @@ namespace YL.Core.Orm.SqlSugar
                         if (flag.Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
                             db.Ado.IsEnableLogEvent = true;
-                            //SQL执行完事件
-                            db.Aop.OnLogExecuted = (sql, pars) =>
-                            {
-                                log.Info(sql);
-                            };
                             //SQL执行前事件
                             db.Aop.OnLogExecuting = (sql, pars) =>
                             {
-                                log.Info(db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                                foreach (var item in pars)
+                                {
+                                    sql = sql.Replace(item.ParameterName.ToString(), $"'{item.Value?.ToString()}'");
+                                }
+                                log.Info($"执行前SQL: {sql}");
+                                //log.Info(db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                            };
+                            //SQL执行完事件
+                            db.Aop.OnLogExecuted = (sql, pars) =>
+                            {
+                                foreach (var item in pars)
+                                {
+                                    sql = sql.Replace(item.ParameterName.ToString(), $"'{item.Value?.ToString()}'");
+                                }
+                                log.Info($"执行后SQL: {sql}");
                             };
                             db.Aop.OnError = (exp) =>//执行SQL 错误事件
                             {
-                                log.Debug(exp.Message);
+                                log.Debug(exp, exp.Sql);
                             };
                         }
                         else
@@ -126,19 +135,28 @@ namespace YL.Core.Orm.SqlSugar
                         if (flag.Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
                             db.Ado.IsEnableLogEvent = true;
-                            //SQL执行完事件
-                            db.Aop.OnLogExecuted = (sql, pars) =>
-                            {
-                                log.Info(sql);
-                            };
                             //SQL执行前事件
                             db.Aop.OnLogExecuting = (sql, pars) =>
                             {
-                                log.Info(db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                                foreach (var item in pars)
+                                {
+                                    sql = sql.Replace(item.ParameterName.ToString(), $"'{item.Value?.ToString()}'");
+                                }
+                                log.Info($"执行前SQL: {sql}");
+                                //log.Info(db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                            };
+                            //SQL执行完事件
+                            db.Aop.OnLogExecuted = (sql, pars) =>
+                            {
+                                foreach (var item in pars)
+                                {
+                                    sql = sql.Replace(item.ParameterName.ToString(), $"'{item.Value?.ToString()}'");
+                                }
+                                log.Info($"执行后SQL: {sql}");
                             };
                             db.Aop.OnError = (exp) =>//执行SQL 错误事件
                             {
-                                log.Debug(exp.Message + ";;" + exp.Sql);
+                                log.Debug(exp, exp.Sql);
                             };
                         }
                         else
@@ -175,19 +193,28 @@ namespace YL.Core.Orm.SqlSugar
                         if (flag.Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
                             db.Ado.IsEnableLogEvent = true;
-                            //SQL执行完事件
-                            db.Aop.OnLogExecuted = (sql, pars) =>
-                            {
-                                log.Info(sql);
-                            };
                             //SQL执行前事件
                             db.Aop.OnLogExecuting = (sql, pars) =>
                             {
-                                log.Info(db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                                foreach (var item in pars)
+                                {
+                                    sql = sql.Replace(item.ParameterName.ToString(), $"'{item.Value?.ToString()}'");
+                                }
+                                log.Info($"执行前SQL: {sql}");
+                                //log.Info(db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                            };
+                            //SQL执行完事件
+                            db.Aop.OnLogExecuted = (sql, pars) =>
+                            {
+                                foreach (var item in pars)
+                                {
+                                    sql = sql.Replace(item.ParameterName.ToString(), $"'{item.Value?.ToString()}'");
+                                }
+                                log.Info($"执行后SQL: {sql}");
                             };
                             db.Aop.OnError = (exp) =>//执行SQL 错误事件
                             {
-                                log.Debug(exp.Message);
+                                log.Debug(exp, exp.Sql);
                             };
                         }
                         else

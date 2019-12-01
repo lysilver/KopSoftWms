@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using YL.Utils.Extensions;
 using YL.Utils.Json;
 using YL.Utils.Table;
@@ -22,9 +23,19 @@ namespace Repository
 
         #region add
 
-        public bool Insert(T t)
+        public bool Insert(T t, bool IgnoreNullColumn = true)
         {
-            return _db.Insertable(t).ExecuteCommand() > 0;
+            return _db.Insertable(t).IgnoreColumns(IgnoreNullColumn).ExecuteCommand() > 0;
+        }
+
+        public bool InsertIgnoreNullColumn(T t)
+        {
+            return _db.Insertable(t).IgnoreColumns(true).ExecuteCommand() > 0;
+        }
+
+        public bool InsertIgnoreNullColumn(T t, params string[] columns)
+        {
+            return _db.Insertable(t).IgnoreColumns(columns).ExecuteCommand() > 0;
         }
 
         public bool Insert(SqlSugarClient client, T t)
@@ -40,6 +51,16 @@ namespace Repository
         public bool Insert(List<T> t)
         {
             return _db.Insertable(t).ExecuteCommand() > 0;
+        }
+
+        public bool InsertIgnoreNullColumn(List<T> t)
+        {
+            return _db.Insertable(t).IgnoreColumns(true).ExecuteCommand() > 0;
+        }
+
+        public bool InsertIgnoreNullColumn(List<T> t, params string[] columns)
+        {
+            return _db.Insertable(t).IgnoreColumns(columns).ExecuteCommand() > 0;
         }
 
         public DbResult<bool> InsertTran(T t)
@@ -132,7 +153,7 @@ namespace Repository
             };
             }
             //_db.Updateable(entity).IgnoreColumns(c => list.Contains(c)).Where(isNull).ExecuteCommand()
-            return _db.Updateable(entity).IgnoreColumns(isNull).IgnoreColumns(c => list.Contains(c)).ExecuteCommand() > 0;
+            return _db.Updateable(entity).IgnoreColumns(isNull).IgnoreColumns(list.ToArray()).ExecuteCommand() > 0;
         }
 
         public bool Update(List<T> entity)
@@ -204,6 +225,11 @@ namespace Repository
         public List<T> QueryableToList(Expression<Func<T, bool>> expression)
         {
             return _db.Queryable<T>().Where(expression).ToList();
+        }
+
+        public Task<List<T>> QueryableToListAsync(Expression<Func<T, bool>> expression)
+        {
+            return _db.Queryable<T>().Where(expression).ToListAsync();
         }
 
         public string QueryableToJson(string select, Expression<Func<T, bool>> expressionWhere)

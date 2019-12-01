@@ -85,7 +85,7 @@ namespace YL
             {
                 o.JsonType = JsonType.Jil;
             });
-            services.AddDIProperty();
+            //services.AddDIProperty();
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -97,6 +97,38 @@ namespace YL
             //@1 DependencyInjection 注册
             services.AddNlog(); //添加Nlog
             RegisterBase(services);
+            //services.AddScoped(provider =>
+            //{
+            //    Func<string, SqlSugarClient> func = key =>
+            //    {
+            //        switch (key)
+            //        {
+            //            case "1":
+            //                return new SqlSugarClient(new ConnectionConfig()
+            //                {
+            //                    ConfigId = "111",
+            //                    ConnectionString = sqlSugarConfig.Item2,
+            //                    DbType = sqlSugarConfig.Item1,
+            //                    IsAutoCloseConnection = true,
+            //                    InitKeyType = InitKeyType.Attribute,
+            //                });
+
+            //            case "2":
+            //                return new SqlSugarClient(new ConnectionConfig()
+            //                {
+            //                    ConfigId = "222",
+            //                    ConnectionString = sqlSugarConfig.Item2,
+            //                    DbType = sqlSugarConfig.Item1,
+            //                    IsAutoCloseConnection = true,
+            //                    InitKeyType = InitKeyType.Attribute,
+            //                });
+
+            //            default:
+            //                throw new NotSupportedException($"Not Support key : {key}");
+            //        }
+            //    };
+            //    return func;
+            //});
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");
             var bulid = services.BuildServiceProvider();

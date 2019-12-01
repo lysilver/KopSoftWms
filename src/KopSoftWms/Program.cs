@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Web;
 using System.Text;
 using YL.Utils.Configs;
 
@@ -19,12 +21,24 @@ namespace YL
             {
                 return WebHost.CreateDefaultBuilder(args)
                  .UseStartup<Startup>();
+                //.ConfigureLogging(logging =>
+                //{
+                //    logging.ClearProviders();
+                //    logging.SetMinimumLevel(LogLevel.None);
+                //})
+                //  .UseNLog();
             }
             else
             {
                 return WebHost.CreateDefaultBuilder(args)
                     .UseConfiguration(ConfigUtil.GetConfiguration)
                     .UseStartup<Startup>();
+                //.ConfigureLogging(logging =>
+                //{
+                //    logging.ClearProviders();
+                //    logging.SetMinimumLevel(LogLevel.None);
+                //})
+                //.UseNLog();
             }
         }
     }
