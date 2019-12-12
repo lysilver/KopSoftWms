@@ -67,6 +67,14 @@
                 datemax: '',
                 DictType: ''
             },
+            computed: {
+                qParams: function () {
+                    var data = {
+                       DictType: this.DictType
+                    };
+                    return data;
+                }
+            },
             //beforeCreate: function () {
             //    this.$nextTick(function () {
             //        this.$refs.Dict.parentNode.parentNode.classList.add("active");
@@ -176,7 +184,7 @@
                     var qParams = {
                         DictType: _self.DictType
                     };
-                    yui.table("bootstraptable", "/Dict/List", obj, "POST", "DictId", true, qParams);
+                    yui.table("bootstraptable", "/Dict/List", obj, "POST", "DictId", true, this.qParams);
                 },
                 showL: function () {
                     yui.layershow("添加字典", "/Dict/Add", 510, 400);
