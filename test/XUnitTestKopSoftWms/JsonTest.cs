@@ -7,6 +7,7 @@ using YL.Utils.Pub;
 using YL.Core.Dto;
 using AutoFixture.Xunit2;
 using AutoFixture;
+using Bogus;
 
 namespace XUnitTestKopSoftWms
 {
@@ -80,6 +81,21 @@ namespace XUnitTestKopSoftWms
                 Flag = true,
                 Msg = "123"
             };
+            Assert.NotNull(a.MpToJson().MpToObj<PubResult>());
+        }
+
+        /// <summary>
+        /// Bogus 地址
+        /// https://github.com/bchavez/Bogus
+        /// </summary>
+        [Fact]
+        public void MpToObj2()
+        {
+            var testData = new Faker<PubResult>()
+                .RuleFor(u => u.Data, (f, u) => f.Internet.Email())
+                .RuleFor(u => u.Flag, false)
+                .RuleFor(u => u.Msg, f => f.Lorem.Text());
+            var a = testData.Generate();
             Assert.NotNull(a.MpToJson().MpToObj<PubResult>());
         }
     }
