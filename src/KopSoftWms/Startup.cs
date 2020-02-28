@@ -42,7 +42,7 @@ namespace YL
                 option.Conventions.Add(new ApplicationDescription("customer", Configuration["sys:customer"]));
             }).SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddControllersWithViews(option =>
             //{
             //    option.Filters.Add<BaseExceptionAttribute>();
