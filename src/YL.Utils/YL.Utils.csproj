@@ -1,40 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspectCore.Extensions.Reflection" Version="1.3.0" />
-    <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
+    <PackageReference Include="AspectCore.Extensions.Reflection" Version="2.1.0" />
+    <PackageReference Include="Ben.Demystifier" Version="0.1.6" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.2" />
-    <PackageReference Include="HtmlSanitizer" Version="5.0.266-beta" />
-    <PackageReference Include="IdGen" Version="2.0.3" />
+    <PackageReference Include="HtmlSanitizer" Version="5.0.310" />
+    <PackageReference Include="IdGen" Version="2.2.0" />
     <PackageReference Include="Jil" Version="2.17.0" />
-    <PackageReference Include="MessagePack" Version="1.8.80" />
+    <PackageReference Include="MessagePack" Version="2.1.115" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="NLog" Version="4.6.8" />
-    <PackageReference Include="NLog.Config" Version="4.6.8" />
+    <PackageReference Include="NLog" Version="4.7.0" />
+    <PackageReference Include="NLog.Config" Version="4.7.0" />
     <PackageReference Include="Swifter.Json" Version="1.2.9.6" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.23" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Utf8Json" Version="1.3.7" />
   </ItemGroup>

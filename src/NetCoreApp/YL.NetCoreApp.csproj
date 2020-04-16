@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>YL.NetCoreApp</RootNamespace>
     <AssemblyName>YL.NetCoreApp</AssemblyName>
     <LangVersion>7.1</LangVersion>

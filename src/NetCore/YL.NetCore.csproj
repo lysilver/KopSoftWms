@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>YL.NetCore</RootNamespace>
     <AssemblyName>YL.NetCore</AssemblyName>
     <LangVersion>7.1</LangVersion>
@@ -33,12 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.4" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.3" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="4.6.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
