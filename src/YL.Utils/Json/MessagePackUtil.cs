@@ -12,17 +12,17 @@ namespace YL.Utils.Json
     {
         public static string MpToJson(this object obj)
         {
-            return MessagePackSerializer.ToJson(MessagePackSerializer.Serialize(obj)); ;
+            return MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(obj)); ;
         }
 
         public static string MpToJson2<T>(this T t)
         {
-            return MessagePackSerializer.ToJson(t);
+            return MessagePackSerializer.SerializeToJson(t);
         }
 
         public static T MpToObj<T>(this string obj)
         {
-            return MessagePackSerializer.Deserialize<T>(MessagePackSerializer.FromJson(obj)); ;
+            return MessagePackSerializer.Deserialize<T>(MessagePackSerializer.ConvertFromJson(obj)); ;
         }
     }
 }

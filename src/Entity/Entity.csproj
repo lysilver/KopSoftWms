@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
-    <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="sqlSugarCore" Version="5.0.0.10" />
+    <PackageReference Include="FluentValidation" Version="8.6.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.13" />
   </ItemGroup>
 
 </Project>
