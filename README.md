@@ -1,21 +1,23 @@
 [![Build Status](https://lysilver.visualstudio.com/kopsoftwms/_apis/build/status/lysilver.KopSoftWms?branchName=master)](https://lysilver.visualstudio.com/kopsoftwms/_build/latest?definitionId=3&branchName=master)
 
 ****
-* KopSoftPrint标签打印软件 http://mes.kopsoft.cn/KopSoftPrint/
+* KopSoft标签打印软件 http://tuoshui.net.cn/Print/
 * GitHub https://github.com/williamyang1984/KopSoftPrint
 * 码云 https://gitee.com/williamyang1984/KopSoftPrint
-****
-* KopSoftWms仓库管理系统 http://wms.kopsoft.cn/
+*
+* KopSoft仓库管理系统 http://wms.kopsoft.cn/
 * GitHub https://github.com/lysilver/KopSoftWms
 * 码云 https://gitee.com/yulou/KopSoftWms
-****
-* KopSoftMes制造执行系统 http://mes.kopsoft.cn/
+*
+* 技术QQ群 421635
+* 技术论坛 http://tangqiao.net.cn/forum.php?mod=forumdisplay&fid=47
 ****
 
 |  版本   | 分支  |
 |  ----  | ----  |
 | netcore2.2  | master |
 | netcore3.0  | netcore3.0 |
+| netcore3.1  | netcore3.1 |
 
 ## 功能模块
 - [x] 用户管理
@@ -40,15 +42,15 @@
   
 
 ## 技术
-`core 2.2`
+`net core`
 
-* 基于.Net Core 2.2开发；
+* 基于.Net Core 2.2~3.1开发；
 
 * 支持sqlserver、mysql数据库，其他数据库未测试，脚本在docs/sql；
 
 * 前端采用 vue、polyfill、qs、 axios、 bootstrap、adminlte、layer、bootstrap-datetimepicker、bootstrap-table、bootstrap-select等
 
-* 后端采用 asp.net mvc core 2.2、sqlsugar、fluentValidation、nlog、Jil、DI、Ganss、雪花算法、Xunit、npoi（因在linux上报错，后期替换掉，bug修复（https://www.cnblogs.com/Robbery/p/10115234.html））等
+* 后端采用 asp.net mvc core、sqlsugar、fluentValidation、nlog、Jil、DI、Ganss、雪花算法、Xunit、npoi（因在linux上报错，后期替换掉，bug修复（https://www.cnblogs.com/Robbery/p/10115234.html））等
 
 
 
