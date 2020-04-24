@@ -1,15 +1,20 @@
 [![Build Status](https://lysilver.visualstudio.com/kopsoftwms/_apis/build/status/lysilver.KopSoftWms?branchName=master)](https://lysilver.visualstudio.com/kopsoftwms/_build/latest?definitionId=3&branchName=master)
 
 ****
-* KopSoft标签打印软件 http://tuoshui.net.cn/Print/
-* GitHub https://github.com/williamyang1984/KopSoftPrint
+* KopSoft标签打印软件 http://kopsoft.cn/print/
 * 码云 https://gitee.com/williamyang1984/KopSoftPrint
-*
-* KopSoft仓库管理系统 http://wms.kopsoft.cn/
-* GitHub https://github.com/lysilver/KopSoftWms
+* GitHub https://github.com/williamyang1984/KopSoftPrint
+
+* (开源免费WMS)KopSoft仓库管理系统 http://wms.kopsoft.cn/
 * 码云 https://gitee.com/yulou/KopSoftWms
-*
-* 技术QQ群 421635
+* GitHub https://github.com/lysilver/KopSoftWms
+
+* (开源免费MES)KopSoft制造执行系统 http://mes.kopsoft.cn/
+* 码云 https://gitee.com/yulou/KopSoftMes
+* GitHub https://github.com/lysilver/KopSoftMes
+
+* 开源免费WMS仓库管理系统 QQ群号 421635
+* 开源免费MES制造执行系统 QQ群号 1048397413
 * 技术论坛 http://tangqiao.net.cn/forum.php?mod=forumdisplay&fid=47
 ****
 
