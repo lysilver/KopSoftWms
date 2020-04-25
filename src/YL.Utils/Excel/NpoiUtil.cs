@@ -230,7 +230,7 @@ namespace YL.Utils.Excel
             return buffer;
         }
 
-        public static byte[] Export<T>(List<T> list, ExcelVersion version = ExcelVersion.V2007)
+        public static byte[] Export<T>(List<T> list, ExcelVersion version = ExcelVersion.V2007, string[] ignoreExport = null)
         {
             if (list.IsNullLt())
             {
@@ -281,6 +281,10 @@ namespace YL.Utils.Excel
                 PropertyInfo[] entityProperties = entityType.GetProperties();
                 for (int j = 0; j < entityProperties.Length; j++)
                 {
+                    if (ignoreExport != null && ignoreExport.Contains(entityProperties[j].Name))
+                    {
+                        continue;
+                    }
                     ICell cell = row.CreateCell(j);
                     cell.CellStyle = cellStyle;
                     cell.SetCellValue(entityProperties[j].Name);
@@ -301,6 +305,10 @@ namespace YL.Utils.Excel
                     var properties = maxList[k].GetType().GetProperties();
                     for (int m = 0; m < properties.Length; m++)
                     {
+                        if (ignoreExport != null && ignoreExport.Contains(properties[m].Name))
+                        {
+                            continue;
+                        }
                         ICell cell = row1.CreateCell(m);
                         cell.CellStyle = cellStyle;
                         var id = properties[m].GetValue(maxList[k])?.ToString();
