@@ -76,6 +76,7 @@ namespace YL.Utils.Files
                     if (!sr.EndOfStream)
                     {
                         line = sr.ReadToEnd();
+                        sr.Close();
                         return line;
                     }
                     //while ((line = sr.ReadLine()) != null)
