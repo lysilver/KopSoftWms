@@ -5,17 +5,17 @@
 * 码云 https://gitee.com/williamyang1984/KopSoftPrint
 * GitHub https://github.com/williamyang1984/KopSoftPrint
 *
-* (开源免费WMS)KopSoft仓库管理系统 http://wms.kopsoft.cn/
+* KopSoft仓库管理系统 http://wms.kopsoft.cn/
 * 码云 https://gitee.com/yulou/KopSoftWms
 * GitHub https://github.com/lysilver/KopSoftWms
 *
-* (开源免费MES)KopSoft制造执行系统 http://mes.kopsoft.cn/
+* KopSoft制造执行系统 http://mes.kopsoft.cn/
 * 码云 https://gitee.com/yulou/KopSoftMES
 * GitHub https://github.com/lysilver/KopSoftMES
 *
-* 开源免费WMS仓库管理系统 QQ群号 421635
-* 开源免费MES制造执行系统 QQ群号 1048397413
-* 技术论坛 http://tangqiao.net.cn/forum.php?mod=forumdisplay&fid=47
+* 工业信息化自动化.技术论坛 www.KopSoft.cn
+* 开源WMS仓库管理系统 QQ群:421635
+* 开源MES制造执行系统 QQ群:1048397413
 ****
 
 |  版本   | 分支  |
