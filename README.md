@@ -10,8 +10,8 @@
 * GitHub https://github.com/lysilver/KopSoftWms
 *
 * (开源免费MES)KopSoft制造执行系统 http://mes.kopsoft.cn/
-* 码云 https://gitee.com/yulou/KopSoftMes
-* GitHub https://github.com/lysilver/KopSoftMes
+* 码云 https://gitee.com/yulou/KopSoftMES
+* GitHub https://github.com/lysilver/KopSoftMES
 *
 * 开源免费WMS仓库管理系统 QQ群号 421635
 * 开源免费MES制造执行系统 QQ群号 1048397413
