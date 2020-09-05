@@ -13,13 +13,12 @@
 * 码云 https://gitee.com/yulou/KopSoftMES
 * GitHub https://github.com/lysilver/KopSoftMES
 *
-* KopSoft电子看板 http://kanban.kopsoft.cn/
-*
-* KopSoft数据采集与监控
+* KopSoft数据采集与监控,电子看板 http://kanban.kopsoft.cn/
 * 码云 https://gitee.com/william1984/KopSoftSCADA
 * GitHub https://github.com/1984william/KopSoftSCADA
 *
 * KopSoft开源免费WMS/MES QQ群:421635
+* 苏州.单片机PLC软件开发 QQ群:625916026
 ****
 
 |  版本   | 分支  |
