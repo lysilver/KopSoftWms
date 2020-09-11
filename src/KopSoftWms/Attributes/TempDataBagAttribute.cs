@@ -33,7 +33,6 @@ namespace KopSoftWms.Attributes
             {
                 viewBag.title = properties["title"].ToString();
                 viewBag.company = properties["company"].ToString();
-                viewBag.customer = properties["customer"].ToString();
             }
             base.OnActionExecuting(context);
         }

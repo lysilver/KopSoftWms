@@ -50,7 +50,6 @@ namespace KopSoftWms.Controllers
 
             ViewBag.keywords = GetDescriptor("keywords");
             ViewBag.description = GetDescriptor("description");
-            ViewBag.customer = GetDescriptor("customer");
             ViewBag.company = GetDescriptor("company");
             return View();
         }

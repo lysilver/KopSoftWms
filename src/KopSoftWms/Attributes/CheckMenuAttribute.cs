@@ -40,7 +40,6 @@ namespace YL.NetCore.Attributes
                 viewBag.keywords = properties["keywords"].ToString();
                 viewBag.description = properties["description"].ToString();
                 viewBag.company = properties["company"].ToString();
-                viewBag.customer = properties["customer"].ToString();
                 viewBag.nickname = claims.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value;
                 viewBag.headimg = claims.SingleOrDefault(c => c.Type == ClaimTypes.Uri).Value;
             }

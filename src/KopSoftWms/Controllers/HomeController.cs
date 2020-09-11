@@ -54,7 +54,6 @@ namespace KopSoftWms.Controllers
             ViewBag.keywords = GetDescriptor("keywords");
             ViewBag.description = GetDescriptor("description");
             ViewBag.company = GetDescriptor("company");
-            ViewBag.customer = GetDescriptor("customer");
             ViewBag.nickname = UserDtoCache.UserNickname;
             ViewBag.headimg = UserDtoCache.HeadImg;
 
