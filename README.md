@@ -1,7 +1,7 @@
 [![Build Status](https://lysilver.visualstudio.com/kopsoftwms/_apis/build/status/lysilver.KopSoftWms?branchName=master)](https://lysilver.visualstudio.com/kopsoftwms/_build/latest?definitionId=3&branchName=master)
 
 ****
-* KopSoft标签打印软件 http://wms.kopsoft.cn/print/
+* KopSoft标签(条码)打印软件 http://print.kopsoft.cn/
 * 码云 https://gitee.com/william1984/KopSoftPrint
 * GitHub https://github.com/1984william/KopSoftPrint
 *
@@ -13,7 +13,7 @@
 * 码云 https://gitee.com/yulou/KopSoftMES
 * GitHub https://github.com/lysilver/KopSoftMES
 *
-* KopSoft数据采集与监控,电子看板 http://kanban.kopsoft.cn/
+* KopSoftSCADA数据采集与监控,电子看板,Andon安灯系统 http://kanban.kopsoft.cn/
 * 码云 https://gitee.com/william1984/KopSoftSCADA
 * GitHub https://github.com/1984william/KopSoftSCADA
 ****
