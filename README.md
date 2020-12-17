@@ -55,7 +55,7 @@
 
 * 前端采用 vue、polyfill、qs、 axios、 bootstrap、adminlte、layer、bootstrap-datetimepicker、bootstrap-table、bootstrap-select等
 
-* 后端采用 asp.net mvc core、sqlsugar、fluentValidation、nlog、Jil、DI、Ganss、雪花算法、Xunit、npoi（因在linux上报错，后期替换掉，bug修复（https://www.cnblogs.com/Robbery/p/10115234.html））等
+* 后端采用 asp.net mvc core、SqlSugar、fluentValidation、nlog、Jil、DI、Ganss、雪花算法、Xunit、npoi（因在linux上报错，后期替换掉，bug修复（https://www.cnblogs.com/Robbery/p/10115234.html））等
 
 
 
