@@ -14,11 +14,11 @@
 * Gitee https://gitee.com/yulou/KopSoftMES
 * GitHub https://github.com/lysilver/KopSoftMES
 *
-* KopSoft数据采集与监控,电子看板,Andon安灯系统 http://kanban.kopsoft.cn/
+* KopSoft数据采集与监控,电子看板 http://kanban.kopsoft.cn/
 * Gitee https://gitee.com/williamyang3/KopSoftSCADA
 * GitHub https://github.com/williamyang3/KopSoftSCADA
 *
-* 技术QQ群:421635 商务合作:13921987606
+* 商务合作:15262337653
 ****
 
 |  版本   | 分支  |
