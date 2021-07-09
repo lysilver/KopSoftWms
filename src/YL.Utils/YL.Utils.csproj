@@ -9,7 +9,7 @@
     <PackageReference Include="AspectCore.Extensions.Reflection" Version="1.1.0" />
     <PackageReference Include="Ben.Demystifier" Version="0.1.6" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.2" />
-    <PackageReference Include="HtmlSanitizer" Version="5.0.310" />
+    <PackageReference Include="HtmlSanitizer" Version="5.0.372" />
     <PackageReference Include="IdGen" Version="2.2.0" />
     <PackageReference Include="Jil" Version="2.17.0" />
     <PackageReference Include="MessagePack" Version="2.1.115" />
