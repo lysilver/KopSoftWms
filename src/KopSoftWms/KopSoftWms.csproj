@@ -155,17 +155,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Views.Login.Index.Designer.cs">
+    <Compile Update="Properties\Localization.SharedResources.Designer.cs">
+      <DependentUpon>Localization.SharedResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Views.Login.Index.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Views.Login.Index.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Views.Login.Index.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Properties\Localization.SharedResources.resx">
+      <LastGenOutput>Localization.SharedResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 

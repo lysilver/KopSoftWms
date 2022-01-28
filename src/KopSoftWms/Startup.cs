@@ -35,7 +35,6 @@ namespace YL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLocalization(options => options.ResourcesPath = "Properties");
-
             services.AddMvc(option =>
             {
                 option.Filters.Add<BaseExceptionAttribute>();
@@ -46,7 +45,11 @@ namespace YL
             })
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(KopSoftWms.Localization.SharedResources));
+                });
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddControllersWithViews(option =>
@@ -105,7 +108,7 @@ namespace YL
                 .AddMediatR(typeof(Startup).GetTypeInfo().Assembly)
                 //@1 DependencyInjection 注册
                 .AddNlog(); //添加Nlog
-                
+
             RegisterBase(services);
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");

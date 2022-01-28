@@ -1,38 +1,38 @@
 ﻿/*
  Navicat Premium Data Transfer
 
- Source Server : (local-sqlserver)
- Source Server Type : SQL Server
+ Source Server         : (local-sqlserver)
+ Source Server Type    : SQL Server
  Source Server Version : 13001742
- Source Host : localhost:1433
- Source Catalog : KopWms
- Source Schema : dbo
+ Source Host           : localhost:1433
+ Source Catalog        : KopWms
+ Source Schema         : dbo
 
- Target Server Type : SQL Server
+ Target Server Type    : SQL Server
  Target Server Version : 13001742
- File Encoding : 65001
+ File Encoding         : 65001
 
  Date: 05/03/2019 15:25:13
 */
 
 
-------------------------------
+-- ----------------------------
 -- Table structure for Sys_dept
-------------------------------
+-- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Sys_dept]') AND type IN ('U'))
-DROP TABLE [dbo].[Sys_dept]
+	DROP TABLE [dbo].[Sys_dept]
 GO
 
 CREATE TABLE [dbo].[Sys_dept] (
-  [DeptId] bigint NOT NULL,
-  [DeptNo] nvarchar(20) COLLATE Chinese_PRC_CI_AS NULL,
-  [DeptName] nvarchar(50) COLLATE Chinese_PRC_CI_AS NULL,
-  [IsDel] tinyint NOT NULL,
-  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS NULL,
-  [CreateBy] bigint NULL,
-  [CreateDate] datetime NULL,
-  [ModifiedBy] bigint NULL,
-  [ModifiedDate] datetime NULL
+  [DeptId] bigint  NOT NULL,
+  [DeptNo] nvarchar(20) COLLATE Chinese_PRC_CI_AS  NULL,
+  [DeptName] nvarchar(50) COLLATE Chinese_PRC_CI_AS  NULL,
+  [IsDel] tinyint  NOT NULL,
+  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [CreateBy] bigint  NULL,
+  [CreateDate] datetime  NULL,
+  [ModifiedBy] bigint  NULL,
+  [ModifiedDate] datetime  NULL
 )
 GO
 
@@ -40,60 +40,60 @@ ALTER TABLE [dbo].[Sys_dept] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 not deleted 0 deleted',
+'MS_Description', N'1未删除   0删除',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dept',
 'COLUMN', N'IsDel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Created by',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dept',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dept',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dept',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modification time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dept',
 'COLUMN', N'ModifiedDate'
 GO
 
 
-------------------------------
---Records of Sys_dept
-------------------------------
-INSERT INTO [dbo].[Sys_dept] VALUES (N'492573722524254208', NULL, N'Technology 1', N'1', N'Responsible for machine 1', N'491786087098744832', N'2018-09-22 09:36:33.000', N'491786087098744832', N'2018-09-22 10:01:39.000')
+-- ----------------------------
+-- Records of Sys_dept
+-- ----------------------------
+INSERT INTO [dbo].[Sys_dept] VALUES (N'492573722524254208', NULL, N'技术一部', N'1', N'负责机台1', N'491786087098744832', N'2018-09-22 09:36:33.000', N'491786087098744832', N'2018-09-22 10:01:39.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'492616866888417280', NULL, N'Technology 2', N'1', N'Responsible for machine 2', N'491786087098744832', N'2018-09-21 16:42:56.000', N'491786087098744832', N'2018-09-22 15:49:11.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'492616866888417280', NULL, N'技术二部', N'1', N'负责机台2', N'491786087098744832', N'2018-09-21 16:42:56.000', N'491786087098744832', N'2018-09-22 15:49:11.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'492617342476353536', NULL, N'Technology 3', N'1', N'Responsible for machine 3', N'491786087098744832', N'2018-09-21 16:44:19.000', N'491786087098744832', N'2018-09-22 15:48:28.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'492617342476353536', NULL, N'技术三部', N'1', N'负责机台3', N'491786087098744832', N'2018-09-21 16:44:19.000', N'491786087098744832', N'2018-09-22 15:48:28.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'492967145194389504', NULL, N'Technology four', N'1', N'responsible for machine 4', N'491786087098744832', N'2018-09-22 15:55:26.000', N'491786087098744832', N'2018-09-23 10:45:55.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'492967145194389504', NULL, N'技术四部', N'1', N'负责机台4', N'491786087098744832', N'2018-09-22 15:55:26.000', N'491786087098744832', N'2018-09-23 10:45:55.000')
 GO
 
 INSERT INTO [dbo].[Sys_dept] VALUES (N'493254990471626752', NULL, N'1111111111111111111111111111111', N'0', NULL, N'491786087098744832', N'2018-09-23 10:55:59.000', N'491786087098744832', N'2018-09-23 13:30:32.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'493259536275079168', N'4', N'Technology 5', N'1', N'machine 5', N'491786087098744832', N'2018-09 -23 11:15:10.000', N'504990858139926528', N'2019-02-17 17:06:22.713')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'493259536275079168', N'4', N'技术五部', N'1', N'机台5', N'491786087098744832', N'2018-09-23 11:15:10.000', N'504990858139926528', N'2019-02-17 17:06:22.713')
 GO
 
 INSERT INTO [dbo].[Sys_dept] VALUES (N'493293212589359104', NULL, N'asd', N'0', NULL, N'491786087098744832', N'2018-09-23 13:31:07.000', N'491786087098744832', N'2018-09-23 13:35:05.000')
@@ -102,55 +102,55 @@ GO
 INSERT INTO [dbo].[Sys_dept] VALUES (N'493293262740652032', NULL, N'asdas', N'0', NULL, N'491786087098744832', N'2018-09-23 13:31:13.000', N'491786087098744832', N'2018-09-23 13:35:08.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'518051525495357440', N'kt004', N'Sales Department', N'1', N'Sales Department', N'504990858139926528', N'2018-11-30 21:11:54.000', N'504990858139926528', N'2018-12-22 19:42:25.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'518051525495357440', N'kt004', N'销售部门', N'1', N'销售部门', N'504990858139926528', N'2018-11-30 21:11:54.000', N'504990858139926528', N'2018-12-22 19:42:25.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'518051575634067456', N'kt003', N'purchasing department', N'1', N'purchasing department', N'504990858139926528', N'2018-11-30 21:12:06.000', N'504990858139926528', N'2018-12-22 19:42:13.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'518051575634067456', N'kt003', N'采购部门', N'1', N'采购部门', N'504990858139926528', N'2018-11-30 21:12:06.000', N'504990858139926528', N'2018-12-22 19:42:13.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'518053174372728832', N'kt002', N'make one', N'1', N'make one', N'504990858139926528', N'2018-11 -30 21:18:28.000', N'504990858139926528', N'2018-12-22 19:42:00.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'518053174372728832', N'kt002', N'制造一部', N'1', N'制造一部', N'504990858139926528', N'2018-11-30 21:18:28.000', N'504990858139926528', N'2018-12-22 19:42:00.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'518053238646243328', N'kt001', N'Manufacturing II', N'1', N'Manufacturing II', N'504990858139926528', N'2018-11 -30 21:18:43.000', N'504990858139926528', N'2018-12-22 19:41:49.000')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'518053238646243328', N'kt001', N'制造二部', N'1', N'制造二部', N'504990858139926528', N'2018-11-30 21:18:43.000', N'504990858139926528', N'2018-12-22 19:41:49.000')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'528063722858479616', N'RD', N'RD', N'1', NULL, N'504990858139926528', N'2018-12-28 12:16:42.000 ', NULL, NULL)
+INSERT INTO [dbo].[Sys_dept] VALUES (N'528063722858479616', N'RD', N'RD', N'1', NULL, N'504990858139926528', N'2018-12-28 12:16:42.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'550212648847802368', N'12', N'12', N'0', N'12', N'504990858139926528', N'2019-02-27 15: 08:36.463', N'504990858139926528', N'2019-02-27 17:01:56.560')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'550212648847802368', N'12', N'12', N'0', N'12', N'504990858139926528', N'2019-02-27 15:08:36.463', N'504990858139926528', N'2019-02-27 17:01:56.560')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'550244912524689408', N'333', N'333', N'0', N'333344', N'504990858139926528', N'2019-02-27 17: 16:48.993', N'504990858139926528', N'2019-02-27 17:27:39.947')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'550244912524689408', N'333', N'333', N'0', N'333344', N'504990858139926528', N'2019-02-27 17:16:48.993', N'504990858139926528', N'2019-02-27 17:27:39.947')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'550312768192905216', N'YBS', N'ice room', N'1', N'YBS', N'504990858139926528', N'2019-02-27 21:46:26.953', N'491786087098744832', N'2019-02-27 22:16:14.803')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'550312768192905216', N'YBS', N'饮冰室', N'1', N'YBS', N'504990858139926528', N'2019-02-27 21:46:26.953', N'491786087098744832', N'2019-02-27 22:16:14.803')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'551031800911101952', N'T001', N'Tianxintang', N'0', N'Tianxintang', N'504990858139926528', N'2019-03-01 21:23:38.457', N'504990858139926528', N'2019-03-01 21:24:17.697')
+INSERT INTO [dbo].[Sys_dept] VALUES (N'551031800911101952', N'T001', N'天心堂', N'0', N'天心堂', N'504990858139926528', N'2019-03-01 21:23:38.457', N'504990858139926528', N'2019-03-01 21:24:17.697')
 GO
 
-INSERT INTO [dbo].[Sys_dept] VALUES (N'552087637804974080', N'89', N'89', N'1', N'89', N'504990858139926528', N'2019-03-04 19: 14:00.640', NULL, NULL)
+INSERT INTO [dbo].[Sys_dept] VALUES (N'552087637804974080', N'89', N'89', N'1', N'89', N'504990858139926528', N'2019-03-04 19:14:00.640', NULL, NULL)
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Table structure for Sys_dict
-------------------------------
+-- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Sys_dict]') AND type IN ('U'))
-DROP TABLE [dbo].[Sys_dict]
+	DROP TABLE [dbo].[Sys_dict]
 GO
 
 CREATE TABLE [dbo].[Sys_dict] (
-  [DictId] bigint NOT NULL,
-  [DictNo] nvarchar(20) COLLATE Chinese_PRC_CI_AS NULL,
-  [DictName] nvarchar(50) COLLATE Chinese_PRC_CI_AS NULL,
-  [DictType] nvarchar(20) COLLATE Chinese_PRC_CI_AS NULL,
-  [IsDel] tinyint NOT NULL,
-  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS NULL,
-  [CreateBy] bigint NULL,
-  [CreateDate] datetime NULL,
-  [ModifiedBy] bigint NULL,
-  [ModifiedDate] datetime NULL
+  [DictId] bigint  NOT NULL,
+  [DictNo] nvarchar(20) COLLATE Chinese_PRC_CI_AS  NULL,
+  [DictName] nvarchar(50) COLLATE Chinese_PRC_CI_AS  NULL,
+  [DictType] nvarchar(20) COLLATE Chinese_PRC_CI_AS  NULL,
+  [IsDel] tinyint  NOT NULL,
+  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [CreateBy] bigint  NULL,
+  [CreateDate] datetime  NULL,
+  [ModifiedBy] bigint  NULL,
+  [ModifiedDate] datetime  NULL
 )
 GO
 
@@ -158,138 +158,138 @@ ALTER TABLE [dbo].[Sys_dict] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 not deleted 0 deleted',
+'MS_Description', N'1未删除   0删除',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dict',
 'COLUMN', N'IsDel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Created by',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dict',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dict',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dict',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modification time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_dict',
 'COLUMN', N'ModifiedDate'
 GO
 
 
-------------------------------
---Records of Sys_dict
-------------------------------
-INSERT INTO [dbo].[Sys_dict] VALUES (N'503747692996853760', NULL, N'pieces', N'1', N'1', NULL, N'491786087098744832', N'2018-10-22 09:53 :29.000', NULL, NULL)
+-- ----------------------------
+-- Records of Sys_dict
+-- ----------------------------
+INSERT INTO [dbo].[Sys_dict] VALUES (N'503747692996853760', NULL, N'件', N'1', N'1', NULL, N'491786087098744832', N'2018-10-22 09:53:29.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'503752972895780864', NULL, N'Purchase receipt order', N'3', N'1', NULL, N'491786087098744832', N'2018-10-22 10:14:27.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'503752972895780864', NULL, N'采购入库单', N'3', N'1', NULL, N'491786087098744832', N'2018-10-22 10:14:27.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'503753018307510272', NULL, N'Finished product issue order', N'4', N'1', NULL, N'491786087098744832', N'2018-10-22 10:14:39.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'503753018307510272', NULL, N'成品出库单', N'4', N'1', NULL, N'491786087098744832', N'2018-10-22 10:14:39.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507099447742693376', NULL, N'A-level material', N'2', N'1', N'A-level material', N'491786087098744832', N'2018 -10-31 15:52:09.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507099447742693376', NULL, N'A级物料', N'2', N'1', N'A级物料', N'491786087098744832', N'2018-10-31 15:52:09.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507099512351752192', NULL, N'Normal Material', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15: 52:25.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507099512351752192', NULL, N'普通材料', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:52:25.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507099602579619840', NULL, N'Consumables', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15: 52:47.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507099602579619840', NULL, N'耗材类', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:52:47.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507100062879318016', NULL, N'Package material', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15: 54:36.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507100062879318016', NULL, N'包材料', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:54:36.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507100561112301568', NULL, N'Dangerous Goods', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15 :56:35.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507100561112301568', NULL, N'危险品料', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:56:35.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507100596751302656', NULL, N'Finished class', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15: 56:44.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507100596751302656', NULL, N'成品类', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:56:44.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507100629949218816', NULL, N'Tool', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15: 56:52.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507100629949218816', NULL, N'冶工具 ', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:56:52.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507100659967852544', NULL, N'device', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:56 :59.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507100659967852544', NULL, N'设备', N'2', N'1', NULL, N'491786087098744832', N'2018-10-31 15:56:59.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507452557040287744', NULL, N'station', N'1', N'1', N'station', N'491786087098744832', N'2018-11-01 15:15:17.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507452557040287744', NULL, N'台', N'1', N'1', N'台', N'491786087098744832', N'2018-11-01 15:15:17.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'507477339421016064', NULL, N'', N'1', N'1', NULL, N'491786087098744832', N'2018-11-01 16:53 :46.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'507477339421016064', NULL, N'个', N'1', N'1', NULL, N'491786087098744832', N'2018-11-01 16:53:46.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'517162885743378432', NULL, N'own', N'6', N'1', NULL, N'504990858139926528', N'2018-11-28 10: 20:39.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'517162885743378432', NULL, N'自有', N'6', N'1', NULL, N'504990858139926528', N'2018-11-28 10:20:39.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'517162936238604288', NULL, N'lease', N'6', N'1', NULL, N'504990858139926528', N'2018-11-28 10:20 :52.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'517162936238604288', NULL, N'租赁', N'6', N'1', NULL, N'504990858139926528', N'2018-11-28 10:20:52.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'517163878539329536', NULL, N'Professional production equipment', N'5', N'1', NULL, N'504990858139926528', N'2018-11-28 10:24:37.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'517163878539329536', NULL, N'专业生产用设备', N'5', N'1', NULL, N'504990858139926528', N'2018-11-28 10:24:37.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'517163903772262400', NULL, N'kinetic energy generator', N'5', N'1', NULL, N'504990858139926528', N'2018-11-28 10 :24:43.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'517163903772262400', NULL, N'动能发生设备', N'5', N'1', NULL, N'504990858139926528', N'2018-11-28 10:24:43.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'517163985334697984', NULL, N'Electrical Equipment', N'5', N'1', NULL, N'504990858139926528', N'2018-11-28 10: 25:03.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'517163985334697984', NULL, N'电器设备', N'5', N'1', NULL, N'504990858139926528', N'2018-11-28 10:25:03.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'517164060874113024', NULL, N'Forging Equipment', N'5', N'1', N'1', N'504990858139926528', N'2018-11- 28 10:25:21.000', N'491786087098744832', N'2018-11-28 16:23:44.000')
+INSERT INTO [dbo].[Sys_dict] VALUES (N'517164060874113024', NULL, N'锻压设备', N'5', N'1', N'1', N'504990858139926528', N'2018-11-28 10:25:21.000', N'491786087098744832', N'2018-11-28 16:23:44.000')
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'524588722197364736', NULL, N'AMaterial', N'2', N'1', NULL, N'504990858139926528', N'2018-12-18 22: 08:18.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'524588722197364736', NULL, N'A物料', N'2', N'1', NULL, N'504990858139926528', N'2018-12-18 22:08:18.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'524838103836262400', N'1', N'stockin', N'0', N'2', N'Do not move, stocking order number', N'504990858139926528 ', N'2018-12-19 14:39:14.000', NULL, N'1900-01-01 00:00:00.000')
+INSERT INTO [dbo].[Sys_dict] VALUES (N'524838103836262400', N'1', N'stockin', N'0', N'2', N'勿动，入库单编号', N'504990858139926528', N'2018-12-19 14:39:14.000', NULL, N'1900-01-01 00:00:00.000')
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'524838556393275392', N'1', N'stockout', N'0', N'2', N'Do not move, stock out order number', N'504990858139926528 ', N'2018-12-19 14:41:03.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'524838556393275392', N'1', N'stockout', N'0', N'2', N'勿动，出库单编号', N'504990858139926528', N'2018-12-19 14:41:03.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'525173270467575808', NULL, N'Return receipt order', N'3', N'1', NULL, N'504990858139926528', N'2018-12-20 12:51:02.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_dict] VALUES (N'525173270467575808', NULL, N'退货入库单', N'3', N'1', NULL, N'504990858139926528', N'2018-12-20 12:51:02.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'525175016191426560', NULL, N'trial storage', N'3', N'1', N'YOU SHEN ME YONG NE ?', N'504990858139926528', N'2018-12-20 12:58:01.000', N'504990858139926528', N'2018-12-28 12:17:18.000')
+INSERT INTO [dbo].[Sys_dict] VALUES (N'525175016191426560', NULL, N'试用入库', N'3', N'1', N'YOU SHEN ME YONG NE ?', N'504990858139926528', N'2018-12-20 12:58:01.000', N'504990858139926528', N'2018-12-28 12:17:18.000')
 GO
 
-INSERT INTO [dbo].[Sys_dict] VALUES (N'539715276204146688', NULL, N'light years', N'1', N'0', NULL, N'504990858139926528', N'2019-01-29 15: 55:49.240', N'504990858139926528', N'2019-01-29 15:56:11.477')
+INSERT INTO [dbo].[Sys_dict] VALUES (N'539715276204146688', NULL, N'光年', N'1', N'0', NULL, N'504990858139926528', N'2019-01-29 15:55:49.240', N'504990858139926528', N'2019-01-29 15:56:11.477')
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Table structure for Sys_log
-------------------------------
+-- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Sys_log]') AND type IN ('U'))
-DROP TABLE [dbo].[Sys_log]
+	DROP TABLE [dbo].[Sys_log]
 GO
 
 CREATE TABLE [dbo].[Sys_log] (
-  [LogId] bigint NOT NULL,
-  [LogType] nvarchar(10) COLLATE Chinese_PRC_CI_AS NULL,
-  [Description] nvarchar(1000) COLLATE Chinese_PRC_CI_AS NULL,
-  [Url] nvarchar(150) COLLATE Chinese_PRC_CI_AS NULL,
-  [Browser] nvarchar(500) COLLATE Chinese_PRC_CI_AS NULL,
-  [CreateBy] bigint NULL,
-  [CreateDate] datetime NULL,
-  [ModifiedBy] bigint NULL,
-  [ModifiedDate] datetime NULL,
-  [LogIp] nvarchar(15) COLLATE Chinese_PRC_CI_AS NULL
+  [LogId] bigint  NOT NULL,
+  [LogType] nvarchar(10) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Description] nvarchar(1000) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Url] nvarchar(150) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Browser] nvarchar(500) COLLATE Chinese_PRC_CI_AS  NULL,
+  [CreateBy] bigint  NULL,
+  [CreateDate] datetime  NULL,
+  [ModifiedBy] bigint  NULL,
+  [ModifiedDate] datetime  NULL,
+  [LogIp] nvarchar(15) COLLATE Chinese_PRC_CI_AS  NULL
 )
 GO
 
@@ -297,56 +297,56 @@ ALTER TABLE [dbo].[Sys_log] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Created by',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_log',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_log',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_log',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modification time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_log',
 'COLUMN', N'ModifiedDate'
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Table structure for Sys_menu_wms
-------------------------------
+-- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Sys_menu_wms]') AND type IN ('U'))
-DROP TABLE [dbo].[Sys_menu_wms]
+	DROP TABLE [dbo].[Sys_menu_wms]
 GO
 
 CREATE TABLE [dbo].[Sys_menu_wms] (
-  [MenuId] bigint NOT NULL,
-  [MenuName] nvarchar(50) COLLATE Chinese_PRC_CI_AS NULL,
-  [MenuUrl] nvarchar(50) COLLATE Chinese_PRC_CI_AS NULL,
-  [MenuIcon] nvarchar(50) COLLATE Chinese_PRC_CI_AS NULL,
-  [MenuParent] bigint NULL,
-  [Sort] int NULL,
-  [Status] tinyint NULL,
-  [MenuType] nvarchar(10) COLLATE Chinese_PRC_CI_AS NULL,
-  [IsDel] tinyint NOT NULL,
-  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS NULL,
-  [CreateBy] bigint NULL,
-  [CreateDate] datetime NULL,
-  [ModifiedBy] bigint NULL,
-  [ModifiedDate] datetime NULL
+  [MenuId] bigint  NOT NULL,
+  [MenuName] nvarchar(50) COLLATE Chinese_PRC_CI_AS  NULL,
+  [MenuUrl] nvarchar(50) COLLATE Chinese_PRC_CI_AS  NULL,
+  [MenuIcon] nvarchar(50) COLLATE Chinese_PRC_CI_AS  NULL,
+  [MenuParent] bigint  NULL,
+  [Sort] int  NULL,
+  [Status] tinyint  NULL,
+  [MenuType] nvarchar(10) COLLATE Chinese_PRC_CI_AS  NULL,
+  [IsDel] tinyint  NOT NULL,
+  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [CreateBy] bigint  NULL,
+  [CreateDate] datetime  NULL,
+  [ModifiedBy] bigint  NULL,
+  [ModifiedDate] datetime  NULL
 )
 GO
 
@@ -354,7 +354,7 @@ ALTER TABLE [dbo].[Sys_menu_wms] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Enable 1 Disable 0',
+'MS_Description', N'启用1 禁用0',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_menu_wms',
 'COLUMN', N'Status'
@@ -368,131 +368,131 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 not deleted 0 deleted',
+'MS_Description', N'1未删除   0删除',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_menu_wms',
 'COLUMN', N'IsDel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Created by',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_menu_wms',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_menu_wms',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_menu_wms',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modification time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_menu_wms',
 'COLUMN', N'ModifiedDate'
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Records of Sys_menu_wms
-------------------------------
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'1', N'System Management', N'#', NULL, N'-1', N'1', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:10:42.000', NULL, NULL)
+-- ----------------------------
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'1', N'系统管理', N'#', NULL, N'-1', N'1', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:10:42.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'2', N'User Management', N'/User', NULL, N'1', N'4', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:12:56.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'2', N'用户管理', N'/User', NULL, N'1', N'4', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:12:56.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'3', N'Dept management', N'/Dept', NULL, N'1', N'3', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:14:38.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'3', N'部门管理', N'/Dept', NULL, N'1', N'3', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:14:38.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'4', N'Role management', N'/Role', NULL, N'1', N'2', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:14:57.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'4', N'角色管理', N'/Role', NULL, N'1', N'2', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:14:57.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'5', N'Data Dictionary', N'/Dict', NULL, N'1', N'5', N'1', N'menu', N'1', NULL, NULL, N'2018-10-21 14:44:30.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'5', N'数据字典', N'/Dict', NULL, N'1', N'5', N'1', N'menu', N'1', NULL, NULL, N'2018-10-21 14:44:30.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'6', N'basic data', N'#', NULL, N'-1', N'6', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:19:07.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'6', N'基础资料', N'#', NULL, N'-1', N'6', N'1', N'menu', N'1', NULL, NULL, N'2018-09-24 12:19:07.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'7', N'Material Management', N'/Material', NULL, N'6', N'7', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:37.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'7', N'物料管理', N'/Material', NULL, N'6', N'7', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:37.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'8', N'Customer management', N'/Customer', NULL, N'6', N'8', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:44.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'8', N'客户管理', N'/Customer', NULL, N'6', N'8', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:44.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'9', N'Supplier Management', N'/Supplier', NULL, N'6', N'9', N'1', N'menu' , N'1', NULL, NULL, N'2018-10-21 10:25:53.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'9', N'供应商管理', N'/Supplier', NULL, N'6', N'9', N'1', N'menu', N'1', NULL, NULL, N'2018-10-21 10:25:53.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'10', N'Carrier Management', N'/Carrier', NULL, N'6', N'10', N'1', N'menu' , N'1', NULL, NULL, N'2018-10-21 10:25:58.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'10', N'承运商管理', N'/Carrier', NULL, N'6', N'10', N'1', N'menu', N'1', NULL, NULL, N'2018-10-21 10:25:58.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'11', N'Warehouse management', N'#', NULL, N'-1', N'11', N'1', N'menu', N'1', NULL, NULL, N'2018-12-18 23:01:36.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'11', N'仓库管理', N'#', NULL, N'-1', N'11', N'1', N'menu', N'1', NULL, NULL, N'2018-12-18 23:01:36.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'12', N'Warehouse Management', N'/Warehouse', NULL, N'11', N'12', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:48:09.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'12', N'仓库管理', N'/Warehouse', NULL, N'11', N'12', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:48:09.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'13', N'Reservoir Area Management', N'/ReservoirArea', NULL, N'11', N'13', N'1', N'menu' , N'1', NULL, NULL, N'2018-10-09 08:49:11.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'13', N'库区管理', N'/ReservoirArea', NULL, N'11', N'13', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:49:11.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'14', N'Rack Management', N'/StorageRack', N'&#xe61a;', N'11', N'14', N'1' , N'menu', N'1', NULL, NULL, N'2018-10-09 08:49:14.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'14', N'货架管理', N'/StorageRack', N'&#xe61a;', N'11', N'14', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:49:14.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'22', N'Log management', N'#', N'&#xe62e;', N'-1', N'22', N'1' , N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:51.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'22', N'日志管理', N'#', N'&#xe62e;', N'-1', N'22', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:51.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'23', N'syslog', N'/Log', NULL, N'22', N'23', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:54.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'23', N'系统日志', N'/Log', NULL, N'22', N'23', N'1', N'menu', N'1', NULL, NULL, N'2018-10-09 08:50:54.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'24', N'StockIn', N'/StockIn', NULL, N'11', N'24', N'1', N'menu' , N'1', NULL, NULL, N'2018-12-19 14:09:08.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'24', N'入库管理', N'/StockIn', NULL, N'11', N'24', N'1', N'menu', N'1', NULL, NULL, N'2018-12-19 14:09:08.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'27', N'StockOut', N'/StockOut', NULL, N'11', N'27', N'1', N'menu' , N'1', NULL, NULL, N'2019-01-22 11:06:17.000', NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'27', N'出库管理', N'/StockOut', NULL, N'11', N'27', N'1', N'menu', N'1', NULL, NULL, N'2019-01-22 11:06:17.000', NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'29', N'Inventory query', N'/Inventory', NULL, N'11', N'29', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'29', N'库存查询', N'/Inventory', NULL, N'11', N'29', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'30', N'InventoryRecord', N'/InventoryRecord', NULL, N'11', N'30', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'30', N'库存记录', N'/InventoryRecord', NULL, N'11', N'30', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'31', N'Login Statistics', N'/Log/Bar', NULL, N'22', N'31', N'1', N'menu ', N'1', NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'31', N'登录统计', N'/Log/Bar', NULL, N'22', N'31', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'32', N'Delivery record', N'/Delivery', NULL, N'11', N'32', N'1', N'menu' , N'1', NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'32', N'发货记录', N'/Delivery', NULL, N'11', N'32', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
 GO
 
-INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'33', N'InventoryMove', N'/InventoryMove', NULL, N'11', N'33', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Sys_menu_wms] VALUES (N'33', N'库存移动', N'/InventoryMove', NULL, N'11', N'33', N'1', N'menu', N'1', NULL, NULL, NULL, NULL, NULL)
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Table structure for Sys_role
-------------------------------
+-- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Sys_role]') AND type IN ('U'))
-DROP TABLE [dbo].[Sys_role]
+	DROP TABLE [dbo].[Sys_role]
 GO
 
 CREATE TABLE [dbo].[Sys_role] (
-  [RoleId] bigint NOT NULL,
-  [RoleName] nvarchar(50) COLLATE Chinese_PRC_CI_AS NULL,
-  [RoleType] nvarchar(10) COLLATE Chinese_PRC_CI_AS NULL,
-  [IsDel] tinyint NOT NULL,
-  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS NULL,
-  [CreateBy] bigint NULL,
-  [CreateDate] datetime NULL,
-  [ModifiedBy] bigint NULL,
-  [ModifiedDate] datetime NULL
+  [RoleId] bigint  NOT NULL,
+  [RoleName] nvarchar(50) COLLATE Chinese_PRC_CI_AS  NULL,
+  [RoleType] nvarchar(10) COLLATE Chinese_PRC_CI_AS  NULL,
+  [IsDel] tinyint  NOT NULL,
+  [Remark] nvarchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [CreateBy] bigint  NULL,
+  [CreateDate] datetime  NULL,
+  [ModifiedBy] bigint  NULL,
+  [ModifiedDate] datetime  NULL
 )
 GO
 
@@ -507,93 +507,93 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 not deleted 0 deleted',
+'MS_Description', N'1未删除   0删除',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_role',
 'COLUMN', N'IsDel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Created by',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_role',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_role',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_role',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modification time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_role',
 'COLUMN', N'ModifiedDate'
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Records of Sys_role
-------------------------------
-INSERT INTO [dbo].[Sys_role] VALUES (N'494712986628259840', N'sysadmin', N'admin', N'1', N'sysadmin', N'491786087098744832', N'2018-09 -27 11:32:43.000', N'504990858139926528', N'2019-03-05 14:48:04.943')
+-- ----------------------------
+INSERT INTO [dbo].[Sys_role] VALUES (N'494712986628259840', N'系统管理员', N'admin', N'1', N'系统管理员', N'491786087098744832', N'2018-09-27 11:32:43.000', N'504990858139926528', N'2019-03-05 14:48:04.943')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'518052696645697536', N'Process Engineer', N'#', N'0', N'Process Engineer', N'504990858139926528', N'2018-11-30 21:16:34.000', N'504990858139926528', N'2019-03-05 14:48:23.500')
+INSERT INTO [dbo].[Sys_role] VALUES (N'518052696645697536', N'工艺工程师', N'#', N'0', N'工艺工程师', N'504990858139926528', N'2018-11-30 21:16:34.000', N'504990858139926528', N'2019-03-05 14:48:23.500')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'551034449270145024', N'1', N'#', N'0', N'12', N'504990858139926528', N'2019-03-01 21: 33:50.523', N'504990858139926528', N'2019-03-03 20:45:46.683')
+INSERT INTO [dbo].[Sys_role] VALUES (N'551034449270145024', N'1', N'#', N'0', N'12', N'504990858139926528', N'2019-03-01 21:33:50.523', N'504990858139926528', N'2019-03-03 20:45:46.683')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'551035289351487488', N'123', N'#', N'0', N'1231', N'504990858139926528', N'2019-03-01 21: 37:20.683', N'504990858139926528', N'2019-03-03 20:45:43.800')
+INSERT INTO [dbo].[Sys_role] VALUES (N'551035289351487488', N'123', N'#', N'0', N'1231', N'504990858139926528', N'2019-03-01 21:37:20.683', N'504990858139926528', N'2019-03-03 20:45:43.800')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'518052825163366400', N'Warehouseman', N'#', N'1', N'Warehouseman', N'504990858139926528', N'2018-11 -30 21:17:04.000', N'504990858139926528', N'2018-12-19 13:53:39.000')
+INSERT INTO [dbo].[Sys_role] VALUES (N'518052825163366400', N'仓库管理员', N'#', N'1', N'仓库管理员', N'504990858139926528', N'2018-11-30 21:17:04.000', N'504990858139926528', N'2018-12-19 13:53:39.000')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'518052895468290048', N'equipment engineer', N'#', N'0', N'equipment engineer', N'504990858139926528', N'2018-11-30 21:17:21.000', N'504990858139926528', N'2019-03-05 14:48:31.507')
+INSERT INTO [dbo].[Sys_role] VALUES (N'518052895468290048', N'设备工程师', N'#', N'0', N'设备工程师', N'504990858139926528', N'2018-11-30 21:17:21.000', N'504990858139926528', N'2019-03-05 14:48:31.507')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'551052717045317632', N'aaa', N'#', N'0', N'aaaa', N'504990858139926528', N'2019-03-01 22: 46:45.737', N'504990858139926528', N'2019-03-03 20:45:40.733')
+INSERT INTO [dbo].[Sys_role] VALUES (N'551052717045317632', N'aaa', N'#', N'0', N'aaaa', N'504990858139926528', N'2019-03-01 22:46:45.737', N'504990858139926528', N'2019-03-03 20:45:40.733')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'551290503941849088', N'111111', N'#', N'0', N'111', N'504990858139926528', N'2019-03-02 14: 29:43.520', N'504990858139926528', N'2019-03-03 20:45:37.883')
+INSERT INTO [dbo].[Sys_role] VALUES (N'551290503941849088', N'111111', N'#', N'0', N'111', N'504990858139926528', N'2019-03-02 14:29:43.520', N'504990858139926528', N'2019-03-03 20:45:37.883')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'552120536675647488', N'16', N'#', N'0', N'1', N'504990858139926528', N'2019-03-04 21: 29:53.060', N'504990858139926528', N'2019-03-05 14:48:27.640')
+INSERT INTO [dbo].[Sys_role] VALUES (N'552120536675647488', N'16', N'#', N'0', N'1', N'504990858139926528', N'2019-03-04 21:29:53.060', N'504990858139926528', N'2019-03-05 14:48:27.640')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'551291650308046848', N'3', N'#', N'0', N'3', N'504990858139926528', N'2019-03-02 14: 34:12.690', N'504990858139926528', N'2019-03-03 20:45:35.030')
+INSERT INTO [dbo].[Sys_role] VALUES (N'551291650308046848', N'3', N'#', N'0', N'3', N'504990858139926528', N'2019-03-02 14:34:12.690', N'504990858139926528', N'2019-03-03 20:45:35.030')
 GO
 
-INSERT INTO [dbo].[Sys_role] VALUES (N'551295610691518464', N'90io', N'#', N'0', N'8990', N'504990858139926528', N'2019-03-02 14: 51:55.940', N'504990858139926528', N'2019-03-03 20:45:31.953')
+INSERT INTO [dbo].[Sys_role] VALUES (N'551295610691518464', N'90io', N'#', N'0', N'8990', N'504990858139926528', N'2019-03-02 14:51:55.940', N'504990858139926528', N'2019-03-03 20:45:31.953')
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Table structure for Sys_rolemenu
-------------------------------
+-- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Sys_rolemenu]') AND type IN ('U'))
-DROP TABLE [dbo].[Sys_rolemenu]
+	DROP TABLE [dbo].[Sys_rolemenu]
 GO
 
 CREATE TABLE [dbo].[Sys_rolemenu] (
-  [RoleMenuId] bigint NOT NULL,
-  [RoleId] bigint NULL,
-  [MenuId] bigint NULL,
-  [CreateBy] bigint NULL,
-  [CreateDate] datetime NULL,
-  [ModifiedBy] bigint NULL,
-  [ModifiedDate] datetime NULL
+  [RoleMenuId] bigint  NOT NULL,
+  [RoleId] bigint  NULL,
+  [MenuId] bigint  NULL,
+  [CreateBy] bigint  NULL,
+  [CreateDate] datetime  NULL,
+  [ModifiedBy] bigint  NULL,
+  [ModifiedDate] datetime  NULL
 )
 GO
 
@@ -601,37 +601,37 @@ ALTER TABLE [dbo].[Sys_rolemenu] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Created by',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_rolemenu',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_rolemenu',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_rolemenu',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modification time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_rolemenu',
 'COLUMN', N'ModifiedDate'
 GO
 
 
-------------------------------
+-- ----------------------------
 -- Records of Sys_rolemenu
-------------------------------
+-- ----------------------------
 INSERT INTO [dbo].[Sys_rolemenu] VALUES (N'494712986762477568', N'494712986628259840', N'1', N'491786087098744832', N'2018-09-27 11:32:47.000', N'491786087098744832', N'2018-12-11 22:26:00.000')
 GO
 
@@ -829,63 +829,63 @@ ALTER TABLE [dbo].[Sys_serialnum] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Table Name',
+'MS_Description', N'表名',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'TableName'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Prefix',
+'MS_Description', N'前缀',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'Prefix'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'number of digits',
+'MS_Description', N'位数',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'Digit'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'mantissa',
+'MS_Description', N'尾数',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'Mantissa'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 not deleted 0 deleted',
+'MS_Description', N'1未删除   0删除',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'IsDel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'founder',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Changing time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_serialnum',
 'COLUMN', N'ModifiedDate'
@@ -895,13 +895,13 @@ GO
 -- ----------------------------
 -- Records of Sys_serialnum
 -- ----------------------------
-INSERT INTO [dbo].[Sys_serialnum] VALUES (N'1', N'R20190301002520000001', N'1', N'Wms_stockin', N'R', N'22', N'6', N'1', N'Inbound order', N'1', N'2019-01-07 11:16:09.000', N'504990858139926528', N'2019-03-01 00:25:20.113')
+INSERT INTO [dbo].[Sys_serialnum] VALUES (N'1', N'R20190301002520000001', N'1', N'Wms_stockin', N'R', N'22', N'6', N'1', N'入库单', N'1', N'2019-01-07 11:16:09.000', N'504990858139926528', N'2019-03-01 00:25:20.113')
 GO
 
-INSERT INTO [dbo].[Sys_serialnum] VALUES (N'2', N'C20190303212032000001', N'1', N'Wms_stockout', N'C', N'22', N'6', N'1', N'Outbound order', N'1', N'2019-02-13 09:24:58.000', N'504990858139926528', N'2019-03-03 21:20:32.283')
+INSERT INTO [dbo].[Sys_serialnum] VALUES (N'2', N'C20190303212032000001', N'1', N'Wms_stockout', N'C', N'22', N'6', N'1', N'出库单', N'1', N'2019-02-13 09:24:58.000', N'504990858139926528', N'2019-03-03 21:20:32.283')
 GO
 
-INSERT INTO [dbo].[Sys_serialnum] VALUES (N'3', N'M20190304224033000002', N'2', N'Wms_inventorymove', N'M', N'22', N'6', N'1', N'stock movement', N'1', N'2019-03-03 13:16:43.000', N'504990858139926528', N'2019-03-04 22:40:33.597')
+INSERT INTO [dbo].[Sys_serialnum] VALUES (N'3', N'M20190304224033000002', N'2', N'Wms_inventorymove', N'M', N'22', N'6', N'1', N'库存移动', N'1', N'2019-03-03 13:16:43.000', N'504990858139926528', N'2019-03-04 22:40:33.597')
 GO
 
 
@@ -942,49 +942,49 @@ ALTER TABLE [dbo].[Sys_user] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'0 male 1 female',
+'MS_Description', N'0男 1女',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'Sex'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 enable 0 disable',
+'MS_Description', N'1 启用 0 禁用',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'IsEabled'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'1 not deleted 0 deleted',
+'MS_Description', N'1未删除   0删除',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'IsDel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'founder',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Changing time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Sys_user',
 'COLUMN', N'ModifiedDate'
@@ -994,7 +994,7 @@ GO
 -- ----------------------------
 -- Records of Sys_user
 -- ----------------------------
-INSERT INTO [dbo].[Sys_user] VALUES (N'491786087098744832', N'admin', N'admin', N'202cb962ac59075b964b07152d234b70', NULL, NULL, N'15678676789', NULL, N'1', N'0', N'127.0.0.1', N'2019-02-27 22:09:59.980', N'1060', N'1', N'1', N'System administrator', N'491786087098744832', N'2018-09-19 09:42:20.000', NULL, NULL, N'494712986628259840', NULL)
+INSERT INTO [dbo].[Sys_user] VALUES (N'491786087098744832', N'admin', N'admin', N'202cb962ac59075b964b07152d234b70', NULL, NULL, N'15678676789', NULL, N'1', N'0', N'127.0.0.1', N'2019-02-27 22:09:59.980', N'1060', N'1', N'1', N'系统管理员', N'491786087098744832', N'2018-09-19 09:42:20.000', NULL, NULL, N'494712986628259840', NULL)
 GO
 
 INSERT INTO [dbo].[Sys_user] VALUES (N'504990858139926528', N'william', N'william', N'670b14728ad9902aecba32e22fa4f6bd', NULL, N'william.yang@kopsoft.cn', N'13921987606', NULL, N'1', N'492573722524254208', N'127.0.0.1', N'2019-03-05 15:06:25.963', N'1256', N'1', N'1', NULL, N'491786087098744832', N'2018-10-25 20:13:22.000', N'504990858139926528', N'2019-02-20 15:44:50.013', N'494712986628259840', N'')
@@ -1036,42 +1036,42 @@ ALTER TABLE [dbo].[Wms_carrier] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'carrier number',
+'MS_Description', N'承运商编号',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'CarrierNo'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'carrier name',
+'MS_Description', N'承运商名称',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'CarrierName'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'carrier address',
+'MS_Description', N'承运商地址',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'Address'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'contact number',
+'MS_Description', N'联系电话',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'Tel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'contact',
+'MS_Description', N'联系人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'CarrierPerson'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'level',
+'MS_Description', N'级别',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'CarrierLevel'
@@ -1085,7 +1085,7 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Remark',
+'MS_Description', N'备注',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'Remark'
@@ -1099,28 +1099,28 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'founder',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Change the time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_carrier',
 'COLUMN', N'ModifiedDate'
@@ -1130,13 +1130,13 @@ GO
 -- ----------------------------
 -- Records of Wms_carrier
 -- ----------------------------
-INSERT INTO [dbo].[Wms_carrier] VALUES (N'506719708456681472', N'123456', N'carrier name', N'this is the address', N'15346400808', N'contact', N'1', N'1459607@qq.com', N'This is test data  Remark', N'1', N'491786087098744832', N'2018-10-30 14:43:13.000', N'491786087098744832', N'2018-10-30 14:46:09.000')
+INSERT INTO [dbo].[Wms_carrier] VALUES (N'506719708456681472', N'123456', N'承运商名称', N'这是地址', N'15346400808', N'联系人', N'1', N'1459607@qq.com', N'这是测试数据     备注', N'1', N'491786087098744832', N'2018-10-30 14:43:13.000', N'491786087098744832', N'2018-10-30 14:46:09.000')
 GO
 
 INSERT INTO [dbo].[Wms_carrier] VALUES (N'506721877532606464', N'11', N'11', N'11', N'11', N'11', N'3', N'11', N'11', N'0', N'491786087098744832', N'2018-10-30 14:51:50.000', N'491786087098744832', N'2018-10-30 14:51:58.000')
 GO
 
-INSERT INTO [dbo].[Wms_carrier] VALUES (N'506722066527944704', N'00000000', N'ycy', N'11address', N'15300000000', N'11', N'2', N'11', N'11', N'1', N'491786087098744832', N'2018-10-30 14:52:35.000', N'491786087098744832', N'2018-10-31 16:04:23.000')
+INSERT INTO [dbo].[Wms_carrier] VALUES (N'506722066527944704', N'00000000', N'ycy', N'11地址', N'15300000000', N'11', N'2', N'11', N'11', N'1', N'491786087098744832', N'2018-10-30 14:52:35.000', N'491786087098744832', N'2018-10-31 16:04:23.000')
 GO
 
 INSERT INTO [dbo].[Wms_carrier] VALUES (N'517506395298332672', N'1', N'1', N'1', N'1', N'1', N'1', N'1', N'1', N'1', N'504990858139926528', N'2018-11-29 09:05:39.000', NULL, NULL)
@@ -1172,42 +1172,42 @@ ALTER TABLE [dbo].[Wms_customer] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Customer Number',
+'MS_Description', N'客户编号',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'CustomerNo'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'client name',
+'MS_Description', N'客户名称',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'CustomerName'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'customer address',
+'MS_Description', N'客户地址',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'Address'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'contact number',
+'MS_Description', N'联系电话',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'Tel'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'contact',
+'MS_Description', N'联系人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'CustomerPerson'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'level',
+'MS_Description', N'级别',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'CustomerLevel'
@@ -1221,7 +1221,7 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Remark',
+'MS_Description', N'备注',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'Remark'
@@ -1235,28 +1235,28 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'founder',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Change the time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_customer',
 'COLUMN', N'ModifiedDate'
@@ -1266,16 +1266,16 @@ GO
 -- ----------------------------
 -- Records of Wms_customer
 -- ----------------------------
-INSERT INTO [dbo].[Wms_customer] VALUES (N'507101850562985984', N'Customer Number', N'client name', N'address', N'15346400800', N'contact', N'2', N'1450000000@qq.com', N'Remark', N'1', N'491786087098744832', N'2018-10-31 16:01:42.000', N'491786087098744832', N'2018-10-31 16:40:15.000')
+INSERT INTO [dbo].[Wms_customer] VALUES (N'507101850562985984', N'客户编号', N'客户名称', N'地址', N'15346400800', N'联系人', N'2', N'1450000000@qq.com', N'备注', N'1', N'491786087098744832', N'2018-10-31 16:01:42.000', N'491786087098744832', N'2018-10-31 16:40:15.000')
 GO
 
 INSERT INTO [dbo].[Wms_customer] VALUES (N'511381500994781184', N'001', N'45', N'.', NULL, NULL, N'1', NULL, NULL, N'0', N'491786087098744832', N'2018-11-12 11:27:31.000', N'504990858139926528', N'2018-12-22 19:54:05.000')
 GO
 
-INSERT INTO [dbo].[Wms_customer] VALUES (N'525552041037135872', N'CP001', N'K', N'Suzhou', N'123456', N'Start', N'2', N'lol@163.com', NULL, N'1', N'504990858139926528', N'2018-12-21 13:56:11.000', N'504990858139926528', N'2018-12-22 19:50:25.000')
+INSERT INTO [dbo].[Wms_customer] VALUES (N'525552041037135872', N'CP001', N'K', N'苏州', N'123456', N'开始', N'2', N'lol@163.com', NULL, N'1', N'504990858139926528', N'2018-12-21 13:56:11.000', N'504990858139926528', N'2018-12-22 19:50:25.000')
 GO
 
-INSERT INTO [dbo].[Wms_customer] VALUES (N'525994765464895488', N'CP002', N'K', N'Suzhou', N'123456', N'Start', N'1', N'lol@163.com', NULL, N'1', N'504990858139926528', N'2018-12-22 19:15:24.000', N'504990858139926528', N'2018-12-22 19:50:16.000')
+INSERT INTO [dbo].[Wms_customer] VALUES (N'525994765464895488', N'CP002', N'K', N'苏州', N'123456', N'开始', N'1', N'lol@163.com', NULL, N'1', N'504990858139926528', N'2018-12-22 19:15:24.000', N'504990858139926528', N'2018-12-22 19:50:16.000')
 GO
 
 INSERT INTO [dbo].[Wms_customer] VALUES (N'527043444330201088', N'11', N'11', N'11', N'11', N'11', N'1', N'11', N'1111', N'0', N'504990858139926528', N'2018-12-25 16:42:29.000', N'504990858139926528', N'2019-02-13 14:53:05.020')
@@ -1335,28 +1335,28 @@ ALTER TABLE [dbo].[Wms_delivery] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Shipping primary key',
+'MS_Description', N'发货主键',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'DeliveryId'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Outbound order master table Id',
+'MS_Description', N'出库单主表Id',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'StockOutId'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'carrier Id',
+'MS_Description', N'承运商Id',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'CarrierId'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Remark',
+'MS_Description', N'备注',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'Remark'
@@ -1370,42 +1370,42 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'founder',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Change the time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'ModifiedDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Ship date',
+'MS_Description', N'发货日期',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'DeliveryDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'tracking number',
+'MS_Description', N'快递单号',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_delivery',
 'COLUMN', N'TrackingNo'
@@ -1447,7 +1447,7 @@ ALTER TABLE [dbo].[Wms_inventory] SET (LOCK_ESCALATION = TABLE)
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Remark',
+'MS_Description', N'备注',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_inventory',
 'COLUMN', N'Remark'
@@ -1461,28 +1461,28 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'founder',
+'MS_Description', N'创建人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_inventory',
 'COLUMN', N'CreateBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'creation time',
+'MS_Description', N'创建时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_inventory',
 'COLUMN', N'CreateDate'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Modified by',
+'MS_Description', N'修改人',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_inventory',
 'COLUMN', N'ModifiedBy'
 GO
 
 EXEC sp_addextendedproperty
-'MS_Description', N'Change the time',
+'MS_Description', N'修改时间',
 'SCHEMA', N'dbo',
 'TABLE', N'Wms_inventory',
 'COLUMN', N'ModifiedDate'

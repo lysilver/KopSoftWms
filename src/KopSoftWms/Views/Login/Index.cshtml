@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 
-@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<KopSoftWms.Localization.SharedResources> SharedLocalizer
 
 @{
     Layout = null;
@@ -112,7 +112,7 @@
                     _self.isSelected = true;
                     //es5写法
                     if (_self.UserNickname.length <= 0) {
-                        layer.msg('@Localizer["ACCOUNT_NOT_NULL"]', { icon: 5 });
+                        layer.msg('@SharedLocalizer["ACCOUNT_NOT_NULL"]', { icon: 5 });
                         _self.disabled = false;
                         _self.isSelected = false;
                         return false;
