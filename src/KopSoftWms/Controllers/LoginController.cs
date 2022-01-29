@@ -19,6 +19,8 @@ using YL.Utils.Pub;
 using YL.Utils.Security;
 using YL.Utils.Json;
 using MediatR;
+using Microsoft.Extensions.Localization;
+using YL.Localization;
 
 namespace KopSoftWms.Controllers
 {
@@ -30,8 +32,9 @@ namespace KopSoftWms.Controllers
         private readonly IConfiguration _configuration;
         private readonly Xss _xss;
         private readonly IMediator _mediator;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        public LoginController(Xss xss, ISys_logServices logServices, IHttpContextAccessor httpContext, IConfiguration configuration, ISys_userServices sys_User, IMediator mediator)
+        public LoginController(Xss xss, ISys_logServices logServices, IHttpContextAccessor httpContext, IConfiguration configuration, ISys_userServices sys_User, IMediator mediator, IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _httpContext = httpContext;
             _configuration = configuration;
@@ -39,6 +42,7 @@ namespace KopSoftWms.Controllers
             _logServices = logServices;
             _xss = xss;
             _mediator = mediator;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         //string returnUrl = null

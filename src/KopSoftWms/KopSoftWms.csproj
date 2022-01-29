@@ -37,6 +37,7 @@
     <ProjectReference Include="..\Orm\Orm.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\YL.Localization\YL.Localization.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -152,21 +153,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\upload\head\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Localization.SharedResources.Designer.cs">
-      <DependentUpon>Localization.SharedResources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Localization.SharedResources.resx">
-      <LastGenOutput>Localization.SharedResources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ProjectExtensions>

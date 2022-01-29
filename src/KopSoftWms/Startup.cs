@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Repository;
 using Services;
 using SqlSugar;
+using System.Globalization;
 using System.Text;
 using YL.Core.Orm.SqlSugar;
 using YL.NetCore.Attributes;
@@ -34,7 +36,25 @@ namespace YL
         //IServiceProvider This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(options => options.ResourcesPath = "Properties");
+            services.AddLocalization
+                (options => 
+                    { 
+                        options.ResourcesPath = "Resources";
+                    });
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                CultureInfo[] supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("cn"),
+                    new CultureInfo("ru")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
             services.AddMvc(option =>
             {
                 option.Filters.Add<BaseExceptionAttribute>();
@@ -42,14 +62,8 @@ namespace YL
                 option.Conventions.Add(new ApplicationDescription("title", Configuration["sys:title"]));
                 option.Conventions.Add(new ApplicationDescription("company", Configuration["sys:company"]));
                 option.Conventions.Add(new ApplicationDescription("customer", Configuration["sys:customer"]));
-            })
-                .SetCompatibilityVersion(CompatibilityVersion.Latest)
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization(options =>
-                {
-                    options.DataAnnotationLocalizerProvider = (type, factory) =>
-                        factory.Create(typeof(KopSoftWms.Localization.SharedResources));
-                });
+            }).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddControllersWithViews(option =>
@@ -164,6 +178,7 @@ namespace YL
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseRequestLocalization();
 
             app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
 

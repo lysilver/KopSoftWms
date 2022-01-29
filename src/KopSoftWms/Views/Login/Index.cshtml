@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 
-@inject IHtmlLocalizer<KopSoftWms.Localization.SharedResources> SharedLocalizer
+@inject IHtmlLocalizer<YL.Localization.SharedResource> SharedLocalizer
 
 @{
     Layout = null;
@@ -101,7 +101,7 @@
                 UserNickname: '',
                 Pwd: '',
                 disabled: false,
-                submit: "登录",
+                submit: '@SharedLocalizer["LOGIN"]',
                 reset: "取消",
                 isSelected: false
             },
