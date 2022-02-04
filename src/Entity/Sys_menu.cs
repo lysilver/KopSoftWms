@@ -70,7 +70,7 @@ namespace YL.Core.Entity
         public string MenuType { get; set; }
 
         /// <summary>
-        /// Desc:1未删除   0删除
+        /// Desc:1未删除   0 Delete
         /// Default:
         /// Nullable:True
         /// </summary>

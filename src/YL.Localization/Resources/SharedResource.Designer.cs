@@ -70,11 +70,65 @@ namespace YL.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        public static string CANCEL {
+            get {
+                return ResourceManager.GetString("CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Error.
+        /// </summary>
+        public static string ERROR {
+            get {
+                return ResourceManager.GetString("ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Exception.
+        /// </summary>
+        public static string EXCEPTION {
+            get {
+                return ResourceManager.GetString("EXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Insert.
+        /// </summary>
+        public static string INSERT {
+            get {
+                return ResourceManager.GetString("INSERT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Insert or update.
+        /// </summary>
+        public static string INSERT_OR_UPDATE {
+            get {
+                return ResourceManager.GetString("INSERT_OR_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         public static string LOGIN {
             get {
                 return ResourceManager.GetString("LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Update.
+        /// </summary>
+        public static string UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATE", resourceCulture);
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿<div class="content-wrapper">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<YL.Localization.SharedResource> _sharedLocalizer
+
+<div class="content-wrapper">
     <section class="content-header">
         <h1>
             日志管理
@@ -22,7 +25,7 @@
                     </div>
                     <div id="toolbar" class="btn-group">
                         <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>@_sharedLocalizer["DELETE"]
                         </button>
                     </div>
                     <div class="table-responsive">
@@ -51,7 +54,7 @@
                             </div>*@
                         <div id="toolbar" class="btn-group">
                             <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>@_sharedLocalizer["CANCEL"]
                             </button>
                         </div>
                         @*<table id="bootstraptable" class="table table-bordered table-hover"></table>*@

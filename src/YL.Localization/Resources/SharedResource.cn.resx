@@ -120,7 +120,25 @@
   <data name="ACCOUNT_NOT_NULL" xml:space="preserve">
     <value>账号不能为空</value>
   </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ERROR" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="EXCEPTION" xml:space="preserve">
+    <value>异常</value>
+  </data>
+  <data name="INSERT" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="INSERT_OR_UPDATE" xml:space="preserve">
+    <value>添加或修改</value>
+  </data>
   <data name="LOGIN" xml:space="preserve">
     <value>登录</value>
+  </data>
+  <data name="UPDATE" xml:space="preserve">
+    <value>修改</value>
   </data>
 </root>

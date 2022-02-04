@@ -7,7 +7,7 @@ namespace YL.Core.Entity
     public class BaseEntity
     {
         /// <summary>
-        /// Desc:1未删除   0删除
+        /// Desc:1未删除   0 Delete
         /// Default:
         /// Nullable:True
         /// </summary>

@@ -236,7 +236,7 @@ namespace KopSoftWms.Controllers
         }
 
         /// <summary>
-        /// 删除
+        /// Delete
         /// </summary>
         /// <param name="id">主表id</param>
         /// <returns></returns>

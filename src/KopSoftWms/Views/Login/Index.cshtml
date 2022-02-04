@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-
-@inject IHtmlLocalizer<YL.Localization.SharedResource> SharedLocalizer
+@inject IHtmlLocalizer<YL.Localization.SharedResource> _sharedLocalizer
 
 @{
     Layout = null;
@@ -101,7 +100,7 @@
                 UserNickname: '',
                 Pwd: '',
                 disabled: false,
-                submit: '@SharedLocalizer["LOGIN"]',
+                submit: '@_sharedLocalizer["LOGIN"]',
                 reset: "取消",
                 isSelected: false
             },
@@ -112,7 +111,7 @@
                     _self.isSelected = true;
                     //es5写法
                     if (_self.UserNickname.length <= 0) {
-                        layer.msg('@SharedLocalizer["ACCOUNT_NOT_NULL"]', { icon: 5 });
+                        layer.msg('@_sharedLocalizer["ACCOUNT_NOT_NULL"]', { icon: 5 });
                         _self.disabled = false;
                         _self.isSelected = false;
                         return false;

@@ -55,6 +55,10 @@ namespace KopSoftWms.Controllers
             ViewBag.title = GetDescriptor("title");
             ViewBag.company = GetDescriptor("company");
             ViewBag.customer = GetDescriptor("customer");
+            var a = LogType.addOrUpdate;
+            var b = LogType.update;
+            if (a == b)
+                throw new Exception("du");
             return View();
         }
 

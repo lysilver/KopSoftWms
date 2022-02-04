@@ -39,7 +39,7 @@ namespace YL.Core.Entity
         public string RoleType { get; set; }
 
         /// <summary>
-        /// Desc:1未删除   0删除
+        /// Desc:1未删除   0 Delete
         /// Default:1
         /// Nullable:False
         /// </summary>

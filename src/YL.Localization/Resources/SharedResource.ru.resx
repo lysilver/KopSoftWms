@@ -120,7 +120,22 @@
   <data name="ACCOUNT_NOT_NULL" xml:space="preserve">
     <value>Имя пользователя не может быть пустым</value>
   </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ERROR" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="EXCEPTION" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="INSERT" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
   <data name="LOGIN" xml:space="preserve">
     <value>Вход</value>
+  </data>
+  <data name="UPDATE" xml:space="preserve">
+    <value>Изменить</value>
   </data>
 </root>
