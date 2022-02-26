@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using SqlSugar;
+﻿using SqlSugar;
+using System;
 
 namespace YL.Core.Entity
 {

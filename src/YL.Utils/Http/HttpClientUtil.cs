@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using YL.Utils.Check;
-using YL.Utils.Security;
 using YL.Utils.Extensions;
+using YL.Utils.Security;
+using YL.Utils.Json;
 
 namespace YL.Utils.Http
 {
@@ -48,7 +48,7 @@ namespace YL.Utils.Http
                 using (HttpContent httpContent = new StringContent(BuildParam(postData), Encoding.UTF8))
                 {
                     HttpResponseMessage response = http.PostAsync(url, httpContent).Result;
-                    return response.Content.ReadAsStreamAsync().Result.ToObject<T>();
+                    return response.Content.ReadAsStringAsync().Result.ToObjL<T>();
                 }
             }
         }
@@ -93,7 +93,7 @@ namespace YL.Utils.Http
                     url = url + "?" + BuildParam(postData);
                 }
                 HttpResponseMessage response = http.GetAsync(url).Result;
-                return response.Content.ReadAsStreamAsync().Result.ToObject<T>();
+                return response.Content.ReadAsStringAsync().Result.ToObjL<T>();
             }
         }
 

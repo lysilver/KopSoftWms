@@ -1,16 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>YL.Core.Entity</RootNamespace>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.6.2" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
-    <PackageReference Include="MediatR" Version="8.0.1" />
-    <PackageReference Include="sqlSugarCore" Version="5.0.0.13" />
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.5.4" />
   </ItemGroup>
 
 </Project>

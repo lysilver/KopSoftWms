@@ -1,17 +1,15 @@
 ﻿using IRepository;
 using IServices;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Repository;
 using Services;
 using SqlSugar;
-using System;
 using System.Text;
 using YL.Core.Orm.SqlSugar;
 using YL.NetCore.Attributes;
@@ -19,10 +17,6 @@ using YL.NetCore.Conventions;
 using YL.NetCore.DI;
 using YL.NetCoreApp.Extensions;
 using YL.Utils.Json;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace YL
 {
@@ -42,11 +36,16 @@ namespace YL
             {
                 option.Filters.Add<BaseExceptionAttribute>();
                 //option.Filters.Add<FilterXSSAttribute>();
+                option.Conventions.Add(new ApplicationDescription("title", Configuration["sys:title"]));
                 option.Conventions.Add(new ApplicationDescription("keywords", Configuration["sys:keywords"]));
                 option.Conventions.Add(new ApplicationDescription("description", Configuration["sys:description"]));
                 option.Conventions.Add(new ApplicationDescription("company", Configuration["sys:company"]));
                 option.Conventions.Add(new ApplicationDescription("customer", Configuration["sys:customer"]));
-            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
+            });
+            services.AddControllersWithViews();
+            services.AddRazorPages()
+                    .AddRazorRuntimeCompilation()
+                ;
             //services.Configure<CookiePolicyOptions>(options =>
             //{
             //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -79,13 +78,11 @@ namespace YL
                 config.DbType = sqlSugarConfig.Item1;
                 config.IsAutoCloseConnection = true;
                 config.InitKeyType = InitKeyType.Attribute;
-                //config.IsShardSameThread = true;
             });
             services.AddJson(o =>
             {
                 o.JsonType = JsonType.Jil;
             });
-            //services.AddDIProperty();
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -131,6 +128,11 @@ namespace YL
             //});
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");
+            SetServiceResolve(services);
+        }
+
+        private static void SetServiceResolve(IServiceCollection services)
+        {
             var bulid = services.BuildServiceProvider();
             ServiceResolve.SetServiceResolve(bulid);
         }
@@ -162,7 +164,7 @@ namespace YL
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -172,27 +174,31 @@ namespace YL
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStaticFiles(); //使用静态文件
+
             app.UseGlobalCore();
             app.UseExecuteTime();
             app.UseTimedJob();
             app.UseResponseCompression();  //使用压缩
             app.UseResponseCaching();    //使用缓存
 
-            app.UseStaticFiles(); //使用静态文件
             app.UseCookiePolicy();
+            app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Login}/{action=Index}/{id?}");
-                // Areas
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
                     name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                  );
+                    areaName: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

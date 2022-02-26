@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YL.Utils.Delegate
+﻿namespace YL.Utils.Delegate
 {
     public class SingletonUtil<T> where T : class, new()
     {

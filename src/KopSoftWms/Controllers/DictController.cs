@@ -30,7 +30,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.DictBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.DictBootstrapParams bootstrap)
         {
             var sd = _dictServices.PageList(bootstrap);
             return Content(sd);
@@ -54,7 +54,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Sys_dict dict, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Sys_dict dict, [FromForm] string id)
         {
             var validator = new SysDictFluent();
             var results = validator.Validate(dict);

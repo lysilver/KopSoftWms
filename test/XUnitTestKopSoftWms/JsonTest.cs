@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoFixture;
+using AutoFixture.Xunit2;
+using Bogus;
+using System;
 using Xunit;
+using YL.Core.Dto;
 using YL.Utils.Json;
 using YL.Utils.Pub;
-using YL.Core.Dto;
-using AutoFixture.Xunit2;
-using AutoFixture;
-using Bogus;
 
 namespace XUnitTestKopSoftWms
 {

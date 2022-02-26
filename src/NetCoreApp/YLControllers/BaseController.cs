@@ -1,19 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Http.Extensions;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using YL.Core.Dto;
 using YL.Utils.Extensions;
 using YL.Utils.Json;
 using YL.Utils.Table;
-using YL.Utils.Pub;
-using Microsoft.AspNetCore.Hosting;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Collections;
 
 namespace YL.NetCore.NetCoreApp
 {
@@ -31,9 +30,12 @@ namespace YL.NetCore.NetCoreApp
     {
         private IMemoryCache _memory;
         private IConfiguration _configuration;
-        public string AppRoot { get { return CreateService<IHostingEnvironment>().ContentRootPath; } }
 
-        public string WebRoot { get { return CreateService<IHostingEnvironment>().WebRootPath; } }
+        public string AppRoot
+        { get { return CreateService<IWebHostEnvironment>().ContentRootPath; } }
+
+        public string WebRoot
+        { get { return CreateService<IWebHostEnvironment>().WebRootPath; } }
 
         protected IMemoryCache GetMemoryCache
         {
@@ -227,7 +229,7 @@ namespace YL.NetCore.NetCoreApp
             var req = HttpContext.Request;
             return $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
         }
-        
+
         protected virtual string GetDisplayUrl()
         {
             return UriHelper.GetDisplayUrl(HttpContext.Request);
@@ -240,7 +242,7 @@ namespace YL.NetCore.NetCoreApp
 
         protected virtual string GetEncodedUrl()
         {
-           return UriHelper.GetEncodedUrl(HttpContext.Request);
+            return UriHelper.GetEncodedUrl(HttpContext.Request);
         }
 
         protected virtual string GetBrowser()

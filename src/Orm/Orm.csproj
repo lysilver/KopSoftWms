@@ -1,15 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>YL.Core.Orm</RootNamespace>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.35" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="sqlSugarCore" Version="5.0.0.13" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.5.4" />
   </ItemGroup>
 
   <ItemGroup>

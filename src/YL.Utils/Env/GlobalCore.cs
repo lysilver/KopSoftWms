@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using YL.Utils.Extensions;
-using YL.Utils.Pub;
 
 namespace YL.Utils.Env
 {
@@ -38,7 +37,7 @@ namespace YL.Utils.Env
             }
         }
 
-        public static IHostingEnvironment GetHostingEnvironment => GetRequiredService<IHostingEnvironment>();
+        public static IWebHostEnvironment GetHostingEnvironment => GetRequiredService<IWebHostEnvironment>();
 
         public static HttpContext Current => GetRequiredService<IHttpContextAccessor>().HttpContext;
 

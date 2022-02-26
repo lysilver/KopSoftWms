@@ -8,13 +8,13 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: UseDotNet@2
+- task: UseDotNet@6
   inputs:
     packageType: 'sdk'
-    version: '2.2.203'
+    version: '6.0'
     includePreviewVersions: true
 
-- task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@6
   displayName: Build
   inputs:
     command: build

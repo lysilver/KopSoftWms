@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using IServices;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using YL.Core.Entity;
 using YL.Utils.Env;
-using IServices;
-using YL.NetCore.DI;
-using Microsoft.Extensions.DependencyInjection;
-using YL.Utils.Log;
 
 namespace KopSoftWms
 {

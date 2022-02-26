@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>7.1</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlSugarCore" Version="5.0.0.13" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.5.4" />
   </ItemGroup>
 
   <ItemGroup>

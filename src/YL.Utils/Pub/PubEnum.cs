@@ -137,8 +137,6 @@ namespace YL.Utils.Pub
         upload = 10,
 
         [Description("下载")]
-        download = 10,
-
-
+        download = 11,
     }
 }

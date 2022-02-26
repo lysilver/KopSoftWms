@@ -67,9 +67,8 @@ function getLodop(oOBJECT, oEMBED) {
     var strHtmFireFox = "<br><br><font color='#FF00FF'>（注意：如曾安装过Lodop旧版附件npActiveXPLugin,请在【工具】->【附加组件】->【扩展】中先卸它）</font>";
     var strHtmChrome = "<br><br><font color='#FF00FF'>(如果此前正常，仅因浏览器升级或重安装而出问题，需重新执行以上安装）</font>";
     var strCLodopInstall_1 = "<br><font color='#FF00FF'>Web打印服务CLodop未安装启动，点击这里<a href='http://www.c-lodop.com/download/CLodop_Setup_for_Win32NT_https_3.075Extend.zip' target='_self'>下载执行安装</a>";
-    if (navigator.userAgent.match(/x64/i))
-    {
-        strCLodopInstall_1 = "<br><font color='#FF00FF'>Web打印服务CLodop未安装启动，点击这里<a href='http://www.lodop.net/download/CLodop_Setup_for_Win64NT_3.075Extend.zip' target='_self'>下载执行安装</a>";       
+    if (navigator.userAgent.match(/x64/i)) {
+        strCLodopInstall_1 = "<br><font color='#FF00FF'>Web打印服务CLodop未安装启动，点击这里<a href='http://www.lodop.net/download/CLodop_Setup_for_Win64NT_3.075Extend.zip' target='_self'>下载执行安装</a>";
     }
     var strCLodopInstall_2 = "<br>（若此前已安装过，可<a href='CLodop.protocol:setup' target='_self'>点这里直接再次启动</a>）";
     var strCLodopInstall_3 = "，成功后请刷新本页面。</font>";
@@ -81,13 +80,13 @@ function getLodop(oOBJECT, oEMBED) {
         if (needCLodop()) {
             try {
                 LODOP = getCLodop();
-            } catch (err) {}
+            } catch (err) { }
             if (!LODOP && document.readyState !== "complete") {
                 alert("网页还没下载完毕，请稍等一下再操作.");
                 return;
             }
             if (!LODOP) {
-                document.body.innerHTML = strCLodopInstall_1 + (CLodopIsLocal ? strCLodopInstall_2 : "") + strCLodopInstall_3 + document.body.innerHTML;                
+                document.body.innerHTML = strCLodopInstall_1 + (CLodopIsLocal ? strCLodopInstall_2 : "") + strCLodopInstall_3 + document.body.innerHTML;
                 return;
             } else {
                 if (CLODOP.CVERSION < "3.0.7.5") {
@@ -135,8 +134,6 @@ function getLodop(oOBJECT, oEMBED) {
             return LODOP;
         }
         //===如下空白位置适合调用统一功能(如注册语句、语言选择等):==
-
-
 
         //=======================================================
         return LODOP;

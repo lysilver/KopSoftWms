@@ -28,7 +28,7 @@ namespace KopSoftWms.Controllers
         }
 
         [HttpPost]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var sd = _logServices.PageList(bootstrap);
             return Content(sd);
@@ -37,7 +37,7 @@ namespace KopSoftWms.Controllers
         //[HttpDelete] axios
         //'Content-Type': 'application/json; charset=UTF-8' FromBody 修饰的每个操作，最多可以有一个参数
         [HttpPost]
-        public IActionResult Delete([FromBody]long[] Id)
+        public IActionResult Delete([FromBody] long[] Id)
         {
             var flag = _logServices.Delete(Id.ToArray());
             return BootJsonH(flag ? (flag, PubConst.Delete1) : (flag, PubConst.Delete2));
@@ -52,7 +52,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult Bar([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult Bar([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var str = _logServices.EChart(bootstrap);
             return Content(str);

@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using SqlSugar;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using YL.Utils.Log;
 
 namespace YL.Core.Orm.SqlSugar

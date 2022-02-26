@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using YL.Utils.Extensions;
 using YL.Utils.Check;
+using YL.Utils.Extensions;
 
 namespace YL.NetCore.DI
 {

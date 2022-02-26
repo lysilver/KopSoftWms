@@ -1,23 +1,9 @@
 ﻿using IServices;
 using KopSoftWms.Controllers;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
 using System;
-using System.Linq;
 using Xunit;
-using YL;
-using YL.NetCoreApp.Extensions;
-using YL.Core.Orm.SqlSugar;
-using Microsoft.AspNetCore.Builder;
-using YL.NetCore.DI;
-using IRepository;
-using Repository;
-using Services;
-using YL.Utils.Configs;
-using YL.Utils.Table;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 
 namespace XUnitTestKopSoftWms
 {

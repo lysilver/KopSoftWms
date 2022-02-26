@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YL.Utils.Http
+﻿namespace YL.Utils.Http
 {
     public class HttpMethodConst
     {

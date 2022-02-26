@@ -23,14 +23,14 @@ namespace Services
         private readonly SqlSugarClient _client;
         private readonly IWms_inventoryRepository _inventory;
         private readonly IWms_inventoryrecordRepository _inventoryrecord;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
         public Wms_stockinServices(
             SqlSugarClient client,
             IWms_inventoryRepository inventoryRepository,
             IWms_inventoryrecordRepository inventoryrecordRepository,
             IWms_stockindetailRepository detail,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             IWms_stockinRepository repository) : base(repository)
         {
             _client = client;

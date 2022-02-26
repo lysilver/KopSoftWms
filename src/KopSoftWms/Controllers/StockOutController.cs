@@ -122,7 +122,7 @@ namespace KopSoftWms.Controllers
         /// <returns></returns>
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.StockOutBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.StockOutBootstrapParams bootstrap)
         {
             var sd = _stockoutServices.PageList(bootstrap);
             return Content(sd);
@@ -144,7 +144,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_stockout model, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_stockout model, [FromForm] string id)
         {
             var validator = new StockOutFluent();
             var results = validator.Validate(model);
@@ -183,7 +183,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdateD([FromForm]Wms_stockoutdetail model, [FromForm]string id)
+        public IActionResult AddOrUpdateD([FromForm] Wms_stockoutdetail model, [FromForm] string id)
         {
             var validator = new StockOutDetailFluent();
             var results = validator.Validate(model);

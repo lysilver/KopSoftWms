@@ -19,11 +19,11 @@ namespace Services
     {
         private readonly IWms_inventorymoveRepository _repository;
         private readonly SqlSugarClient _client;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
         public Wms_inventorymoveServices(IWms_inventorymoveRepository repository,
             SqlSugarClient client,
-            IHostingEnvironment env
+            IWebHostEnvironment env
             ) : base(repository)
         {
             _repository = repository;

@@ -1,8 +1,8 @@
 ﻿using IServices;
 using Microsoft.AspNetCore.Mvc;
 using YL.Core.Dto;
-using YL.NetCore.NetCoreApp;
 using YL.NetCore.Attributes;
+using YL.NetCore.NetCoreApp;
 using YL.Utils.Pub;
 
 namespace KopSoftWms.Controllers
@@ -31,7 +31,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.InventoryBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.InventoryBootstrapParams bootstrap)
         {
             var sd = _inventoryServices.PageList(bootstrap);
             return Content(sd);

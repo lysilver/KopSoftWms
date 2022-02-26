@@ -1,20 +1,19 @@
 ﻿using IRepository;
 using IServices;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
+using Services;
 using SqlSugar;
 using System;
+using YL.Core.Orm.SqlSugar;
 using YL.NetCore.DI;
 using YL.NetCoreApp.Extensions;
-using YL.Core.Orm.SqlSugar;
-using Services;
 using YL.Utils.Configs;
-using YL.Utils.Table;
-using Microsoft.AspNetCore.Builder.Internal;
 using YL.Utils.Json;
-using MediatR;
+using YL.Utils.Table;
 
 namespace XUnitTestKopSoftWms
 {
@@ -33,7 +32,6 @@ namespace XUnitTestKopSoftWms
             {
                 o.JsonType = JsonType.Jil;
             });
-            services.AddDIProperty();
             services.AddOptions();
             services.AddXsrf();
             services.AddXss();

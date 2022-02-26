@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using YL.NetCore.Attributes;
-using YL.NetCore.NetCoreApp;
-using IServices;
-using YL.Utils.Table;
-using YL.Utils.Pub;
-using YL.Utils.Extensions;
+﻿using IServices;
+using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
+using System.Collections.Generic;
+using System.Linq;
 using YL.Core.Dto;
 using YL.Core.Entity;
 using YL.Core.Entity.Fluent.Validation;
-using System.Linq;
-using SqlSugar;
-using System.Collections.Generic;
+using YL.NetCore.Attributes;
+using YL.NetCore.NetCoreApp;
+using YL.Utils.Extensions;
+using YL.Utils.Pub;
 using YL.Utils.Security;
 
 namespace KopSoftWms.Controllers
@@ -60,7 +59,7 @@ namespace KopSoftWms.Controllers
         /// <returns></returns>
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.StatusBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.StatusBootstrapParams bootstrap)
         {
             var sd = _inventorymoveServices.PageList(bootstrap);
             return Content(sd);
@@ -137,7 +136,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_inventorymove model, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_inventorymove model, [FromForm] string id)
         {
             var validator = new InventoryMoveFluent();
             var results = validator.Validate(model);
@@ -168,7 +167,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdateD([FromForm]List<Wms_invmovedetail> list, [FromForm]string id)
+        public IActionResult AddOrUpdateD([FromForm] List<Wms_invmovedetail> list, [FromForm] string id)
         {
             var validator = new InvmovedetailFluent();
             foreach (var c in list)

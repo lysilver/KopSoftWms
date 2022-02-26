@@ -1,18 +1,14 @@
 ﻿using IServices;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Diagnostics;
 using System.Text;
 using YL.Core.Dto;
-using YL.Core.Entity;
 using YL.Models;
 using YL.NetCore.Attributes;
 using YL.NetCore.NetCoreApp;
-using YL.Utils.Pub;
-using YL.Utils.Extensions;
-using MediatR;
-using SqlSugar;
 
 namespace KopSoftWms.Controllers
 {
@@ -39,18 +35,7 @@ namespace KopSoftWms.Controllers
 
         public IActionResult Index()
         {
-            //TempData["returnUrl"] = returnUrl;
-            //_userServices.Login(UserDtoCache.UserId, GetIp());
-            //_logServices.Insert(new Sys_log
-            //{
-            //    LogId = PubId.SnowflakeId,
-            //    Browser = GetBrowser(),
-            //    CreateBy = UserDtoCache.UserId,
-            //    Description = $"{UserDtoCache.UserNickname}登录成功",
-            //    LogIp = GetIp(),
-            //    Url = GetUrl(),
-            //    LogType = LogType.login.EnumToString(),
-            //});
+            ViewBag.title = GetDescriptor("title");
             ViewBag.keywords = GetDescriptor("keywords");
             ViewBag.description = GetDescriptor("description");
             ViewBag.company = GetDescriptor("company");
@@ -87,6 +72,7 @@ namespace KopSoftWms.Controllers
         public IActionResult Welcome()
         {
             //ViewBag.keywords = GetDescriptor("keywords");
+            ViewBag.title = GetDescriptor("title");
             return View();
         }
 

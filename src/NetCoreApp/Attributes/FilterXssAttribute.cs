@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using YL.Utils.Security;
 using System;
+using YL.Utils.Security;
 
 namespace YL.NetCore.Attributes
 {

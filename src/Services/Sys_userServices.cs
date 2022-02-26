@@ -31,7 +31,7 @@ namespace Services
                 flag = false;
                 return (flag, PubConst.Login2, null);
             }
-            var sys = _UserRepository.QueryableToEntity(c => c.UserNickname == dto.UserNickname &&c.IsDel==1);
+            var sys = _UserRepository.QueryableToEntity(c => c.UserNickname == dto.UserNickname && c.IsDel == 1);
             if (sys.IsNullT())
             {
                 flag = false;
@@ -133,7 +133,10 @@ namespace Services
 
         public void Login(long userId, string ip)
         {
-            var op = _client.Updateable(new Sys_user { UserId = userId, LoginDate = DateTimeExt.DateTime, LoginIp = ip }).UpdateColumns(d => new { d.LoginIp, d.LoginDate, d.LoginTime }).ReSetValue(c => c.LoginTime == c.LoginTime + 1).ExecuteCommand();
+            var op = _client.Updateable(new Sys_user { UserId = userId, LoginDate = DateTimeExt.DateTime, LoginIp = ip })
+                .UpdateColumns(d => new { d.LoginIp, d.LoginDate, d.LoginTime })
+                .ReSetValue(c => { c.LoginTime = c.LoginTime ?? 0 + 1; })
+                .ExecuteCommand();
         }
     }
 }

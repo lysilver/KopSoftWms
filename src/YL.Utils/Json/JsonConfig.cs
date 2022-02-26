@@ -35,12 +35,12 @@ namespace YL.Utils.Json
     /// </summary>
     public class NewtonsoftConfig
     {
-        public string DateTimeFormat { get; set; }
+        public string DateTimeFormat { get; set; } = "yyyy-MM-dd HH:mm:ss"
     }
 
     public class SwifterJsonConfig
     {
         public JsonFormatterOptions JsonFormatterOptions { get; set; }
-        public string DateTimeFormat { get; set; }
+        public string DateTimeFormat { get; set; } = "yyyy-MM-dd HH:mm:ss"
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using YL.Utils.Check;
 
 namespace YL.Utils.Files

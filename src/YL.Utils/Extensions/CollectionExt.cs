@@ -189,10 +189,8 @@ namespace YL.Utils.Extensions
             var table = new DataTable(tableName);
             foreach (var column in columnMappings)
             {
-
                 var dataColumn = new DataColumn(column.Key, column.Value);
                 table.Columns.Add(dataColumn);
-
             }
             return table;
         }

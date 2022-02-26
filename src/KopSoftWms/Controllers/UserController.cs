@@ -39,7 +39,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             //单表
             //var express = ExpressionExt.Init<Sys_user>();
@@ -111,7 +111,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.update)]
-        public IActionResult UpdatePwd([FromForm]Sys_user sys_User, [FromForm]string id)
+        public IActionResult UpdatePwd([FromForm] Sys_user sys_User, [FromForm] string id)
         {
             //用Sys_user中的Sort接收旧密码
             if (id.IsEmptyZero())
@@ -136,7 +136,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Sys_user sys_User, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Sys_user sys_User, [FromForm] string id)
         {
             var validator = new SysUserFluent();
             ValidationResult results = validator.Validate(sys_User);

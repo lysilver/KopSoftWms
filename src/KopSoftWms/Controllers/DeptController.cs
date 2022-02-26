@@ -30,7 +30,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType = LogType.select)]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var sd = _deptServices.PageList(bootstrap);
             return Content(sd);
@@ -54,7 +54,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType = LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Sys_dept dept, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Sys_dept dept, [FromForm] string id)
         {
             var validator = new SysDeptFluent();
             var results = validator.Validate(dept);

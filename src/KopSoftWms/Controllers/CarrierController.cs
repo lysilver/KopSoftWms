@@ -30,7 +30,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType = LogType.select)]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var sd = _carrierServices.PageList(bootstrap);
             return Content(sd);
@@ -54,7 +54,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType = LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_Carrier model, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_Carrier model, [FromForm] string id)
         {
             var validator = new CarrierFluent();
             var results = validator.Validate(model);

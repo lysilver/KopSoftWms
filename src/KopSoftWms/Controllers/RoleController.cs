@@ -2,7 +2,6 @@
 using IServices;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
-using System;
 using System.Linq;
 using YL.Core.Dto;
 using YL.Core.Entity;
@@ -38,7 +37,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var sd = _roleServices.PageList(bootstrap);
             return Content(sd);
@@ -118,7 +117,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Sys_role role, [FromForm]string id, [FromForm]string[] menuId)
+        public IActionResult AddOrUpdate([FromForm] Sys_role role, [FromForm] string id, [FromForm] string[] menuId)
         {
             //int[] menuIds = Array.ConvertAll(menuId, new Converter<string, int>(c => c.ToInt32()));
             //Array.Sort(menuIds);

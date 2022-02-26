@@ -36,7 +36,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var sd = _materialServices.PageList(bootstrap);
             return Content(sd);
@@ -60,7 +60,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_material model, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_material model, [FromForm] string id)
         {
             var validator = new MaterialFluent();
             var results = validator.Validate(model);
@@ -130,7 +130,7 @@ namespace KopSoftWms.Controllers
 
         [HttpGet]
         [OperationLog(LogType.export)]
-        public IActionResult Export([FromQuery]Bootstrap.BootstrapParams bootstrap)
+        public IActionResult Export([FromQuery] Bootstrap.BootstrapParams bootstrap)
         {
             var buffer = _materialServices.ExportList(bootstrap);
             if (buffer.IsNull())

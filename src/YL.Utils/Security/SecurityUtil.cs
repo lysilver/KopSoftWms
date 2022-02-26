@@ -24,7 +24,7 @@ namespace YL.Utils.Security
         public static string ToMd52(this string str)
         {
             CheckNull.ArgumentIsNullException(str, nameof(str));
-            using (var md5Hasher = new MD5CryptoServiceProvider())
+            using (var md5Hasher = MD5.Create())
             {
                 var data = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(str));
                 return data.ToHexString();

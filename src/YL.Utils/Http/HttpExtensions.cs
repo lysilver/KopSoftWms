@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
@@ -8,9 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using YL.Utils.Json;
 using YL.Utils.Extensions;
-using System.Linq;
+using YL.Utils.Json;
 
 namespace YL.Utils.Http
 {
@@ -85,7 +83,7 @@ namespace YL.Utils.Http
         public static (string, string, string) ReadResultExecutingContext(this ResultExecutingContext context)
         {
             var req = context.HttpContext.Request;
-            req.EnableRewind();
+            req.EnableBuffering();
             var method = req.Method;
             var url = $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
             var urlParam = req.QueryString.ToUriComponent();
@@ -116,7 +114,7 @@ namespace YL.Utils.Http
         public static string ReadFromResultExecutingContext(this ResultExecutingContext context)
         {
             var req = context.HttpContext.Request;
-            req.EnableRewind();
+            req.EnableBuffering();
             var method = req.Method;
             var url = $"{req.Scheme}://{req.Host}{req.PathBase}{req.Path}{req.QueryString}";
             var urlParam = req.QueryString.ToUriComponent();
@@ -157,7 +155,7 @@ namespace YL.Utils.Http
         public static string ReadFromResultExecutedContext(this ResultExecutedContext context)
         {
             var req = context.HttpContext.Request;
-            req.EnableRewind();
+            req.EnableBuffering();
             using (var ms = new MemoryStream())
             {
                 req.Body.Position = 0;

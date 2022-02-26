@@ -1,13 +1,9 @@
 using IRepository;
 using IServices;
-using Repository;
-using YL.Core.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using YL.Utils.Table;
 using SqlSugar;
+using YL.Core.Entity;
 using YL.Utils.Json;
+using YL.Utils.Table;
 
 namespace Services
 {

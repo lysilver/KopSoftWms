@@ -1,5 +1,5 @@
-﻿using System;
-using SqlSugar;
+﻿using SqlSugar;
+using System;
 
 namespace YL.Core.Entity
 {
@@ -10,9 +10,101 @@ namespace YL.Core.Entity
             this.IsDel = Convert.ToByte("1");
             this.CreateDate = DateTime.Now;
         }
-        /// <summary>        /// Desc:客户id        /// Default:        /// Nullable:False        /// </summary>        [SugarColumn(IsPrimaryKey = true)]        public long CustomerId { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>        /// Desc:客户id        /// Default:        /// Nullable:False        /// </summary>        [SugarColumn(IsPrimaryKey = true)]
+        public long CustomerId { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>        /// Desc:客户编号        /// Default:        /// Nullable:False        /// </summary>        public string CustomerNo { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>        /// Desc:客户名称        /// Default:        /// Nullable:False        /// </summary>        public string CustomerName { get; set; }
 

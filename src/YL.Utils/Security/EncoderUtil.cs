@@ -1,7 +1,7 @@
-﻿using System.Text.Encodings.Web;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Web;
 
 namespace YL.Utils.Security
 {

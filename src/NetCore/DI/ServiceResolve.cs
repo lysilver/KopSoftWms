@@ -17,7 +17,6 @@ namespace YL.NetCore.DI
         /// <param name="serviceProvider"></param>
         public static void SetServiceResolve(IServiceProvider serviceProvider)
         {
-            //IServiceProvider serviceProvider1 = new ServiceCollection().BuildServiceProvider();
             _serviceProvider = serviceProvider;
         }
 
@@ -33,7 +32,6 @@ namespace YL.NetCore.DI
 
         public static IOptions<T> ResolveOption<T>() where T : class, new()
         {
-            //var serviceProvider = new ServiceCollection().BuildServiceProvider();
             return _serviceProvider.GetService<IOptions<T>>();
         }
 

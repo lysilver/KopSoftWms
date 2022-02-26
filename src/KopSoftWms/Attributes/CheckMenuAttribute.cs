@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Security.Claims;
 using YL.Utils.Extensions;
-using YL.Utils.Pub;
 
 namespace YL.NetCore.Attributes
 {
@@ -37,6 +35,7 @@ namespace YL.NetCore.Attributes
             }
             if (viewBag != null)
             {
+                viewBag.title = properties["title"].ToString();
                 viewBag.keywords = properties["keywords"].ToString();
                 viewBag.description = properties["description"].ToString();
                 viewBag.company = properties["company"].ToString();

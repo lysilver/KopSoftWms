@@ -1,8 +1,8 @@
 ﻿using Pomelo.AspNetCore.TimedJob;
-using YL.NetCore.DI;
-using YL.Utils.Log;
 using SqlSugar;
 using System;
+using YL.NetCore.DI;
+using YL.Utils.Log;
 
 namespace KopSoftWms
 {

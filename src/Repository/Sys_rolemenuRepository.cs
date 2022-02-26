@@ -1,8 +1,5 @@
 using IRepository;
 using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using YL.Core.Entity;
 
 namespace Repository

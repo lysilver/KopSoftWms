@@ -9,7 +9,6 @@ using YL.NetCore.Attributes;
 using YL.NetCore.NetCoreApp;
 using YL.Utils.Extensions;
 using YL.Utils.Pub;
-using YL.Utils.Table;
 
 namespace KopSoftWms.Controllers
 {
@@ -57,7 +56,7 @@ namespace KopSoftWms.Controllers
         /// <returns></returns>
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.StockInBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.StockInBootstrapParams bootstrap)
         {
             var sd = _stockinServices.PageList(bootstrap);
             return Content(sd);
@@ -110,7 +109,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_stockin model, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_stockin model, [FromForm] string id)
         {
             var validator = new StockInFluent();
             var results = validator.Validate(model);
@@ -149,7 +148,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdateD([FromForm]Wms_stockindetail model, [FromForm]string id)
+        public IActionResult AddOrUpdateD([FromForm] Wms_stockindetail model, [FromForm] string id)
         {
             var validator = new StockInDetailFluent();
             var results = validator.Validate(model);

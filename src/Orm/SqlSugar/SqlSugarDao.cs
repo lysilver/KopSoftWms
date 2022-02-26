@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SqlSugar;
+﻿using SqlSugar;
+using System;
 
 namespace YL.Core.Orm.SqlSugar
 {
@@ -33,7 +31,6 @@ namespace YL.Core.Orm.SqlSugar
                 DbType = _config.DbType,         //必填, 数据库类型
                 IsAutoCloseConnection = _config.IsAutoCloseConnection,       //默认false, 时候知道关闭数据库连接, 设置为true无需使用using或者Close操作
                 InitKeyType = _config.InitKeyType,    //默认SystemTable, 字段信息读取, 如：该属性是不是主键，是不是标识列等等信息
-                IsShardSameThread = _config.IsShardSameThread,
             })
             {
                 MappingTables = listTable,      //别名表
@@ -54,7 +51,6 @@ namespace YL.Core.Orm.SqlSugar
                     DbType = _config.DbType,
                     IsAutoCloseConnection = _config.IsAutoCloseConnection,       //默认false, 时候知道关闭数据库连接, 设置为true无需使用using或者Close操作
                     InitKeyType = _config.InitKeyType,    //默认SystemTable, 字段信息读取, 如：该属性是不是主键，是不是标识列等等信息
-                    IsShardSameThread = _config.IsShardSameThread,
                 };
 
                 var db = new SqlSugarClient(conn)

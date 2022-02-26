@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using YL.Utils.Check;
-using YL.Utils.Extensions;
 using YL.Utils.Delegate;
+using YL.Utils.Extensions;
 
 namespace YL.Utils.Files
 {

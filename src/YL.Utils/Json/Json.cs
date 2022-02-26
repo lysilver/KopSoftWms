@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using YL.Utils.Env;
+﻿using System;
 using YL.Utils.Check;
+using YL.Utils.Env;
 using YL.Utils.Extensions;
 
 namespace YL.Utils.Json
@@ -55,8 +53,12 @@ namespace YL.Utils.Json
 
                     return obj.ToJson(config.Newtonsoft.DateTimeFormat);
 
+                case JsonType.TextJson:
+
+                    return obj.ToTextJson();
+
                 default:
-                    return obj.JilToJson();
+                    return obj.ToTextJson();
             }
         }
 
@@ -91,6 +93,10 @@ namespace YL.Utils.Json
 
                 case JsonType.Newtonsoft:
                     return obj.ToObject<T>();
+
+                case JsonType.TextJson:
+
+                    return obj.ToTextObj<T>();
 
                 default:
                     return obj.JilToObject<T>();

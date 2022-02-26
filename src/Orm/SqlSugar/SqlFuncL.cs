@@ -1,5 +1,4 @@
 ﻿using System;
-using YL.Utils.Extensions;
 
 namespace YL.Core.Orm.SqlSugar
 {

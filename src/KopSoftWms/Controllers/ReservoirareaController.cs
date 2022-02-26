@@ -34,7 +34,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]Bootstrap.BootstrapParams bootstrap)
+        public ContentResult List([FromForm] Bootstrap.BootstrapParams bootstrap)
         {
             var sd = _reservoirareaServices.PageList(bootstrap);
             return Content(sd);
@@ -58,7 +58,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_reservoirarea model, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_reservoirarea model, [FromForm] string id)
         {
             var validator = new ReservoirareaFluent();
             var results = validator.Validate(model);

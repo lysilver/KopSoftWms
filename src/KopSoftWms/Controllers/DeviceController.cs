@@ -38,7 +38,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.DeviceBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.DeviceBootstrapParams bootstrap)
         {
             var sd = _deviceServices.PageList(bootstrap);
             return Content(sd);
@@ -62,7 +62,7 @@ namespace KopSoftWms.Controllers
         [HttpPost]
         [FilterXss]
         [OperationLog(LogType.addOrUpdate)]
-        public IActionResult AddOrUpdate([FromForm]Wms_device device, [FromForm]string id)
+        public IActionResult AddOrUpdate([FromForm] Wms_device device, [FromForm] string id)
         {
             var validator = new DeviceFluent();
             var results = validator.Validate(device);

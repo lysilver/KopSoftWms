@@ -1,11 +1,12 @@
 ﻿using IServices;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,9 @@ using YL.Core.Dto;
 using YL.Core.Entity;
 using YL.NetCore.NetCoreApp;
 using YL.Utils.Extensions;
+using YL.Utils.Json;
 using YL.Utils.Pub;
 using YL.Utils.Security;
-using YL.Utils.Json;
-using MediatR;
 
 namespace KopSoftWms.Controllers
 {
@@ -44,19 +44,22 @@ namespace KopSoftWms.Controllers
         //string returnUrl = null
         [HttpGet]
         [AllowAnonymous]
+        [Route("Login/Index")]
         public IActionResult Index()
         {
             //TempData["returnUrl"] = returnUrl;
-
             ViewBag.keywords = GetDescriptor("keywords");
             ViewBag.description = GetDescriptor("description");
             ViewBag.company = GetDescriptor("company");
+            ViewBag.title = GetDescriptor("title");
+            ViewBag.customer = GetDescriptor("customer");
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CheckLoginAsync([FromBody]SysUserDto sys)
+        [Route("Login/CheckLoginAsync")]
+        public async Task<IActionResult> CheckLoginAsync([FromBody] SysUserDto sys)
         {
             ClearCache(MenuKey);
             ClearCache(UserKey);

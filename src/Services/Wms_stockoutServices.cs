@@ -20,13 +20,13 @@ namespace Services
     {
         private readonly IWms_stockoutRepository _repository;
         private readonly SqlSugarClient _client;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly IWms_stockoutdetailRepository _detail;
         private readonly IWms_inventoryRepository _inventory;
 
         public Wms_stockoutServices(SqlSugarClient client,
             IWms_stockoutRepository repository,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             IWms_stockoutdetailRepository detail,
             IWms_inventoryRepository inventory
             ) : base(repository)

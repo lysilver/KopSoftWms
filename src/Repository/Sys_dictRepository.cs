@@ -1,6 +1,6 @@
-using YL.Core.Entity;
 using IRepository;
 using SqlSugar;
+using YL.Core.Entity;
 
 namespace Repository
 {

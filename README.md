@@ -23,7 +23,8 @@
 
 |  版本   | 分支  |
 |  ----  | ----  |
-| netcore2.2  | master |
+| netcore6.0  | master |
+| netcore2.2  | netcore2.2 |
 | netcore3.0  | netcore3.0 |
 | netcore3.1  | netcore3.1 |
 
@@ -52,7 +53,7 @@
 ## 技术
 `net core`
 
-* 基于.Net Core 2.2~3.1开发；
+* 基于.Net Core 2.2~6.0开发；
 
 * 支持sqlserver、mysql数据库，其他数据库未测试，脚本在docs/sql；
 

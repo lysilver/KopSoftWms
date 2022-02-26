@@ -1,5 +1,5 @@
-﻿using System;
-using SqlSugar;
+﻿using SqlSugar;
+using System;
 
 namespace YL.Core.Entity
 {
@@ -10,7 +10,6 @@ namespace YL.Core.Entity
             this.IsDel = Convert.ToByte("1");
             this.CreateDate = DateTime.Now;
         }
-
 
         /// <summary>
         /// Desc:供应商id

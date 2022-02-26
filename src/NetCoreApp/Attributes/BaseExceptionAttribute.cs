@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using System;
-using YL.Utils.Log;
 using YL.Utils.Json;
+using YL.Utils.Log;
 
 namespace YL.NetCore.Attributes
 {
@@ -47,14 +47,14 @@ namespace YL.NetCore.Attributes
                     context.Result = new ContentResult()
                     {
                         //Content = (false, "异常").JilToJson()
-                        Content = (false, dt.Message).JilToJson()
+                        Content = (false, dt.Message).ToJsonL()
                     };
                 }
                 else if (context.HttpContext.Request.Headers["fileExcel"] == "fileExcel")
                 {
                     context.Result = new ContentResult()
                     {
-                        Content = (false, "文件可能已损坏").JilToJson()
+                        Content = (false, "文件可能已损坏").ToJsonL()
                     };
                 }
                 else

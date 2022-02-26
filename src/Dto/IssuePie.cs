@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YL.Core.Dto
+﻿namespace YL.Core.Dto
 {
     public class IssuePie
     {

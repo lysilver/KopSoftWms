@@ -27,7 +27,7 @@ namespace KopSoftWms.Controllers
 
         [HttpPost]
         [OperationLog(LogType.select)]
-        public ContentResult List([FromForm]PubParams.InventoryBootstrapParams bootstrap)
+        public ContentResult List([FromForm] PubParams.InventoryBootstrapParams bootstrap)
         {
             var sd = _inventoryrecordServices.PageList(bootstrap);
             return Content(sd);

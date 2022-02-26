@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using SqlSugar;
+using System;
 
 namespace YL.Core.Entity
 {
@@ -20,6 +19,7 @@ namespace YL.Core.Entity
         /// Default:
         /// Nullable:False
         /// </summary>
+        [SugarColumn(IsPrimaryKey = true)]
         public long StockOutDetailId { get; set; }
 
         /// <summary>
