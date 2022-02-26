@@ -4,13 +4,16 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
 using Services;
 using SqlSugar;
+using System.Globalization;
 using System.Text;
 using YL.Core.Orm.SqlSugar;
 using YL.NetCore.Attributes;
@@ -33,6 +36,25 @@ namespace YL
         //IServiceProvider This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization
+                (options => 
+                    { 
+                        options.ResourcesPath = "Resources";
+                    });
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                CultureInfo[] supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("cn"),
+                    new CultureInfo("ru")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
             services.AddMvc(option =>
             {
                 option.Filters.Add<BaseExceptionAttribute>();
@@ -40,7 +62,8 @@ namespace YL
                 option.Conventions.Add(new ApplicationDescription("title", Configuration["sys:title"]));
                 option.Conventions.Add(new ApplicationDescription("company", Configuration["sys:company"]));
                 option.Conventions.Add(new ApplicationDescription("customer", Configuration["sys:customer"]));
-            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
+            }).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddControllersWithViews(option =>
@@ -92,13 +115,14 @@ namespace YL
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            services.AddBr(); //br压缩
-            services.AddResponseCompression();//添加压缩
-            services.AddResponseCaching(); //响应式缓存
-            services.AddMemoryCache();
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
-            //@1 DependencyInjection 注册
-            services.AddNlog(); //添加Nlog
+            services.AddBr() //br压缩
+                .AddResponseCompression()//添加压缩
+                .AddResponseCaching() //响应式缓存
+                .AddMemoryCache()
+                .AddMediatR(typeof(Startup).GetTypeInfo().Assembly)
+                //@1 DependencyInjection 注册
+                .AddNlog(); //添加Nlog
+
             RegisterBase(services);
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");
@@ -154,6 +178,7 @@ namespace YL
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseRequestLocalization();
 
             app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
 

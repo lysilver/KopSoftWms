@@ -37,7 +37,7 @@ namespace YL.Core.Entity
         public string WarehouseName { get; set; }
 
         /// <summary>
-        /// Desc:是否删除 1未删除  0删除
+        /// Desc:是否删除 1未删除  0 Deleted
         /// Default:1
         /// Nullable:True
         /// </summary>

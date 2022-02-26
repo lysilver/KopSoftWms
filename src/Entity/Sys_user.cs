@@ -118,7 +118,7 @@ namespace YL.Core.Entity
         public byte? Sex { get; set; }
 
         /// <summary>
-        /// Desc:1未删除   0删除
+        /// Desc:1未删除   0 Deleted
         /// Default:
         /// Nullable:True
         /// </summary>

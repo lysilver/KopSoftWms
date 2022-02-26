@@ -112,7 +112,7 @@ namespace YL.NetCore.Attributes
                     var model = new Core.Entity.Sys_log
                     {
                         Browser = GlobalCore.GetBrowser(),
-                        CreateBy = claims.SingleOrDefault(c => c.Type == ClaimTypes.Sid).Value.ToInt64(),
+                        CreateBy = claims.First(c => c.Type == ClaimTypes.Sid).ToInt64(),
                         CreateDate = DateTimeExt.DateTime,
                         Description = des,
                         LogId = PubId.SnowflakeId,

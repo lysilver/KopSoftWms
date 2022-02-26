@@ -88,7 +88,7 @@ namespace YL.Core.Entity
         public DateTime? ModifiedDate { get; set; }
 
         /// <summary>
-        /// Desc:1未删除   0删除
+        /// Desc:1未删除   0 Deleted
         /// Default:1
         /// Nullable:False
         /// </summary>

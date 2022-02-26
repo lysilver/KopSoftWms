@@ -39,4 +39,8 @@
     <PackageReference Include="Utf8Json" Version="1.3.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YL.Localization\YL.Localization.csproj" />
+  </ItemGroup>
+
 </Project>

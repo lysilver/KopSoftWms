@@ -1,5 +1,6 @@
 ﻿using MessagePack;
 using System.ComponentModel;
+using YL.Localization;
 
 namespace YL.Utils.Pub
 {
@@ -7,15 +8,15 @@ namespace YL.Utils.Pub
     public class PubResult
     {
         [Key(0)]
-        [Description("标识")]
+        [LocalizableDescription("标识")]
         public bool Flag { get; set; }
 
         [Key(1)]
-        [Description("信息")]
+        [LocalizableDescription("信息")]
         public string Msg { get; set; }
 
         [Key(2)]
-        [Description("数据")]
+        [LocalizableDescription("数据")]
         public object Data { get; set; }
     }
 
@@ -35,10 +36,10 @@ namespace YL.Utils.Pub
 
     public class PubResultTwo
     {
-        [Description("标识")]
+        [LocalizableDescription("标识")]
         public bool Flag { get; set; }
 
-        [Description("信息")]
+        [LocalizableDescription("信息")]
         public string Msg { get; set; }
     }
 }

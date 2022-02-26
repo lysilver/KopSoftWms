@@ -1,4 +1,7 @@
-﻿<div class="content-wrapper">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<YL.Localization.SharedResource> _sharedLocalizer
+
+<div class="content-wrapper">
     <section class="content-header">
         <h1>
             仓库管理
@@ -75,7 +78,7 @@
                             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>审核
                             </button>*@
                             <button id="btn_delete" v-on:click="deleteL" type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>@_sharedLocalizer["DELETE"]
                             </button>
                         </div>
                         <table id="bootstraptable" class="table table-bordered text-nowrap table-hover"></table>
@@ -284,7 +287,7 @@
                         sortable: true,
                         formatter: function (value, row, index) {
                             if (value != 2) {
-                                return ['<button id="deleteDetailL" type="button" class="btn btn-link" style="margin-top:-8px;">删除</button>'
+                                return ['<button id="deleteDetailL" type="button" class="btn btn-link" style="margin-top:-8px;">@_sharedLocalizer["CANCEL"]</button>'
                                     , '<button id="editDetailL" type="button" class="btn btn-link" style="margin-top:-8px;">修改</button>'
                                 ].join('');
                             } else {

@@ -4,6 +4,92 @@ using System.Text;
 
 namespace YL.Utils.Pub
 {
+    public enum OperationResult
+    {
+        Login1,
+        Login2,
+        Login3,
+        Login4,
+
+        Add1,
+        Add2,
+
+        Update1,
+        Update2,
+        Update3,
+        Update4,
+
+        Delete1,
+        Delete2,
+
+        Dept1,
+        Dept2,
+
+        Dict1,
+
+        Warehouse1,
+        Warehouse2,
+        Warehouse3,
+        Warehouse4,
+        Warehouse5,
+        Warehouse6,
+
+        Material1,
+        Material2,
+
+        Supplier1,
+        Supplier2,
+
+        Carrier1,
+        Carrier2,
+
+        Customer1,
+        Customer2,
+
+        User1,
+        User2,
+        User3,
+        User4,
+
+        Enable1,
+        Enable2,
+        Enable3,
+        Enable4,
+
+        Role1,
+        Role2,
+        Role3,
+
+        StockIn1,
+        StockIn2,
+        StockIn3,
+        StockIn4,
+
+        StockOut1,
+        StockOut2,
+
+        Delivery1,
+        Delivery2,
+        Delivery3,
+
+        Device1,
+
+        Inventorymove1,
+
+        Import1,
+        Import2,
+        Import3,
+
+        File1,
+        File2,
+        File3,
+        File4,
+        File5,
+        File6,
+        File7,
+        File8
+    }
+
     public static class PubConst
     {
         public const string Login1 = "登录成功";

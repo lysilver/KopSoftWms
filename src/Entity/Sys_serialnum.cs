@@ -62,7 +62,7 @@ namespace YL.Core.Entity
         public int? Mantissa { get; set; }
 
         /// <summary>
-        /// Desc:1未删除   0删除
+        /// Desc:1未删除  0 Deleted
         /// Default:
         /// Nullable:False
         /// </summary>
