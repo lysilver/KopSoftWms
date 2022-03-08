@@ -18,7 +18,6 @@
 * Gitee https://gitee.com/williamyang3/KopSoftSCADA
 * GitHub https://github.com/williamyang3/KopSoftSCADA
 *
-* 商务合作:15262337653
 ****
 
 |  版本   | 分支  |
