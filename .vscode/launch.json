@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/KopSoftWms/bin/Debug/netcoreapp2.2/KopSoftWms.dll",
+            "program": "${workspaceFolder}/src/KopSoftWms/bin/Debug/net6.0/KopSoftWms.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/KopSoftWms",
             "stopAtEntry": false,
