@@ -17,7 +17,6 @@
 * KopSoft数据采集与监控,电子看板 http://kanban.kopsoft.cn/
 * Gitee https://gitee.com/williamyang3/KopSoftSCADA
 * GitHub https://github.com/williamyang3/KopSoftSCADA
-*
 ****
 
 |  版本   | 分支  |
