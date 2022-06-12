@@ -52,7 +52,7 @@
 
 * 基于.Net Core 2.2~6.0开发；
 
-* 支持sqlserver、mysql数据库，其他数据库未测试，脚本在docs/sql；
+* 支持sqlserver、mysql数据库，其他数据库未测试，脚本在DB；
 
 * 前端采用 vue、polyfill、qs、 axios、 bootstrap、adminlte、layer、bootstrap-datetimepicker、bootstrap-table、bootstrap-select等
 
@@ -63,8 +63,5 @@
 
 ## 申明
 * 本代码只做学习交流使用！
-* 写的不好请谅解！
 
-## 使用
-* 该架子在某顺风车业务使用
 
