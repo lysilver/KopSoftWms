@@ -58,7 +58,7 @@
 
 * 后端采用 asp.net mvc core、fluentValidation、nlog、Jil、DI、Ganss、雪花算法、Xunit、npoi
 
-* ORM 采用 一款简单易用的开源ORM框架 SqlSugar http://www.codeisbug.com/Home/Doc
+* ORM 采用 一款简单易用的开源ORM框架 SqlSugar
 
 
 ## 申明
