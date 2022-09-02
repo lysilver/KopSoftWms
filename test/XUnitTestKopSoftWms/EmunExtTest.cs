@@ -2,13 +2,23 @@
 using YL.Utils.Extensions;
 using YL.Utils.Pub;
 
-public class EmunExtTest
+namespace XUnitTestKopSoftWms
 {
-    [Fact]
-    public void TestEnum()
+    public class EmunExtTest
     {
-        var list = EnumExt.ToKVList<PubDictType>();
+        [Fact]
+        public void TestEnum()
+        {
+            var list = EnumExt.ToKVList<PubDictType>();
+            var d = EnumExt.GetDescription<PubDictType>("unit");
+            Assert.Equal(6, list.Count);
+        }
 
-        Assert.Equal(6, list.Count);
+        [Fact]
+        public void TestGetDescriptionByValue()
+        {
+            var unit = EnumExt.GetDescription<PubDictType>("unit");
+            Assert.Equal("单位类别", unit);
+        }
     }
 }

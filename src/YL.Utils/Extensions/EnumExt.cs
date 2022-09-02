@@ -1,5 +1,4 @@
-﻿using AspectCore.Extensions.Reflection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,13 +15,6 @@ namespace YL.Utils.Extensions
             return arrDesc[0]?.Description;
         }
 
-        public static string GetDescription<T>(this Enum obj)
-        {
-            var refactor = typeof(T).GetField(obj.ToString()).GetReflector();
-            var arrDesc = refactor.GetCustomAttributes(typeof(DescriptionAttribute));
-            return ((DescriptionAttribute)arrDesc[0]).Description;
-        }
-
         public static T ToEnum<T>(this string obj)
         {
             return (T)Enum.Parse(typeof(T), obj);
@@ -30,9 +22,9 @@ namespace YL.Utils.Extensions
 
         public static string GetDescription<T>(string obj)
         {
-            var refactor = typeof(T).GetField(obj).GetReflector();
-            var arrDesc = refactor.GetCustomAttributes(typeof(DescriptionAttribute));
-            return ((DescriptionAttribute)arrDesc[0]).Description;
+            var fi = typeof(T).GetField(obj);
+            var arrDesc = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return arrDesc[0]?.Description;
         }
 
         public static Dictionary<int, string> ToDict(this Enum obj)

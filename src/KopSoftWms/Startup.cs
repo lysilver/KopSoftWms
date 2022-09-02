@@ -17,6 +17,7 @@ using YL.NetCore.Conventions;
 using YL.NetCore.DI;
 using YL.NetCoreApp.Extensions;
 using YL.Utils.Json;
+using YL.Utils.Pub;
 
 namespace YL
 {
@@ -52,6 +53,7 @@ namespace YL
             //    options.CheckConsentNeeded = context => true;
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
+            PubId.InitId();
             services.AddTimedJob();
             services.AddOptions();
             services.AddXsrf();

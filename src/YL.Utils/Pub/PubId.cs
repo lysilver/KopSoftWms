@@ -1,6 +1,7 @@
 ﻿using IdGen;
 using System;
 using System.Linq;
+using Yitter.IdGenerator;
 
 namespace YL.Utils.Pub
 {
@@ -10,6 +11,19 @@ namespace YL.Utils.Pub
         private static readonly IdGenerator Generator = new IdGenerator(0);
         private static IdGenerator _snowflake;
 
+        /// <summary>
+        /// 只能初始化一次
+        /// // WorkerIdBitLength 默认值6，支持的 WorkerId 最大值为2^6-1，若 WorkerId 超过64
+        /// </summary>
+        /// <param name="workerId"></param>
+        public static void InitId(ushort workerId = 0)
+        {
+            var options = new Yitter.IdGenerator.IdGeneratorOptions(workerId);
+            options.WorkerIdBitLength = 10;
+            YitIdHelper.SetIdGenerator(options);
+        }
+
+        // options.WorkerIdBitLength = 10;
         public static IdGenerator GetInstance()
         {
             if (_snowflake == null)
@@ -21,8 +35,9 @@ namespace YL.Utils.Pub
         {
             get
             {
-                var id = Generator.CreateId();
-                return id;
+                return YitIdHelper.NextId();
+                //var id = Generator.CreateId();
+                //return id;
             }
         }
 
