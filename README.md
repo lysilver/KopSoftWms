@@ -2,20 +2,16 @@
 
 ## 项目介绍
 * ERP企业资源计划 http://erp.kopsoft.cn/
-* 
+* https://gitee.com/yulou/kopSoftERP
+* https://github.com/lysilver/kopSoftERP
+*
 * 开源免费WMS仓库管理系统 http://wms.kopsoft.cn/
-* Gitee https://gitee.com/yulou/kopSoftWMS
-* GitHub https://github.com/lysilver/kopSoftWMS
+* https://gitee.com/yulou/kopSoftWMS
+* https://github.com/lysilver/kopSoftWMS
 *
 * MES制造执行系统 http://mes.kopsoft.cn/
-* Gitee https://gitee.com/yulou/kopSoftMES
-* GitHub https://github.com/lysilver/kopSoftMES
-*
-* 免费标签(条码)打印软件 http://mom.kopsoft.cn/label/
-* Gitee https://gitee.com/williamyang3/KopSoftLabel
-* GitHub https://github.com/williamyang3/KopSoftLabel
-*
-* SCADA数据采集与监控,电子看板 http://kanban.kopsoft.cn/
+* https://gitee.com/williamyang3/kopSoftMES
+* https://github.com/williamyang3/kopSoftMES
 ****
 
 |  版本   | 分支  |
