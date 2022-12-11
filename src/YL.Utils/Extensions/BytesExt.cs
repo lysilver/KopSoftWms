@@ -105,44 +105,10 @@ namespace YL.Utils.Extensions
             }
         }
 
-        public static byte[] ToBytes(this object obj)
-        {
-            if (obj.IsNullT())
-            {
-                return default;
-            }
-            using (MemoryStream ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, obj);
-                return ms.GetBuffer();
-            }
-        }
-
-        public static Stream ToStream(this object obj)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, obj);
-                return ms;
-            }
-        }
-
         public static Stream ToStream(this byte[] bytes)
         {
             var stream = new MemoryStream(bytes);
             return stream;
-        }
-
-        public static T ToObject<T>(this byte[] bytes)
-        {
-            using (var ms = new MemoryStream())
-            {
-                ms.Write(bytes, 0, bytes.Length);
-                ms.Seek(0, SeekOrigin.Begin);
-                return (T)new BinaryFormatter().Deserialize(ms);
-            }
         }
 
         public static BinaryReader GetBinaryReader(this byte[] bytes)
@@ -151,16 +117,6 @@ namespace YL.Utils.Extensions
             {
                 var binaryReader = new BinaryReader(memoryStream);
                 return binaryReader;
-            }
-        }
-
-        public static T ToObject<T>(this Stream stream)
-        {
-            using (var ms = new MemoryStream())
-            {
-                ms.WriteTo(stream);
-                ms.Seek(0, SeekOrigin.Begin);
-                return (T)new BinaryFormatter().Deserialize(ms);
             }
         }
 
