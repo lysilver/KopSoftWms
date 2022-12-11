@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kopSoftWMS", "KopSoftWms\kopSoftWMS.csproj", "{AB10278E-541F-43A6-BB31-360B8F43AE92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KopSoftWMS", "KopSoftWms\KopSoftWMS.csproj", "{AB10278E-541F-43A6-BB31-360B8F43AE92}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YL.Core", "YL.Core", "{0C5095D0-6E22-4148-89A3-B44D6DFC29E3}"
 EndProject

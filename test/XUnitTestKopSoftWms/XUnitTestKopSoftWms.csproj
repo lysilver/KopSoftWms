@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\KopSoftWms\kopSoftWMS.csproj" />
+    <ProjectReference Include="..\..\src\KopSoftWms\KopSoftWMS.csproj" />
     <ProjectReference Include="..\..\src\YL.Utils\YL.Utils.csproj" />
   </ItemGroup>
 
