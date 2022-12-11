@@ -13,14 +13,7 @@ namespace YL.Utils.Delegate
         public static void TryExecute(Action action)
         {
             //CheckNull.ArgumentIsNullException(action, nameof(action));
-            try
-            {
-                action();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            action();
         }
 
         public static string TryCatch(Action action)
@@ -124,14 +117,7 @@ namespace YL.Utils.Delegate
         {
             Task.Factory.StartNew(() =>
             {
-                try
-                {
-                    action();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                action();
             });
         }
 
@@ -185,18 +171,11 @@ namespace YL.Utils.Delegate
 
         public static long TryStopWatch(Action action)
         {
-            try
-            {
-                Stopwatch watch = new Stopwatch();
-                watch.Start();
-                action();
-                watch.Stop();
-                return watch.ElapsedMilliseconds;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            action();
+            watch.Stop();
+            return watch.ElapsedMilliseconds;
         }
 
         public static void RunAsync(Action firstFunc, Action next)
@@ -229,10 +208,6 @@ namespace YL.Utils.Delegate
                 {
                     action();
                     tran.Complete();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
                 }
                 finally
                 {
