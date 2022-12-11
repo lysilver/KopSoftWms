@@ -4,8 +4,8 @@ using YL.Utils.Pub;
 namespace XUnitTestKopSoftWms
 {
     /// <summary>
-    /// Yitter.IdGenerator 16λid
-    /// IdGen 18
+    /// Yitter.IdGenerator 16 id
+    /// IdGen 19
     /// </summary>
     public class PubIdTest
     {
@@ -25,7 +25,7 @@ namespace XUnitTestKopSoftWms
         public void TestSnowflakeId2()
         {
             long id = PubId.SnowflakeId2;
-            Assert.Equal(18, id.ToString().Length);
+            Assert.Equal(19, id.ToString().Length);
         }
     }
 }
