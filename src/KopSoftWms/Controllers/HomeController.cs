@@ -35,7 +35,18 @@ namespace KopSoftWms.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.title = GetDescriptor("title");
+            //TempData["returnUrl"] = returnUrl;
+            //_userServices.Login(UserDtoCache.UserId, GetIp());
+            //_logServices.Insert(new Sys_log
+            //{
+            //    LogId = PubId.SnowflakeId,
+            //    Browser = GetBrowser(),
+            //    CreateBy = UserDtoCache.UserId,
+            //    Description = $"{UserDtoCache.UserNickname}登录成功",
+            //    LogIp = GetIp(),
+            //    Url = GetUrl(),
+            //    LogType = LogType.login.EnumToString(),
+            //});
             ViewBag.keywords = GetDescriptor("keywords");
             ViewBag.description = GetDescriptor("description");
             ViewBag.company = GetDescriptor("company");
@@ -49,6 +60,7 @@ namespace KopSoftWms.Controllers
             return View();
         }
 
+        //[AllowAnonymous]
         [AddHeader("Content-Type", YL.Utils.Files.ContentType.ContentTypeSSE)]
         [AddHeader("Cache-Control", YL.Utils.Files.ContentType.CacheControl)]
         [AddHeader("Connection", YL.Utils.Files.ContentType.Connection)]
@@ -59,7 +71,7 @@ namespace KopSoftWms.Controllers
                 Data = DateTime.Now.ToString(),
                 Event = "message",
                 Id = Guid.NewGuid().ToString(),
-                Retry = "3000",
+                Retry = "1000",
             };
             StringBuilder sb = new StringBuilder();
             sb.Append($"id:{a.Id}\n");
@@ -72,7 +84,6 @@ namespace KopSoftWms.Controllers
         public IActionResult Welcome()
         {
             //ViewBag.keywords = GetDescriptor("keywords");
-            ViewBag.title = GetDescriptor("title");
             return View();
         }
 

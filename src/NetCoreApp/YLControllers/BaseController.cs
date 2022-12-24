@@ -205,7 +205,7 @@ namespace YL.NetCore.NetCoreApp
 
         protected virtual string GetDescriptor(string key)
         {
-            return ControllerContext.ActionDescriptor.Properties[key].ToString();
+            return ControllerContext.ActionDescriptor.Properties[key]?.ToString();
         }
 
         protected virtual object GetDescriptorObj(string key)

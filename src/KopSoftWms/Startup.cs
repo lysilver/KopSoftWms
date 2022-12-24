@@ -37,16 +37,15 @@ namespace YL
             {
                 option.Filters.Add<BaseExceptionAttribute>();
                 //option.Filters.Add<FilterXSSAttribute>();
-                option.Conventions.Add(new ApplicationDescription("title", Configuration["sys:title"]));
                 option.Conventions.Add(new ApplicationDescription("keywords", Configuration["sys:keywords"]));
                 option.Conventions.Add(new ApplicationDescription("description", Configuration["sys:description"]));
-                option.Conventions.Add(new ApplicationDescription("company", Configuration["sys:company"]));
                 option.Conventions.Add(new ApplicationDescription("customer", Configuration["sys:customer"]));
+                option.Conventions.Add(new ApplicationDescription("company", Configuration["sys:company"]));
+                option.Conventions.Add(new ApplicationDescription("product", Configuration["sys:product"]));
             });
             services.AddControllersWithViews();
             services.AddRazorPages()
-                    .AddRazorRuntimeCompilation()
-                ;
+                    .AddRazorRuntimeCompilation();
             //services.Configure<CookiePolicyOptions>(options =>
             //{
             //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -80,6 +79,7 @@ namespace YL
                 config.DbType = sqlSugarConfig.Item1;
                 config.IsAutoCloseConnection = true;
                 config.InitKeyType = InitKeyType.Attribute;
+                //config.IsShardSameThread = true;
             });
             services.AddJson(o =>
             {
@@ -96,38 +96,6 @@ namespace YL
             //@1 DependencyInjection 注册
             services.AddNlog(); //添加Nlog
             RegisterBase(services);
-            //services.AddScoped(provider =>
-            //{
-            //    Func<string, SqlSugarClient> func = key =>
-            //    {
-            //        switch (key)
-            //        {
-            //            case "1":
-            //                return new SqlSugarClient(new ConnectionConfig()
-            //                {
-            //                    ConfigId = "111",
-            //                    ConnectionString = sqlSugarConfig.Item2,
-            //                    DbType = sqlSugarConfig.Item1,
-            //                    IsAutoCloseConnection = true,
-            //                    InitKeyType = InitKeyType.Attribute,
-            //                });
-
-            //            case "2":
-            //                return new SqlSugarClient(new ConnectionConfig()
-            //                {
-            //                    ConfigId = "222",
-            //                    ConnectionString = sqlSugarConfig.Item2,
-            //                    DbType = sqlSugarConfig.Item1,
-            //                    IsAutoCloseConnection = true,
-            //                    InitKeyType = InitKeyType.Attribute,
-            //                });
-
-            //            default:
-            //                throw new NotSupportedException($"Not Support key : {key}");
-            //        }
-            //    };
-            //    return func;
-            //});
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");
             SetServiceResolve(services);

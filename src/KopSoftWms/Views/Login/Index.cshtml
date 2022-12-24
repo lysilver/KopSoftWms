@@ -31,7 +31,7 @@
 
     <!-- iCheck -->
     <link href="~/lib/iCheck/square/blue.css" rel="stylesheet" />
-    <title>ERP企业资源计划,WMS仓库管理系统,MES制造执行系统</title>
+    <title>ERP企业资源计划,WMS仓库管理系统,MES制造执行系统,EMS设备管理系统,QMS质量管理系统</title>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +48,7 @@
         <div class="login-box">
 
             <div class="login-logo">
-                <a href="http://www.kopsoft.cn/" target="_blank"><b>kopSoft</b>仓库管理系统</a>
+                <a href="http://wms.kopsoft.cn/" target="_blank"><b>kopSoft</b>仓库管理系统</a>
             </div>
 
             <!-- /.login-logo -->
@@ -91,7 +91,7 @@
                     </a>
                 </div>
                 <!-- /.social-auth-links -->
-                <strong>&copy;2020<a href="http://www.kopsoft.cn/" target="_blank"> @ViewBag.company</a></strong> 技术支持:15262337653
+                <strong>&copy;2020<a href="http://mom.kopsoft.cn/" target="_blank"> @ViewBag.company</a></strong> 技术支持:15262337653
             </div>
             <!-- /.login-box-body -->
         </div>
@@ -106,9 +106,9 @@
     <script src="~/js/bootstrap.min.js"></script>
 
     @*<script src="~/js/icheck.min.js"></script>*@
-    @*<script src="~/lib/iCheck/icheck.js"></script>*@
+    <script src="~/lib/iCheck/icheck.js"></script>
 
-   @* <script>
+    <script>
         $(function () {
             $('input').iCheck({
                 checkboxClass: 'icheckbox_square-blue',
@@ -117,14 +117,13 @@
             });
         });
     </script>
-*@
 
     <script type="text/javascript">
         var app = new Vue({
             el: '#app',
             data: {
-                UserNickname: '',
-                Pwd: '',
+                UserNickname: 'guest',
+                Pwd: '000000',
                 disabled: false,
                 submit: "登录",
                 reset: "取消",
