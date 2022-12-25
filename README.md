@@ -7,6 +7,7 @@
 * kopSoftWMS仓库管理系统 http://wms.kopsoft.cn/
 * Gitee https://gitee.com/yulou/kopSoftWMS
 * GitHub https://github.com/lysilver/kopSoftWMS
+* 
 * 开源不易，更多商业产品（ERP企业资源计划,WMS仓库管理系统,MES制造执行系统,EMS设备管理系统,QMS质量管理系统）请移步 http://mom.kopsoft.cn/
 
 ## kopSoftWMS功能模块：
