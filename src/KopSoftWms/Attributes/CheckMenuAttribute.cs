@@ -35,6 +35,7 @@ namespace YL.NetCore.Attributes
             }
             if (viewBag != null)
             {
+                viewBag.title = properties["title"].ToString();
                 viewBag.keywords = properties["keywords"].ToString();
                 viewBag.description = properties["description"].ToString();
                 viewBag.company = properties["company"].ToString();
