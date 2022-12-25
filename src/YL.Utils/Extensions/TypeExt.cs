@@ -98,52 +98,30 @@ namespace YL.Utils.Extensions
         public static string ToFormat(this object obj, int count = 3)
         {
             //string.Format("{0:N3}", obj)
-            switch (count)
+            return count switch
             {
-                case 1:
-                    return $"{obj:N1}";
-
-                case 2:
-                    return $"{obj:N2}";
-
-                case 3:
-                    return $"{obj:N3}";
-
-                case 4:
-                    return $"{obj:N4}";
-
-                case 5:
-                    return $"{obj:N5}";
-
-                default:
-                    return $"{obj:N2}";
-            }
+                1 => $"{obj:N1}",
+                2 => $"{obj:N2}",
+                3 => $"{obj:N3}",
+                4 => $"{obj:N4}",
+                5 => $"{obj:N5}",
+                _ => $"{obj:N2}",
+            };
         }
 
         public static string ToFormat2(this object obj, int count = 3)
         {
             //string.Format("{0:F3}", obj)
             CheckNull.ArgumentIsNullException(obj, nameof(obj));
-            switch (count)
+            return count switch
             {
-                case 1:
-                    return $"{obj:F1}";
-
-                case 2:
-                    return $"{obj:F2}";
-
-                case 3:
-                    return $"{obj:F3}";
-
-                case 4:
-                    return $"{obj:F4}";
-
-                case 5:
-                    return $"{obj:F5}";
-
-                default:
-                    return $"{obj:F2}";
-            }
+                1 => $"{obj:F1}",
+                2 => $"{obj:F2}",
+                3 => $"{obj:F3}",
+                4 => $"{obj:F4}",
+                5 => $"{obj:F5}",
+                _ => $"{obj:F2}",
+            };
         }
     }
 }
