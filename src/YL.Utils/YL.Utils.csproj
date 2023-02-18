@@ -8,13 +8,13 @@
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.542" />
-    <PackageReference Include="IdGen" Version="3.0.1" />
+    <PackageReference Include="IdGen" Version="3.0.3" />
     <PackageReference Include="Jil" Version="2.17.0" />
     <PackageReference Include="MessagePack" Version="2.4.35" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="NLog" Version="4.7.14" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
-    <PackageReference Include="Swifter.Json" Version="1.5.0.3" />
+    <PackageReference Include="Swifter.Json" Version="1.6.0.6" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.19" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
