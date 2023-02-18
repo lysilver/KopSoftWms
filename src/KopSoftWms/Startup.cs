@@ -92,7 +92,10 @@ namespace YL
             services.AddResponseCompression();//添加压缩
             services.AddResponseCaching(); //响应式缓存
             services.AddMemoryCache();
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddMediatR(configuration =>
+            {
+                configuration.RegisterServicesFromAssembly(typeof(Startup).GetTypeInfo().Assembly);
+            });
             //@1 DependencyInjection 注册
             services.AddNlog(); //添加Nlog
             RegisterBase(services);

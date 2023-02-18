@@ -50,7 +50,10 @@ namespace XUnitTestKopSoftWms
             services.AddBr(); //br压缩
             services.AddResponseCompression();//添加压缩
             services.AddMemoryCache();
-            services.AddMediatR(typeof(BaseControllerTest).GetTypeInfo().Assembly);
+            services.AddMediatR(configuration =>
+            {
+                configuration.RegisterServicesFromAssembly(typeof(BaseControllerTest).GetTypeInfo().Assembly);
+            });
 
             services.AddNlog(); //添加Nlog
             services.AddLogging();

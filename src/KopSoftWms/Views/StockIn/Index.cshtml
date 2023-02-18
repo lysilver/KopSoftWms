@@ -411,6 +411,7 @@
                     yui.layershow("入库明细", "/StockIn/Detail?pid=" + val, 600, 500);
                 },
                 htmlL: function (val, type) {
+                    var _self = this;
                     var index = layer.load(1, {
                         shade: [0.1, '#fff'] //0.1透明度的白色背景
                     });
@@ -482,15 +483,18 @@
                     return this.jsonDateFormat(val);
                 },
                 searchL: function () {
-                    var qParams = {
-                        StockInStatus: _self.StockInStatus,
-                        StockInType: _self.StockInType
-                    };
-                    var query = {
-                        silent: true,
-                        query: qParams
-                    };
-                    $("#bootstraptable").bootstrapTable('refresh', query);
+                    var _self = this;
+                    _self.$nextTick(() => {
+                        var qParams = {
+                            StockInStatus: _self.StockInStatus,
+                            StockInType: _self.StockInType
+                        };
+                        var query = {
+                            silent: true,
+                            query: qParams
+                        };
+                        $("#bootstraptable").bootstrapTable('refresh', query);
+                    })
                 },
                 editL: function () {
                     var arr = $("#bootstraptable").bootstrapTable('getSelections');
