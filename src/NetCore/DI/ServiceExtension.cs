@@ -52,12 +52,6 @@ namespace YL.NetCore.DI
         //}
 
         /// <summary>
-        /// 泛型注册
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="injection"></param>
-
-        /// <summary>
         ///
         /// </summary>
         /// <param name="service">IServiceCollection</param>
@@ -70,7 +64,7 @@ namespace YL.NetCore.DI
             var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(assemblyName));
             if (assembly.IsNullT())
             {
-                throw new DllNotFoundException($"\"{assemblyName}\".dll不存在");
+                throw new ArgumentNullException($"\"{assemblyName}\".dll不存在");
             }
             var types = assembly.GetTypes().Where(o =>
             (typeof(IDependency).IsAssignableFrom(o)) && !o.IsInterface).ToList();
@@ -114,7 +108,7 @@ namespace YL.NetCore.DI
                 var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(item));
                 if (assembly.IsNullT())
                 {
-                    throw new DllNotFoundException($"\"{assemblyName}\".dll不存在");
+                    throw new ArgumentNullException($"\"{assemblyName}\".dll不存在");
                 }
                 var types = assembly.GetTypes().Where(o =>
                 (typeof(IDependency).IsAssignableFrom(o)) && !o.IsInterface).ToList();
