@@ -11,102 +11,27 @@ namespace YL.Core.Entity
             this.CreateDate = DateTime.Now;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /// <summary>        /// Desc:客户id        /// Default:        /// Nullable:False        /// </summary>        [SugarColumn(IsPrimaryKey = true)]
+        /// <summary>
+        /// Desc:客户id
+        /// Default:
+        /// Nullable:False
+        /// </summary>
+        [SugarColumn(IsPrimaryKey = true)]
         public long CustomerId { get; set; }
 
+        /// <summary>
+        /// Desc:客户编号
+        /// Default:
+        /// Nullable:False
+        /// </summary>
+        public string CustomerNo { get; set; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /// <summary>        /// Desc:客户编号        /// Default:        /// Nullable:False        /// </summary>        public string CustomerNo { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /// <summary>        /// Desc:客户名称        /// Default:        /// Nullable:False        /// </summary>        public string CustomerName { get; set; }
+        /// <summary>
+        /// Desc:客户名称
+        /// Default:
+        /// Nullable:False
+        /// </summary>
+        public string CustomerName { get; set; }
 
         /// <summary>
         /// Desc:地址

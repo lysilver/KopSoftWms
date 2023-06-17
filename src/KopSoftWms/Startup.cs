@@ -1,6 +1,5 @@
 ﻿using IRepository;
 using IServices;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,7 +52,6 @@ namespace YL
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
             PubId.InitId();
-            services.AddTimedJob();
             services.AddOptions();
             services.AddXsrf();
             services.AddXss();
@@ -151,7 +149,6 @@ namespace YL
 
             app.UseGlobalCore();
             app.UseExecuteTime();
-            app.UseTimedJob();
             app.UseResponseCompression();  //使用压缩
             app.UseResponseCaching();    //使用缓存
 

@@ -1,12 +1,14 @@
-﻿using Pomelo.AspNetCore.TimedJob;
-using SqlSugar;
+﻿using SqlSugar;
 using System;
 using YL.NetCore.DI;
 using YL.Utils.Log;
 
 namespace KopSoftWms
 {
-    public class SqlJob : Job
+    /// <summary>
+    /// 废弃过时TimeJob 后面使用YL.Scheduler替换
+    /// </summary>
+    public class SqlJob
     {
         private readonly SqlSugarClient _client;
 
@@ -15,7 +17,6 @@ namespace KopSoftWms
             _client = client;
         }
 
-        [Invoke(IsEnabled = false, Begin = "2018-12-19 10:30", Interval = 1000 * 3, SkipWhileExecuting = true)]
         public void Run()
         {
             var _nlog = ServiceResolve.Resolve<ILogUtil>();
