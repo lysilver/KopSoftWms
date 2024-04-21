@@ -1,4 +1,4 @@
-﻿using Ganss.XSS;
+﻿using Ganss.Xss;
 
 namespace YL.Utils.Security
 {
@@ -17,7 +17,7 @@ namespace YL.Utils.Security
 
         public static Xss GetXss()
         {
-            return _xss ?? (_xss = new Xss());
+            return _xss ??= new Xss();
         }
 
         /// <summary>

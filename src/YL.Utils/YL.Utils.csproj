@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
-    <PackageReference Include="HtmlSanitizer" Version="7.1.542" />
+    <PackageReference Include="HtmlSanitizer" Version="8.0.865" />
     <PackageReference Include="IdGen" Version="3.0.3" />
     <PackageReference Include="Jil" Version="2.17.0" />
     <PackageReference Include="MessagePack" Version="2.4.35" />
