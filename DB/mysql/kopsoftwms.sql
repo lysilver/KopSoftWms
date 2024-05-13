@@ -588,4 +588,70 @@ CREATE TABLE `wms_warehouse`  (
 -- Records of wms_warehouse
 -- ----------------------------
 
+-- ----------------------------
+-- Table structure for wms_supplier
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_supplier`;
+CREATE TABLE `wms_supplier`  (
+  `SupplierId` bigint(20) NOT NULL,
+  `SupplierNo` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '供应商编号',
+  `SupplierName` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '供应商名称',
+  `Address` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '供应商地址',
+  `Tel` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
+  `SupplierPerson` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人',
+  `SupplierLevel` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '级别',
+  `Email` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Email',
+  `Remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `IsDel` tinyint(4) NULL DEFAULT NULL COMMENT '1 0',
+  `CreateBy` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
+  `CreateDate` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `ModifiedBy` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
+  `ModifiedDate` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`SupplierId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for wms_carrier
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_carrier`;
+CREATE TABLE `wms_carrier`  (
+  `CarrierId` bigint(20) NOT NULL,
+  `CarrierNo` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '承运商编号',
+  `CarrierName` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '承运商名称',
+  `Address` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '承运商地址',
+  `Tel` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
+  `CarrierPerson` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人',
+  `CarrierLevel` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '级别',
+  `Email` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Email',
+  `Remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `IsDel` tinyint(4) NULL DEFAULT NULL COMMENT '1 0',
+  `CreateBy` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
+  `CreateDate` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `ModifiedBy` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
+  `ModifiedDate` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`CarrierId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for wms_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_customer`;
+CREATE TABLE `wms_customer`  (
+  `CustomerId` bigint(20) NOT NULL,
+  `CustomerNo` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '客户编号',
+  `CustomerName` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '客户名称',
+  `Address` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户地址',
+  `Tel` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
+  `CustomerPerson` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人',
+  `CustomerLevel` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '级别',
+  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Email',
+  `Remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `IsDel` tinyint(4) NULL DEFAULT NULL COMMENT '1 0',
+  `CreateBy` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
+  `CreateDate` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `ModifiedBy` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
+  `ModifiedDate` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`CustomerId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
 SET FOREIGN_KEY_CHECKS = 1;
