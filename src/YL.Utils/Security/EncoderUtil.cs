@@ -41,11 +41,8 @@ namespace YL.Utils.Security
 
         public static string UrlHttpUtilityEncoder(string str, Encoding encode = null)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
-            return HttpUtility.UrlEncode(str, Encoding.UTF8);
+            encode ??= Encoding.UTF8;
+            return HttpUtility.UrlEncode(str, encode);
         }
 
         public static string UrlHttpUtilityDecoder(string str)
@@ -55,10 +52,7 @@ namespace YL.Utils.Security
 
         public static string UrlHttpUtilityDecoder(string str, Encoding encode = null)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
+            encode ??= Encoding.UTF8;
             return HttpUtility.UrlDecode(str, encode);
         }
 

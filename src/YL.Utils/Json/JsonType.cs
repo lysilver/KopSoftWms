@@ -1,7 +1,7 @@
 ﻿namespace YL.Utils.Json
 {
     /// <summary>
-    /// 目前使用Jil
+    /// 目前使用TextJson
     /// </summary>
     public enum JsonType
     {

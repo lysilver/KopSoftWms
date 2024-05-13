@@ -99,7 +99,7 @@ namespace YL.Utils.Json
                     return obj.ToTextObj<T>();
 
                 default:
-                    return obj.JilToObject<T>();
+                    return obj.ToTextObj<T>();
             }
         }
     }
