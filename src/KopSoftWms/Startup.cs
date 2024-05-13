@@ -81,7 +81,7 @@ namespace YL
             });
             services.AddJson(o =>
             {
-                o.JsonType = JsonType.TextJson;
+                o.JsonType = JsonType.Jil;
             });
             services.AddHttpContextAccessor();
             services.AddHtmlEncoder();

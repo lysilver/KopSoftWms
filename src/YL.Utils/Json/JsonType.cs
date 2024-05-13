@@ -14,6 +14,10 @@
         Jil = 7, //https://github.com/kevin-montrose/Jil
         ServiceStackText = 8, //https://github.com/ServiceStack/ServiceStack.Text
         Newtonsoft = 9, //https://github.com/JamesNK/Newtonsoft.Json
+
+        /// <summary>
+        /// 不支持元组等
+        /// </summary>
         TextJson = 10
     }
 }
