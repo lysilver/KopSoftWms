@@ -16,7 +16,7 @@
         Newtonsoft = 9, //https://github.com/JamesNK/Newtonsoft.Json
 
         /// <summary>
-        /// 不支持元组等
+        /// 元组 IncludeFields = true
         /// </summary>
         TextJson = 10
     }

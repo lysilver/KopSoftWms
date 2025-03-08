@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>$(LatestDevTFM)</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<RazorCompileOnBuild>false</RazorCompileOnBuild>
 	<MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>

@@ -28,6 +28,11 @@ namespace Repository
             return _db.Insertable(t).IgnoreColumns(IgnoreNullColumn).ExecuteCommand() > 0;
         }
 
+        public async Task<bool> InsertAsync(T t, bool IgnoreNullColumn = true)
+        {
+            return await _db.Insertable(t).IgnoreColumns(IgnoreNullColumn).ExecuteCommandAsync() > 0;
+        }
+
         public bool InsertIgnoreNullColumn(T t)
         {
             return _db.Insertable(t).IgnoreColumns(true).ExecuteCommand() > 0;

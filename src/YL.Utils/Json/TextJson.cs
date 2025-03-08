@@ -23,7 +23,8 @@ namespace YL.Utils.Json
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 AllowTrailingCommas = true,
                 // 取消unicode编码
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                IncludeFields = true
             };
             return options;
         });

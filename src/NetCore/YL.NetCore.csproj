@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>$(LatestDevTFM)</TargetFramework>
     <RootNamespace>YL.NetCore</RootNamespace>
     <AssemblyName>YL.NetCore</AssemblyName>
   </PropertyGroup>

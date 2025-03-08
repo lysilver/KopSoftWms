@@ -16,6 +16,8 @@ namespace IRepository
 
         bool Insert(T t, bool IgnoreNullColumn = true);
 
+        Task<bool> InsertAsync(T t, bool IgnoreNullColumn = true);
+
         bool InsertIgnoreNullColumn(T t);
 
         bool InsertIgnoreNullColumn(T t, params string[] columns);

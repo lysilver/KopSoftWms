@@ -107,7 +107,7 @@ namespace YL.NetCoreApp.Extensions
         {
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("X-Xss-Protection", "1"); //启用XSS保护，并在检测到任何XSS漏洞的情况下阻止加载页面。
+                context.Response.Headers.Append("X-Xss-Protection", "1"); //启用XSS保护，并在检测到任何XSS漏洞的情况下阻止加载页面。
                 await next();
             });
             return app;

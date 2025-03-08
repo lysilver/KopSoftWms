@@ -14,7 +14,7 @@ namespace YL.Utils.Json
         public static string SwifterToJson<T>(this T obj, string dateTimeFormat, JsonFormatterOptions options = JsonFormatterOptions.Default)
         {
             var format = new JsonFormatter(options);
-            format.SetDateTimeFormat(dateTimeFormat.IsEmpty() ? DateTimeExt.DateTimeFormat : dateTimeFormat);
+            // format.SetDateTimeFormat(dateTimeFormat.IsEmpty() ? DateTimeExt.DateTimeFormat : dateTimeFormat);
             return format.Serialize(obj);
         }
 

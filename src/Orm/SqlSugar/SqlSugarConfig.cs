@@ -51,26 +51,15 @@ namespace YL.Core.Orm.SqlSugar
         {
             string type = configuration["SqlSugar:DbType"];
             var dbType = type.ToEnum<DbType>();
-            switch (dbType)
+            return dbType switch
             {
-                case DbType.MySql:
-                    return (DbType.MySql, configuration["SqlSugar:MySqlConnectionString"]);
-
-                case DbType.SqlServer:
-                    return (DbType.SqlServer, configuration["SqlSugar:SqlServerConnectionString"]);
-
-                case DbType.Sqlite:
-                    return (DbType.Sqlite, configuration["SqlSugar:SqliteConnectionString"]);
-
-                case DbType.Oracle:
-                    return (DbType.Oracle, configuration["SqlSugar:OracleConnectionString"]);
-
-                case DbType.PostgreSQL:
-                    return (DbType.PostgreSQL, configuration["SqlSugar:PostgreSQLConnectionString"]);
-
-                default:
-                    return (DbType.SqlServer, configuration["SqlSugar:SqlServerConnectionString"]);
-            }
+                DbType.MySql => (DbType.MySql, configuration["SqlSugar:MySqlConnectionString"]),
+                DbType.SqlServer => (DbType.SqlServer, configuration["SqlSugar:SqlServerConnectionString"]),
+                DbType.Sqlite => (DbType.Sqlite, configuration["SqlSugar:SqliteConnectionString"]),
+                DbType.Oracle => (DbType.Oracle, configuration["SqlSugar:OracleConnectionString"]),
+                DbType.PostgreSQL => (DbType.PostgreSQL, configuration["SqlSugar:PostgreSQLConnectionString"]),
+                _ => (DbType.SqlServer, configuration["SqlSugar:SqlServerConnectionString"]),
+            };
         }
 
         /// <summary>

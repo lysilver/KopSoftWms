@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -166,14 +167,12 @@ namespace YL.NetCore.NetCoreApp
 
         protected ContentResult BootJsonH(object obj)
         {
-            //var str = obj.JilToJson();
             var str = obj.ToJsonL();
             return Content(str);
         }
 
         protected ContentResult BootJsonH((bool, object) data)
         {
-            //var str = data.JilToJson();
             var str = data.ToJsonL();
             return Content(str);
         }
@@ -186,14 +185,12 @@ namespace YL.NetCore.NetCoreApp
 
         protected ContentResult BootJsonH((int, object) data)
         {
-            //var str = data.JilToJson();
             var str = data.ToJsonL();
             return Content(str);
         }
 
         protected ContentResult BootJsonH((object, int) data)
         {
-            //var str = Bootstrap.GridData(data.Item1, data.Item2).JilToJson();
             var str = Bootstrap.GridData(data.Item1, data.Item2).ToJsonL();
             return Content(str);
         }
@@ -247,7 +244,8 @@ namespace YL.NetCore.NetCoreApp
 
         protected virtual string GetBrowser()
         {
-            return HttpContext.Request.Headers["User-Agent"].ToString();
+            return HttpContext.Request.Headers.UserAgent;
+            // return HttpContext.Request.Headers["User-Agent"].ToString();
         }
 
         protected virtual string GetRequestHeaders(string key)
@@ -257,7 +255,7 @@ namespace YL.NetCore.NetCoreApp
 
         protected virtual void SetResponseHeader(string key, string value)
         {
-            HttpContext.Response.Headers.Add(key, value);
+            HttpContext.Response.Headers.Append(key, value);
         }
     }
 }

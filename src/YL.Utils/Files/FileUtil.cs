@@ -95,7 +95,8 @@ namespace YL.Utils.Files
             {
                 FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
                 bytes = new byte[fileStream.Length];
-                fileStream.Read(bytes, 0, bytes.Length);
+                // fileStream.Read(bytes, 0, bytes.Length);
+                fileStream.ReadExactly(bytes);
                 fileStream.Seek(0, SeekOrigin.Begin);
                 fileStream.Close();
             }

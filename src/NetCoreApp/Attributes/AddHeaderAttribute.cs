@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace YL.NetCore.Attributes
 {
@@ -18,7 +19,7 @@ namespace YL.NetCore.Attributes
 
         public override void OnResultExecuting(ResultExecutingContext context)
         {
-            context.HttpContext.Response.Headers.Add(
+            context.HttpContext.Response.Headers.Append(
                 _name, new string[] { _value });
             base.OnResultExecuting(context);
         }
