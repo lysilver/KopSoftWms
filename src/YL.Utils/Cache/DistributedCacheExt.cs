@@ -41,15 +41,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<char?> GetCharAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -74,15 +67,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<decimal?> GetDecimalAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -107,15 +93,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<double?> GetDoubleAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -140,15 +119,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<short?> GetShortAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -173,15 +145,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<int?> GetIntAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -206,15 +171,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<long?> GetLongAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -239,15 +197,8 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<float?> GetFloatAsync(this IDistributedCache cache, string key)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -273,20 +224,10 @@ namespace YL.Utils.Cache
         /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
         public static async Task<string> GetStringAsync(this IDistributedCache cache, string key, Encoding encoding = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (encoding == null)
-            {
-                encoding = Encoding.UTF8;
-            }
+            encoding ??= Encoding.UTF8;
 
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
             if (bytes == null)
@@ -310,20 +251,10 @@ namespace YL.Utils.Cache
         public static async Task<T> GetAsJsonAsync<T>(this IDistributedCache cache, string key, Encoding encoding = null)
             where T : class
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (encoding == null)
-            {
-                encoding = Encoding.UTF8;
-            }
+            encoding ??= Encoding.UTF8;
 
             var json = await GetStringAsync(cache, key, encoding).ConfigureAwait(false);
             if (json == null)
@@ -349,20 +280,10 @@ namespace YL.Utils.Cache
             bool value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -390,20 +311,10 @@ namespace YL.Utils.Cache
             char value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -431,20 +342,10 @@ namespace YL.Utils.Cache
             decimal value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -472,20 +373,10 @@ namespace YL.Utils.Cache
             double value,
             DistributedCacheEntryOptions options)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -513,20 +404,10 @@ namespace YL.Utils.Cache
             short value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -554,20 +435,10 @@ namespace YL.Utils.Cache
             int value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -595,20 +466,10 @@ namespace YL.Utils.Cache
             long value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -636,20 +497,10 @@ namespace YL.Utils.Cache
             float value,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -695,25 +546,12 @@ namespace YL.Utils.Cache
             Encoding encoding = null,
             DistributedCacheEntryOptions options = null)
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            encoding ??= Encoding.UTF8;
 
-            if (encoding == null)
-            {
-                encoding = Encoding.UTF8;
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             var bytes = encoding.GetBytes(value);
             return cache.SetAsync(key, bytes, options);
@@ -758,25 +596,12 @@ namespace YL.Utils.Cache
             DistributedCacheEntryOptions options = null)
             where T : class
         {
-            if (cache == null)
-            {
-                throw new ArgumentNullException(nameof(cache));
-            }
+            ArgumentNullException.ThrowIfNull(cache);
+            ArgumentNullException.ThrowIfNull(key);
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            encoding ??= Encoding.UTF8;
 
-            if (encoding == null)
-            {
-                encoding = Encoding.UTF8;
-            }
-
-            if (options == null)
-            {
-                options = new DistributedCacheEntryOptions();
-            }
+            options ??= new DistributedCacheEntryOptions();
 
             var json = JsonConvert.SerializeObject(value, Formatting.None);
             return SetAsync(cache, key, json, encoding, options);
