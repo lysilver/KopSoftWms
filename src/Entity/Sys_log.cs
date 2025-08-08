@@ -7,6 +7,7 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "sys_log")]
     public partial class Sys_log : INotification
     {
         public Sys_log()

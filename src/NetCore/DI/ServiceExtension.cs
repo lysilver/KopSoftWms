@@ -115,7 +115,7 @@ namespace YL.NetCore.DI
                 foreach (var type in types)
                 {
                     var faces = type.GetInterfaces().Where(o => o.Name != "IDependency" && !o.Name.Contains("Base")).ToArray();
-                    if (faces.Any())
+                    if (faces.Length != 0)
                     {
                         var interfaceType = faces.FirstOrDefault();
                         switch (injection)

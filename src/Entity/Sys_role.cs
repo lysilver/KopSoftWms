@@ -6,11 +6,12 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "sys_role")]
     public partial class Sys_role
     {
         public Sys_role()
         {
-            IsDel = Convert.ToByte("1");
+            IsDel = 1;
             CreateDate = DateTime.Now;
         }
 

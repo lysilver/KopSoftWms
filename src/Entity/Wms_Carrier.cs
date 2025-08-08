@@ -3,11 +3,12 @@ using System;
 
 namespace YL.Core.Entity
 {
+    [SugarTable(tableName: "wms_carrier")]
     public partial class Wms_Carrier
     {
         public Wms_Carrier()
         {
-            this.IsDel = Convert.ToByte("1");
+            this.IsDel = 1;
             this.CreateDate = DateTime.Now;
         }
 

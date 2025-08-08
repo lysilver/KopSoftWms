@@ -30,7 +30,7 @@ namespace XUnitTestKopSoftWms
 
             services.AddJson(o =>
             {
-                o.JsonType = JsonType.Jil;
+                o.JsonType = JsonType.TextJson;
             });
             services.AddOptions();
             services.AddXsrf();

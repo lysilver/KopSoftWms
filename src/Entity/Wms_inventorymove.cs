@@ -6,12 +6,13 @@ namespace YL.Core.Entity
     ///<summary>
     ///库存移动
     ///</summary>
+    [SugarTable(tableName: "wms_inventorymove")]
     public partial class Wms_inventorymove
     {
         public Wms_inventorymove()
         {
             CreateDate = DateTime.Now;
-            IsDel = Convert.ToByte("1");
+            IsDel = 1;
         }
 
         /// <summary>

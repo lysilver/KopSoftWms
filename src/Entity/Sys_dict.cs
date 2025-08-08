@@ -6,11 +6,12 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "sys_dict")]
     public partial class Sys_dict
     {
         public Sys_dict()
         {
-            this.IsDel = Convert.ToByte("1");
+            this.IsDel = 1;
             this.CreateDate = DateTime.Now;
         }
 

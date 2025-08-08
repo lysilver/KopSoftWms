@@ -83,7 +83,7 @@ namespace YL.Utils.Env
             }
         }
 
-        public static string GetBrowser() => Current.Request.Headers["User-Agent"].ToString();
+        public static string GetBrowser() => Current.Request.Headers.UserAgent.ToString();
 
         public static string GetHeaders(string key) => Current.Request.Headers[key].ToString();
     }

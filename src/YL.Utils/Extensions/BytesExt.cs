@@ -19,29 +19,16 @@ namespace YL.Utils.Extensions
     {
         public static byte[] ToBytes(this string str, EncodingType type = EncodingType.UTF8)
         {
-            switch (type)
+            return type switch
             {
-                case EncodingType.ASCII:
-                    return Encoding.ASCII.GetBytes(str);
-
-                case EncodingType.UTF8:
-                    return Encoding.UTF8.GetBytes(str);
-
-                case EncodingType.gbk:
-                    return Encoding.GetEncoding("gbk").GetBytes(str);
-
-                case EncodingType.gb2312:
-                    return Encoding.GetEncoding("gb2312").GetBytes(str);
-
-                case EncodingType.Default:
-                    return Encoding.Default.GetBytes(str);
-
-                case EncodingType.Unicode:
-                    return Encoding.Unicode.GetBytes(str);
-
-                default:
-                    return Encoding.UTF8.GetBytes(str);
-            }
+                EncodingType.ASCII => Encoding.ASCII.GetBytes(str),
+                EncodingType.UTF8 => Encoding.UTF8.GetBytes(str),
+                EncodingType.gbk => Encoding.GetEncoding("gbk").GetBytes(str),
+                EncodingType.gb2312 => Encoding.GetEncoding("gb2312").GetBytes(str),
+                EncodingType.Default => Encoding.Default.GetBytes(str),
+                EncodingType.Unicode => Encoding.Unicode.GetBytes(str),
+                _ => Encoding.UTF8.GetBytes(str),
+            };
         }
 
         /// <summary>
@@ -53,56 +40,30 @@ namespace YL.Utils.Extensions
         /// <returns></returns>
         public static Encoding GetEncoding(EncodingType type = EncodingType.UTF8)
         {
-            switch (type)
+            return type switch
             {
-                case EncodingType.ASCII:
-                    return Encoding.ASCII;
-
-                case EncodingType.UTF8:
-                    return Encoding.UTF8;
-
-                case EncodingType.gbk:
-                    return Encoding.GetEncoding("gbk");
-
-                case EncodingType.gb2312:
-                    return Encoding.GetEncoding(936);
-
-                case EncodingType.Default:
-                    return Encoding.Default;
-
-                case EncodingType.Unicode:
-                    return Encoding.Unicode;
-
-                default:
-                    return Encoding.UTF8;
-            }
+                EncodingType.ASCII => Encoding.ASCII,
+                EncodingType.UTF8 => Encoding.UTF8,
+                EncodingType.gbk => Encoding.GetEncoding("gbk"),
+                EncodingType.gb2312 => Encoding.GetEncoding(936),
+                EncodingType.Default => Encoding.Default,
+                EncodingType.Unicode => Encoding.Unicode,
+                _ => Encoding.UTF8,
+            };
         }
 
         public static string ByteToString(this byte[] bytes, EncodingType type = EncodingType.UTF8)
         {
-            switch (type)
+            return type switch
             {
-                case EncodingType.ASCII:
-                    return Encoding.ASCII.GetString(bytes);
-
-                case EncodingType.UTF8:
-                    return Encoding.UTF8.GetString(bytes);
-
-                case EncodingType.gbk:
-                    return Encoding.GetEncoding("gbk").GetString(bytes);
-
-                case EncodingType.gb2312:
-                    return Encoding.GetEncoding("gb2312").GetString(bytes);
-
-                case EncodingType.Default:
-                    return Encoding.Default.GetString(bytes);
-
-                case EncodingType.Unicode:
-                    return Encoding.Unicode.GetString(bytes);
-
-                default:
-                    return Encoding.UTF8.GetString(bytes);
-            }
+                EncodingType.ASCII => Encoding.ASCII.GetString(bytes),
+                EncodingType.UTF8 => Encoding.UTF8.GetString(bytes),
+                EncodingType.gbk => Encoding.GetEncoding("gbk").GetString(bytes),
+                EncodingType.gb2312 => Encoding.GetEncoding("gb2312").GetString(bytes),
+                EncodingType.Default => Encoding.Default.GetString(bytes),
+                EncodingType.Unicode => Encoding.Unicode.GetString(bytes),
+                _ => Encoding.UTF8.GetString(bytes),
+            };
         }
 
         public static Stream ToStream(this byte[] bytes)
@@ -136,9 +97,8 @@ namespace YL.Utils.Extensions
 
         public static string ReadToString(this Stream stream, Encoding encoding)
         {
-            string resStr = string.Empty;
             stream.Seek(0, SeekOrigin.Begin);
-            resStr = new StreamReader(stream, encoding).ReadToEnd();
+            string resStr = new StreamReader(stream, encoding).ReadToEnd();
             stream.Seek(0, SeekOrigin.Begin);
             return resStr;
         }

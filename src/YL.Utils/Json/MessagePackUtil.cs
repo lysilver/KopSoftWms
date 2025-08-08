@@ -9,7 +9,7 @@ namespace YL.Utils.Json
     {
         public static string MpToJson(this object obj)
         {
-            return MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(obj)); ;
+            return MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(obj));
         }
 
         public static string MpToJson2<T>(this T t)
@@ -19,7 +19,7 @@ namespace YL.Utils.Json
 
         public static T MpToObj<T>(this string obj)
         {
-            return MessagePackSerializer.Deserialize<T>(MessagePackSerializer.ConvertFromJson(obj)); ;
+            return MessagePackSerializer.Deserialize<T>(MessagePackSerializer.ConvertFromJson(obj));
         }
     }
 }

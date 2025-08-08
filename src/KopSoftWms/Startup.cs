@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Repository;
 using Services;
 using SqlSugar;
+using System;
 using System.Text;
 using YL.Core.Orm.SqlSugar;
 using YL.NetCore.Attributes;
@@ -99,13 +100,11 @@ namespace YL
             RegisterBase(services);
             ServiceExtension.RegisterAssembly(services, "Services");
             ServiceExtension.RegisterAssembly(services, "Repository");
-            SetServiceResolve(services);
         }
 
-        private static void SetServiceResolve(IServiceCollection services)
+        public static void SetServiceResolve(IServiceProvider serviceProvider)
         {
-            var bulid = services.BuildServiceProvider();
-            ServiceResolve.SetServiceResolve(bulid);
+            ServiceResolve.SetServiceResolve(serviceProvider);
         }
 
         /// <summary>
@@ -137,6 +136,7 @@ namespace YL
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            SetServiceResolve(app.ApplicationServices!);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

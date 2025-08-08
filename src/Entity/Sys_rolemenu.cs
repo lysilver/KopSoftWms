@@ -6,6 +6,7 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "sys_rolemenu")]
     public partial class Sys_rolemenu
     {
         public Sys_rolemenu()

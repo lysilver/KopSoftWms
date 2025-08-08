@@ -47,7 +47,9 @@ namespace YL.Utils.Extensions
         public static bool IsEmpty(this object str)
         {
             if (str == null)
+            {
                 return true;
+            }
             return string.IsNullOrWhiteSpace(str.ToString());
         }
 
@@ -64,8 +66,7 @@ namespace YL.Utils.Extensions
 
         public static bool IsNullOrEmpty<T>(this ICollection<T> source)
         {
-            //return source == null || source.Count <= 0;
-            return source.Any();
+            return source is null || source.Count <= 0;
         }
 
         /// <summary>

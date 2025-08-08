@@ -3,9 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using YL.Utils.Check;
-using YL.Utils.Extensions;
-using YL.Utils.Security;
 using YL.Utils.Json;
+using YL.Utils.Security;
 
 namespace YL.Utils.Http
 {

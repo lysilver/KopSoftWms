@@ -6,12 +6,13 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "wms_invmovedetail")]
     public partial class Wms_invmovedetail
     {
         public Wms_invmovedetail()
         {
             CreateDate = DateTime.Now;
-            IsDel = Convert.ToByte("1");
+            IsDel = 1;
         }
 
         /// <summary>

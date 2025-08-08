@@ -42,22 +42,6 @@ namespace YL.Utils.Http
             return response.WriteAsync(str);
         }
 
-        public static async Task<T> ReadFromJsonJil<T>(this HttpContext httpContext)
-        {
-            using (var streamReader = new StreamReader(httpContext.Request.Body))
-            {
-                var obj = streamReader.JilToObject<T>();
-                var results = new List<ValidationResult>();
-                if (Validator.TryValidateObject(obj, new ValidationContext(obj), results))
-                {
-                    return obj;
-                }
-                httpContext.Response.StatusCode = 400;
-                await httpContext.Response.WriteJson(results.JilToJson());
-                return default;
-            }
-        }
-
         public static async Task<T> ReadFromJson<T>(this HttpContext httpContext)
         {
             using (var streamReader = new StreamReader(httpContext.Request.Body))

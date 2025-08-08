@@ -6,11 +6,12 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "sys_serialnum")]
     public partial class Sys_serialnum
     {
         public Sys_serialnum()
         {
-            IsDel = Convert.ToByte("1");
+            IsDel = 1;
             CreateDate = DateTime.Now;
         }
 

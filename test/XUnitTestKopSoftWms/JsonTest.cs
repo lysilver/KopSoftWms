@@ -32,21 +32,6 @@ namespace XUnitTestKopSoftWms
         }
 
         [Fact]
-        public void JilToJsonCamelCase()
-        {
-            var a = new ServerSentEventsDto
-            {
-                Data = DateTime.Now.ToString(),
-                Event = "message",
-                Id = Guid.NewGuid().ToString(),
-                Retry = "1000",
-            };
-            var b = a.JilToJsonCamelCase();
-            var c = b.JilToObject<ServerSentEventsDto>();
-            Assert.NotNull(c);
-        }
-
-        [Fact]
         public void JilToObj()
         {
             var a = new PubResult
@@ -55,7 +40,7 @@ namespace XUnitTestKopSoftWms
                 Flag = true,
                 Msg = "123"
             };
-            Assert.NotNull(a.JilToJson().JilToObject<PubResult>());
+            Assert.NotNull(a.ToTextJson().ToTextObj<PubResult>());
         }
 
         [Fact]

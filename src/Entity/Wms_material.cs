@@ -6,11 +6,12 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "wms_material")]
     public partial class Wms_material
     {
         public Wms_material()
         {
-            IsDel = Convert.ToByte("1");
+            IsDel = 1;
             CreateDate = DateTime.Now;
         }
 

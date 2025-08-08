@@ -1,4 +1,6 @@
-﻿namespace YL.Utils.Table
+﻿using YL.Utils.Json;
+
+namespace YL.Utils.Table
 {
     public class Bootstrap
     {

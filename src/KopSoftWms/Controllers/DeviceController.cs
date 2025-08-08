@@ -32,7 +32,7 @@ namespace KopSoftWms.Controllers
         {
             ViewBag.Dept = _deptServices.QueryableToList(c => c.IsDel == 1);
             ViewBag.Device = _dictServices.Queryable().Where(c => c.IsDel == 1 && c.DictType == SqlFunc.ToString(Convert.ToInt32(PubDictType.device))).ToList();
-            ViewBag.Property = _dictServices.Queryable().Where(c => c.IsDel == 1 && c.DictType == SqlFunc.ToString(Convert.ToInt32(PubDictType.property))).ToList(); ;
+            ViewBag.Property = _dictServices.Queryable().Where(c => c.IsDel == 1 && c.DictType == SqlFunc.ToString(Convert.ToInt32(PubDictType.property))).ToList();
             return View();
         }
 

@@ -9,7 +9,7 @@ namespace YL.Utils.Http
     {
         public static string HttpPost(this IHttpClientFactory clientFactory, string url, Dictionary<string, string> postData = null, Dictionary<string, string> headers = null)
         {
-            var client = clientFactory.CreateClient();
+            using var client = clientFactory.CreateClient();
             if (headers != null)
             {
                 foreach (var item in headers)
@@ -26,7 +26,7 @@ namespace YL.Utils.Http
 
         public static string HttpPost(this IHttpClientFactory clientFactory, string url, List<KeyValuePair<string, string>> postData = null, Dictionary<string, string> headers = null)
         {
-            var client = clientFactory.CreateClient();
+            using var client = clientFactory.CreateClient();
             if (headers != null)
             {
                 foreach (var item in headers)
@@ -48,7 +48,7 @@ namespace YL.Utils.Http
 
         public static async Task<string> HttpPostAsync(this IHttpClientFactory clientFactory, string url, Dictionary<string, string> postData = null, Dictionary<string, string> headers = null)
         {
-            var client = clientFactory.CreateClient();
+            using var client = clientFactory.CreateClient();
             if (headers != null)
             {
                 foreach (var item in headers)
@@ -65,7 +65,7 @@ namespace YL.Utils.Http
 
         public static string HttpGet(this IHttpClientFactory clientFactory, string url, Dictionary<string, string> postData = null, Dictionary<string, string> headers = null)
         {
-            var client = clientFactory.CreateClient();
+            using var client = clientFactory.CreateClient();
             if (headers != null)
             {
                 foreach (var item in headers)

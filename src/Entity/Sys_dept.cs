@@ -6,6 +6,7 @@ namespace YL.Core.Entity
     ///<summary>
     ///
     ///</summary>
+    [SugarTable(tableName: "sys_dept")]
     public partial class Sys_dept
     {
         public Sys_dept()
