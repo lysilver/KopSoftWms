@@ -272,46 +272,42 @@ namespace YL.Utils.Excel
             {
                 sheetCount = GetLen(count);
             }
+            var entityProperties = typeof(T).GetProperties();
             for (int i = 0; i < sheetCount; i++)
             {
                 string sheetname = "sheet" + (i + 1);
                 ISheet sheet = workbook.CreateSheet(sheetname);
                 IRow row = sheet.CreateRow(0);
-                Type entityType = list[0].GetType();
-                PropertyInfo[] entityProperties = entityType.GetProperties();
+                //Type entityType = list[0].GetType();
+                //PropertyInfo[] entityProperties = entityType.GetProperties();
+                int colIndex = 0;
                 for (int j = 0; j < entityProperties.Length; j++)
                 {
                     if (ignoreExport != null && ignoreExport.Contains(entityProperties[j].Name))
                     {
                         continue;
                     }
-                    ICell cell = row.CreateCell(j);
+                    ICell cell = row.CreateCell(colIndex++);
                     cell.CellStyle = cellStyle;
                     cell.SetCellValue(entityProperties[j].Name);
                 }
-                var maxList = list.Skip(Max * i).Take(Max).ToList();
-                if (i == sheetCount - 1)
-                {
-                    maxList.Take((count - i * Max)).ToList();
-                }
-                else
-                {
-                    maxList.Take(Max).ToList();
-                }
+                var start = i * Max;
+                var remaining = Math.Max(0, Math.Min(Max, count - start));
+                var maxList = list.Skip(start).Take(remaining).ToList();
                 //数据
                 for (int k = 0; k < maxList.Count; k++)
                 {
                     IRow row1 = sheet.CreateRow(k + 1);
-                    var properties = maxList[k].GetType().GetProperties();
-                    for (int m = 0; m < properties.Length; m++)
+                    // var properties = maxList[k].GetType().GetProperties();
+                    for (int m = 0; m < entityProperties.Length; m++)
                     {
-                        if (ignoreExport != null && ignoreExport.Contains(properties[m].Name))
+                        if (ignoreExport != null && ignoreExport.Contains(entityProperties[m].Name))
                         {
                             continue;
                         }
                         ICell cell = row1.CreateCell(m);
                         cell.CellStyle = cellStyle;
-                        var id = properties[m].GetValue(maxList[k])?.ToString();
+                        var id = entityProperties[m].GetValue(maxList[k])?.ToString();
                         cell.SetCellValue(id);
                     }
                 }
@@ -326,14 +322,16 @@ namespace YL.Utils.Excel
         private DocumentSummaryInformation SetDocumentSummaryInformation()
         {
             //文档摘要信息
-            DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
-            dsi.Company = "";
+            DocumentSummaryInformation dsi = new DocumentSummaryInformation
+            {
+                Company = ""
+            };
             return dsi;
         }
 
         private SummaryInformation SetSummaryInformation()
         {
-            SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
+            SummaryInformation si = PropertySetFactory.NewSummaryInformation();
             si.Author = ""; //填加xls文件作者信息
             si.ApplicationName = ""; //填加xls文件创建程序信息
             si.LastAuthor = ""; //填加xls文件最后保存者信息

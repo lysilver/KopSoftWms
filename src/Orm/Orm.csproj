@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
-    <PackageReference Include="sqlSugarCore" Version="5.1.4.199" />
+    <PackageReference Include="sqlSugarCore" Version="5.1.4.210" />
   </ItemGroup>
 
   <ItemGroup>
