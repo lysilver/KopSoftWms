@@ -15,7 +15,7 @@
     <PackageReference Include="NPOI" Version="2.7.5" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.7.1" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.11" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.12" />
     <PackageReference Include="System.ValueTuple" Version="4.6.1" />
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
   </ItemGroup>
