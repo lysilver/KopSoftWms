@@ -11,7 +11,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '9.0.308'
+    version: '9.0.310'
     includePreviewVersions: true
 
 - task: DeleteFiles@1
