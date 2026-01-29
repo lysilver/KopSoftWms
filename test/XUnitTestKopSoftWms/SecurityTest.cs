@@ -1,5 +1,4 @@
-﻿using AutoFixture.Xunit2;
-using Xunit;
+﻿using Xunit;
 using YL.Utils.Security;
 
 namespace XUnitTestKopSoftWms
@@ -14,7 +13,7 @@ namespace XUnitTestKopSoftWms
             Assert.Equal("55a10ac78972a76ee94d6be6bf00e2b2354b4f91", sd);
         }
 
-        [Theory, AutoData]
+        [Theory, InlineData("ssssss")]
         public void TestMethod2(string str)
         {
             var sd = str.ToMd52();

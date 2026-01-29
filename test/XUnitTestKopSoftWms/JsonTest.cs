@@ -1,9 +1,6 @@
-﻿using AutoFixture;
-using AutoFixture.Xunit2;
-using Bogus;
-using System;
+﻿using Bogus;
+using System.Collections.Generic;
 using Xunit;
-using YL.Core.Dto;
 using YL.Utils.Json;
 using YL.Utils.Pub;
 
@@ -14,21 +11,32 @@ namespace XUnitTestKopSoftWms
         [Fact]
         public void JilToJson()
         {
-            //var a = new PubResult
-            //{
-            //    Data = null,
-            //    Flag = true,
-            //    Msg = "123"
-            //};
-            Fixture fixture = new Fixture();
-            var a = fixture.Create<PubResult>();
+            var a = new PubResult
+            {
+                Data = null,
+                Flag = true,
+                Msg = "123"
+            };
             Assert.NotNull(a.JilToJson());
         }
 
-        [Theory, AutoData]
-        public void JilToJson2(PubResult a)
+        public static TheoryData<PubResult> GetPubResults()
         {
-            Assert.NotNull(a.JilToJson());
+            return new TheoryData<PubResult>
+            {
+            };
+        }
+
+        [Fact]
+        public void JilToJson2()
+        {
+            var a = new PubResult
+            {
+                Data = null,
+                Flag = true,
+                Msg = "123"
+            };
+            Assert.NotNull(a.ToTextJson());
         }
 
         [Fact]
